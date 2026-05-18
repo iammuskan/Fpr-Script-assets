@@ -709,7 +709,7 @@
       ? `I improved my shooting accuracy by ${improve}% in ${s.total_sessions} sessions with Spotter on FPRMembers.com. Can you beat that?`
       : `I scored ${s.latest_echo_score}/100 on my latest Spotter session. Think you can match it?`;
 
-    const shareText = `🎯 ${headline}\n\nMy stats:\n• Echo Score: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadge.icon_emoji} ${topBadge.name}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
+    const shareText = `🎯 ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadge.icon_emoji} ${topBadge.name}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Challenge a Friend</h2>
@@ -722,7 +722,7 @@
         <div class="fpr-echo__challenge-score-row">
           <div>
             <div class="fpr-echo__challenge-score-big">${s.latest_echo_score || 0}</div>
-            <div class="fpr-echo__challenge-score-sub">Echo Score</div>
+            <div class="fpr-echo__challenge-score-sub">Spotter</div>
           </div>
           <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
           <div>
@@ -997,7 +997,7 @@
 
     ctx.fillStyle = 'rgba(255,255,255,.4)';
     ctx.font = '13px Inter, sans-serif';
-    ctx.fillText('/ 100  ECHO SCORE', 32 + ctx.measureText(String(stats.latest_echo_score || 0)).width + 10, 130);
+    ctx.fillText('/ 100 Spotter', 32 + ctx.measureText(String(stats.latest_echo_score || 0)).width + 10, 130);
 
     // Improvement
     const imp = Math.round(stats.overall_improvement_pct || 0);
