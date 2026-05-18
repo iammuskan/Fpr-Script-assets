@@ -261,36 +261,38 @@ const FPRMatchmaker = (() => {
   function renderWelcome() {
     return `<div class="fpr-mm-welcome">
       <div class="fpr-mm-welcome-icon">🎯</div>
-      <h1 class="fpr-mm-welcome-title">AI Gun Matchmaker</h1>
+      <h1 class="fpr-mm-welcome-title">VANGUARD GunFit</h1>
       <p class="fpr-mm-welcome-sub">
-        Answer a few questions about your experience, lifestyle, and goals.
-        Optionally upload a hand photo for biometric fitment mapping.
-        Your AI match is scored across 6 compatibility dimensions — grip, trigger reach, bore axis, recoil, use-case, and experience.
+       Precision firearm matching powered by GunDNA analysis.
       </p>
+       <p class="fpr-mm-welcome-sub">
+The right firearm should feel natural the moment you pick it up.      </p>
+       <p class="fpr-mm-welcome-sub">
+Finding the right fit changes everything — comfort, confidence, and control.      </p>
       <div class="fpr-mm-feature-list">
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">🖐️</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti-hand-finger" style="font-size:28px; color:#1b2f4e;"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>Biometric Fitment</strong>
             <span>Optional hand photo maps your grip geometry to specific firearms</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">🗺️</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti-chart-dots" style="font-size:28px; color:#1b2f4e;"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>Compatibility Heatmap</strong>
             <span>Visual breakdown of grip fit, trigger reach, and bore axis</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">🧠</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti-message-circle" style="font-size:28px; color:#1b2f4e;"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>AI Explanation</strong>
             <span>"Why This Gun" narrative specific to your profile</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">⚠️</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti-alert-triangle" style="font-size:28px; color:#1b2f4e;"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>Honest Warnings</strong>
             <span>Poor matches are flagged clearly — no overselling</span>
