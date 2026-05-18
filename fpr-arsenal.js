@@ -281,7 +281,7 @@ const FPRArsenalIQ = (() => {
         sequence to complete it. Score updates dynamically as your life changes.
       </p>
       <div class="fpr-iq-map-rule-notice">
-        <i class="ti ti-lock" style="color:#1b2f4e;"></i><strong>Arsenal IQ Score and gap analysis never display specific prices.</strong>
+        <i class="ti ti-lock" style="color:#fff;"></i><strong>Arsenal IQ Score and gap analysis never display specific prices.</strong>
         All pricing appears exclusively on members.fprmembers.com after you click through.
         The score is about preparedness completeness — never about cost.
       </div>
