@@ -911,6 +911,7 @@
           ].sort((a, b) => b.pts - a.pts).map((r, i) => `
             <div class="fpr-guniq__mini-lb-row">
               <div class="fpr-guniq__mini-rank">${['🥇','🥈','🥉','#4'][i]}</div>
+              <div class="fpr-guniq__mini-name">${esc(r.name)}</div>
               <div class="fpr-guniq__mini-pts">${r.pts.toLocaleString()}</div>
             </div>
           `).join('')}
