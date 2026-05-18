@@ -138,7 +138,7 @@
       <div class="fpr-echo__topbar-title">Spotter</div>
       <div class="fpr-echo__topbar-score">
         ${IC.target}
-        <span>Echo Score: <strong>${state.stats.latest_echo_score || '—'}</strong></span>
+        <span>Spotter: <strong>${state.stats.latest_echo_score || '—'}</strong></span>
         ${state.stats.overall_improvement_pct > 0 ? `<span style="color:#4ADE80">+${Math.round(state.stats.overall_improvement_pct)}%</span>` : ''}
       </div>
     `;
@@ -171,7 +171,7 @@
           <div class="fpr-echo__sidebar-stat-icon">${IC.target}</div>
           <div>
             <div class="fpr-echo__sidebar-stat-val">${state.stats.latest_echo_score || 0}</div>
-            <div class="fpr-echo__sidebar-stat-lbl">Echo Score</div>
+            <div class="fpr-echo__sidebar-stat-lbl">Spotter</div>
           </div>
         </div>
         <div class="fpr-echo__sidebar-stat">
