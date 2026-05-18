@@ -261,7 +261,7 @@ const FPRMatchmaker = (() => {
   function renderWelcome() {
     return `<div class="fpr-mm-welcome">
       <div class="fpr-mm-welcome-icon">🎯</div>
-      <h1 class="fpr-mm-welcome-title">AI Gun Matchmaker</h1>
+      <h1 class="fpr-mm-welcome-title">VANGUARD GunFit</h1>
       <p class="fpr-mm-welcome-sub">
         Answer a few questions about your experience, lifestyle, and goals.
         Optionally upload a hand photo for biometric fitment mapping.
