@@ -273,7 +273,7 @@ const FPRArsenalIQ = (() => {
   // ─── VIEWS ──────────────────────────────────────────────────────────────────
   function renderWelcome() {
     return `<div class="fpr-iq-welcome">
-      <div class="fpr-iq-welcome-icon"><i class="ti ti-shield-check" style="font-size:28px; color:#1b2f4e;"></i></div>
+      <div class="fpr-iq-welcome-icon"><i class="ti ti-shield-check" style="font-size:40px; color:#1b2f4e;"></i></div>
       <h1 class="fpr-iq-welcome-title">Arsenal IQ™</h1>
       <p class="fpr-iq-welcome-sub">
         Your personalized armory readiness score. Arsenal IQ analyzes your life stage, family,
@@ -281,7 +281,7 @@ const FPRArsenalIQ = (() => {
         sequence to complete it. Score updates dynamically as your life changes.
       </p>
       <div class="fpr-iq-map-rule-notice">
-        <i class="ti ti-lock" style="font-size:28px; color:#1b2f4e;"></i><strong>Arsenal IQ Score and gap analysis never display specific prices.</strong>
+        <i class="ti ti-lock" style="font-size:20px; color:#1b2f4e;"></i><strong>Arsenal IQ Score and gap analysis never display specific prices.</strong>
         All pricing appears exclusively on members.fprmembers.com after you click through.
         The score is about preparedness completeness — never about cost.
       </div>
@@ -290,13 +290,13 @@ const FPRArsenalIQ = (() => {
           <div class="fpr-iq-mode-icon"><i class="ti ti-bolt" style="font-size:28px; color:#1b2f4e;"></i></div>
           <div class="fpr-iq-mode-title">Quick Score</div>
           <div class="fpr-iq-mode-sub">5 questions, instant estimated Arsenal IQ. Get your baseline in 60 seconds.</div>
-          <div class="fpr-iq-mode-time"><i class="ti ti-clock" style="font-size:28px; color:#1b2f4e;"></i> ~1 minute</div>
+          <div class="fpr-iq-mode-time"><i class="ti ti-clock" style="font-size:15px; color:#1b2f4e;"></i> ~1 minute</div>
         </div>
         <div class="fpr-iq-mode-card" data-action="mode-full">
-          <div class="fpr-iq-mode-icon"><i class="ti ti-clipboard-list" style="font-size:28px; color:#1b2f4e;"></i></div>
+          <div class="fpr-iq-mode-icon"><i class="ti ti-clipboard-list" style="font-size:20px; color:#1b2f4e;"></i></div>
           <div class="fpr-iq-mode-title">Full Armory Builder</div>
           <div class="fpr-iq-mode-sub">Complete life-stage intake, AI gap analysis, and a personalized priority purchase sequence.</div>
-          <div class="fpr-iq-mode-time"><i class="ti ti-clock" style="font-size:28px; color:#1b2f4e;"></i> ~5 minutes</div>
+          <div class="fpr-iq-mode-time"><i class="ti ti-clock" style="font-size:15px; color:#1b2f4e;"></i> ~5 minutes</div>
         </div>
       </div>
       <p class="fpr-iq-welcome-sub">
