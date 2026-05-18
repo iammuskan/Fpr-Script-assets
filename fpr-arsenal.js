@@ -287,13 +287,13 @@ const FPRArsenalIQ = (() => {
       </div>
       <div class="fpr-iq-mode-grid">
         <div class="fpr-iq-mode-card" data-action="mode-quick">
-          <div class="fpr-iq-mode-icon"><i class="ti ti-bolt" style="font-size:28px; color:#1b2f4e;"></i></div>
+          <div class="fpr-iq-mode-icon"><i class="ti ti-bolt" style="color:#1b2f4e;"></i></div>
           <div class="fpr-iq-mode-title">Quick Score</div>
           <div class="fpr-iq-mode-sub">5 questions, instant estimated Arsenal IQ. Get your baseline in 60 seconds.</div>
           <div class="fpr-iq-mode-time"><i class="ti ti-clock" style="color:#1b2f4e;"></i> ~1 minute</div>
         </div>
         <div class="fpr-iq-mode-card" data-action="mode-full">
-          <div class="fpr-iq-mode-icon"><i class="ti ti-clipboard-list" style="font-size:20px; color:#1b2f4e;"></i></div>
+          <div class="fpr-iq-mode-icon"><i class="ti ti-clipboard-list" style="color:#1b2f4e;"></i></div>
           <div class="fpr-iq-mode-title">Full Armory Builder</div>
           <div class="fpr-iq-mode-sub">Complete life-stage intake, AI gap analysis, and a personalized priority purchase sequence.</div>
           <div class="fpr-iq-mode-time"><i class="ti ti-clock" style="color:#1b2f4e;"></i> ~5 minutes</div>
