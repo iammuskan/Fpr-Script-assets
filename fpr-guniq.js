@@ -48,7 +48,7 @@
   // -------------------------------------------------------------------------
   const DEMO_COURSES = [
     { id: 'c1', slug: 'gun-safety',      title: 'Gun Safety Fundamentals',        subtitle: 'Master the rules every responsible owner lives by.',          icon_name: 'shield', estimated_mins: 40, lesson_count: 8,  module_count: 3 },
-    { id: 'c2', slug: 'how-to-shoot',    title: 'How to Shoot',                   subtitle: 'Stance, grip, trigger control — the fundamentals that build accuracy.', icon_name: 'target', estimated_mins: 45, lesson_count: 7, module_count: 2 },
+    { id: 'c2', slug: 'how-to-shoot',    title: 'Shooting Fundamentals',                   subtitle: 'Stance, grip, trigger control — the fundamentals that build accuracy.', icon_name: 'target', estimated_mins: 45, lesson_count: 7, module_count: 2 },
     { id: 'c3', slug: 'firearm-parts',   title: 'Firearm Parts & Anatomy',        subtitle: 'Know your firearm inside and out.',                           icon_name: 'parts',  estimated_mins: 35, lesson_count: 6,  module_count: 2 },
     { id: 'c4', slug: 'types-firearms',  title: 'Types of Firearms',              subtitle: 'Handguns, long guns, NFA items, and everything between.',     icon_name: 'types',  estimated_mins: 40, lesson_count: 7,  module_count: 3 },
     { id: 'c5', slug: 'legal-scenarios', title: 'Legal Scenarios: Know Before You Draw', subtitle: 'Zip-code aware situational law in your state.',         icon_name: 'gavel',  estimated_mins: 50, lesson_count: 8,  module_count: 2 },
