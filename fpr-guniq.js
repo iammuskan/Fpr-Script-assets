@@ -790,7 +790,7 @@
 
       <div class="fpr-guniq__cert-list">
         ${buildDemoCertCard('Gun Safety Fundamentals', 'FPR-2026-GS4X9K', 'course')}
-        ${buildLockedCertCard('How to Shoot')}
+        ${buildLockedCertCard('Shooting Fundamentals')}
         ${buildLockedCertCard('Firearm Parts & Anatomy')}
         ${buildLockedCertCard('Types of Firearms')}
         ${buildLockedCertCard('Legal Scenarios')}
