@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+
 /* FPRMembers.com — Build 11: AI Gun Matchmaker — Biometric Fitment Engine
    Mount: <div class="fpr-mm-mount" data-api-url="" data-member-id="" data-member-name="">
    Bootstrap: FPRMatchmaker.init(document.querySelector('.fpr-mm-mount'))
