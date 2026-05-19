@@ -282,8 +282,7 @@ const FPRArsenalIQ = (() => {
       </p>
 
        <p class="fpr-iq-welcome-sub">
-        YMost gun owners own firearms. Few have a complete strategy.
-      </p>
+        Most gun owners own firearms. Few have a complete strategy.</p>
       <div class="fpr-iq-map-rule-notice">
         🔒 <strong>Arsenal IQ Score and gap analysis never display specific prices.</strong>
         All pricing appears exclusively on ShopFPR after you click through.
