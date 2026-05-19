@@ -22,17 +22,17 @@ const FPRArsenalIQ = (() => {
 
   // ─── ARMORY ROLES (client-side mirror of armory-database.js) ────────────────
   const ROLES = [
-    { id: 'primary_home_defense',  name: 'Primary Home Defense',      tier: 'CRITICAL', icon: '🏠', shopfpr: 'home-defense'       },
-    { id: 'ccw_primary',           name: 'Primary CCW Firearm',        tier: 'CRITICAL', icon: '🕵️', shopfpr: 'ccw-pistols'        },
-    { id: 'training_platform',     name: 'Training Platform (.22 LR)', tier: 'HIGH',     icon: '🎯', shopfpr: 'rimfire-training'    },
-    { id: 'versatile_rifle',       name: 'Centerfire Rifle',           tier: 'HIGH',     icon: '🔫', shopfpr: 'modern-sporting-rifles' },
-    { id: 'defensive_shotgun',     name: 'Defensive Shotgun',          tier: 'HIGH',     icon: '💥', shopfpr: 'defensive-shotguns'  },
-    { id: 'hunting_rifle',         name: 'Hunting Rifle',              tier: 'MEDIUM',   icon: '🦌', shopfpr: 'hunting-rifles'      },
-    { id: 'competition_pistol',    name: 'Competition Pistol',         tier: 'MEDIUM',   icon: '🥇', shopfpr: 'competition-pistols' },
-    { id: 'youth_trainer',         name: 'Youth / Family Trainer',     tier: 'MEDIUM',   icon: '👨‍👧', shopfpr: 'youth-firearms'     },
-    { id: 'home_defense_staged',   name: 'Staged Secondary HD',        tier: 'MEDIUM',   icon: '🔒', shopfpr: 'home-defense'        },
-    { id: 'backup_ccw',            name: 'Backup CCW Pocket Pistol',   tier: 'LOW',      icon: '📦', shopfpr: 'pocket-pistols'      },
-    { id: 'rural_long_range',      name: 'Long-Range Ranch Rifle',     tier: 'MEDIUM',   icon: '🏔️', shopfpr: 'precision-rifles'   },
+    { id: 'primary_home_defense',  name: 'Primary Home Defense',      tier: 'CRITICAL', icon: '<i class="ti ti-home" style=" color:#1b2f4e;"></i>', shopfpr: 'home-defense'       },
+    { id: 'ccw_primary',           name: 'Primary CCW Firearm',        tier: 'CRITICAL', icon: '<i class="ti ti-pistol" style=" color:#1b2f4e;"></i>', shopfpr: 'ccw-pistols'        },
+    { id: 'training_platform',     name: 'Training Platform (.22 LR)', tier: 'HIGH',     icon: '<i class="ti ti-crosshair" style=" color:#1b2f4e;"></i>', shopfpr: 'rimfire-training'    },
+    { id: 'versatile_rifle',       name: 'Centerfire Rifle',           tier: 'HIGH',     icon: '<i class="ti ti-gun" style=" color:#1b2f4e;"></i>', shopfpr: 'modern-sporting-rifles' },
+    { id: 'defensive_shotgun',     name: 'Defensive Shotgun',          tier: 'HIGH',     icon: '<i class="ti ti-flame" style=" color:#1b2f4e;"></i>', shopfpr: 'defensive-shotguns'  },
+    { id: 'hunting_rifle',         name: 'Hunting Rifle',              tier: 'MEDIUM',   icon: '<i class="ti ti-pistol" style=" color:#1b2f4e;"></i>', shopfpr: 'hunting-rifles'      },
+    { id: 'competition_pistol',    name: 'Competition Pistol',         tier: 'MEDIUM',   icon: '<i class="ti ti-prize" style=" color:#1b2f4e;"></i>', shopfpr: 'competition-pistols' },
+    { id: 'youth_trainer',         name: 'Youth / Family Trainer',     tier: 'MEDIUM',   icon: '<i class="ti ti-firearm" style=" color:#1b2f4e;"></i>', shopfpr: 'youth-firearms'     },
+    { id: 'home_defense_staged',   name: 'Staged Secondary HD',        tier: 'MEDIUM',   icon: '<i class="ti ti-lock" style=" color:#1b2f4e;"></i>', shopfpr: 'home-defense'        },
+    { id: 'backup_ccw',            name: 'Backup CCW Pocket Pistol',   tier: 'LOW',      icon: '<i class="ti ti-shop" style=" color:#1b2f4e;"></i>', shopfpr: 'pocket-pistols'      },
+    { id: 'rural_long_range',      name: 'Long-Range Ranch Rifle',     tier: 'MEDIUM',   icon: '<i class="ti ti-shoot" style=" color:#1b2f4e;"></i>', shopfpr: 'precision-rifles'   },
   ];
 
   const TIER_COLORS = {
@@ -295,7 +295,7 @@ const FPRArsenalIQ = (() => {
         <div class="fpr-iq-mode-card" data-action="mode-full">
           <div class="fpr-iq-mode-icon">📋</div>
           <div class="fpr-iq-mode-title">Full Armory Builder</div>
-          <div class="fpr-iq-mode-sub">Complete life-stage intake, AI gap analysis, and a personalized priority purchase sequence.</div>
+          <div class="fpr-iq-mode-sub">Complete life-stage intake, gap analysis, and a personalized priority purchase sequence.</div>
           <div class="fpr-iq-mode-time">⏱ ~5 minutes</div>
         </div>
       </div>
