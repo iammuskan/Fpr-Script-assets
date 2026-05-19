@@ -263,34 +263,36 @@ const FPRMatchmaker = (() => {
       <div class="fpr-mm-welcome-icon">🎯</div>
       <h1 class="fpr-mm-welcome-title">VANGUARD GunFit</h1>
       <p class="fpr-mm-welcome-sub">
-        Answer a few questions about your experience, lifestyle, and goals.
-        Optionally upload a hand photo for biometric fitment mapping.
-        Your AI match is scored across 6 compatibility dimensions — grip, trigger reach, bore axis, recoil, use-case, and experience.
+        Precision firearm matching powered by GunDNA analysis.
       </p>
+      <p class="fpr-mm-welcome-sub">
+The right firearm should feel natural the moment you pick it up.      </p>
+      <p class="fpr-mm-welcome-sub">
+Finding the right fit changes everything — comfort, confidence, and control     </p>
       <div class="fpr-mm-feature-list">
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">🖐️</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti ti-hand-finger"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>Biometric Fitment</strong>
             <span>Optional hand photo maps your grip geometry to specific firearms</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">🗺️</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti ti-chart-dots"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>Compatibility Heatmap</strong>
             <span>Visual breakdown of grip fit, trigger reach, and bore axis</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">🧠</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti ti-message-circle"></i></span>
           <div class="fpr-mm-feature-item-text">
-            <strong>AI Explanation</strong>
+            <strong>Fitment Explanation</strong>
             <span>"Why This Gun" narrative specific to your profile</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon">⚠️</span>
+          <span class="fpr-mm-feature-item-icon"><i class="ti ti-alert-triangle"></i></span>
           <div class="fpr-mm-feature-item-text">
             <strong>Honest Warnings</strong>
             <span>Poor matches are flagged clearly — no overselling</span>
@@ -298,7 +300,7 @@ const FPRMatchmaker = (() => {
         </div>
       </div>
       <div class="fpr-mm-price-notice">
-        🔒 <strong>Pricing is never shown on the recommendation page.</strong>
+        <i class="ti ti-lock"></i> <strong>Pricing is never shown on the recommendation page.</strong>
         All recommendations are purely about fit, feel, and use-case.
         Pricing appears only after you click "See Pricing &amp; Availability."
       </div>
@@ -342,23 +344,23 @@ const FPRMatchmaker = (() => {
       <div class="fpr-mm-field">
         <label class="fpr-mm-label">Experience Level</label>
         ${opts('experience_level', [
-          ['never_shot', '🆕', 'Never Shot', 'First time buyer'],
-          ['beginner',   '🎯', 'Beginner',   'Shot a few times'],
-          ['intermediate','🏆','Intermediate','Regular range time'],
-          ['experienced','⭐','Experienced', '3+ years active'],
-          ['expert',     '🥇', 'Expert',     'Competition / professional'],
+          ['never_shot', '<i class="ti ti-new"></i>', 'Never Shot', 'First time buyer'],
+          ['beginner',   '<i class="ti ti-shoot"></i>', 'Beginner',   'Shot a few times'],
+          ['intermediate','<i class="ti ti-prize"></i>','Intermediate','Regular range time'],
+          ['experienced','<i class="ti ti-star"></i>','Experienced', '3+ years active'],
+          ['expert',     '<i class="ti ti-medal"></i>', 'Expert',     'Competition / professional'],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Primary Intent</label>
         ${opts('primary_intent', [
-          ['home_defense', '🏠', 'Home Defense',  'Bedside or safe'],
-          ['ccw',          '🕵️', 'CCW / Carry',  'Everyday carry'],
-          ['hunting',      '🦌', 'Hunting',       'Field use'],
-          ['competition',  '🎖️', 'Competition',  'USPSA / IDPA / 3-Gun'],
-          ['collection',   '🏛️', 'Collection',  'Historical / investment'],
-          ['all_purpose',  '🔄', 'All-Purpose',   'Versatile use'],
+          ['home_defense', '<i class="ti ti-home"></i>', 'Home Defense',  'Bedside or safe'],
+          ['ccw',          '<i class="ti ti-person"></i>', 'CCW / Carry',  'Everyday carry'],
+          ['hunting',      '<i class="ti ti-hunting"></i>', 'Hunting',       'Field use'],
+          ['competition',  '<i class="ti ti-competition"></i>', 'Competition',  'USPSA / IDPA / 3-Gun'],
+          ['collection',   '<i class="ti ti-collection"></i>', 'Collection',  'Historical / investment'],
+          ['all_purpose',  '<i class="ti ti-infinity"></i>', 'All-Purpose',   'Versatile use'],
         ])}
       </div>
 
@@ -388,27 +390,27 @@ const FPRMatchmaker = (() => {
       <div class="fpr-mm-field">
         <label class="fpr-mm-label">Living Environment</label>
         ${opts('living_environment', [
-          ['apartment', '🏙️', 'Apartment',  'Urban / close quarters'],
-          ['suburban',  '🏡', 'Suburban',   'Single-family home'],
-          ['rural',     '🌾', 'Rural',      'Property / acreage'],
+          ['apartment', '<i class="ti ti-apartment"></i>', 'Apartment',  'Urban / close quarters'],
+          ['suburban',  '<i class="ti ti-house"></i>', 'Suburban',   'Single-family home'],
+          ['rural',     '<i class="ti ti-leave"></i>', 'Rural',      'Property / acreage'],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Risk Tolerance / Priority</label>
         ${opts('risk_tolerance', [
-          ['conservative',  '🛡️', 'Conservative',   'Simplicity & reliability above all'],
-          ['moderate',      '⚖️', 'Moderate',       'Balance of features & ease'],
-          ['performance',   '⚡', 'Performance',    'Maximum capability, willing to train'],
+          ['conservative',  '<i class="ti ti-shield"></i>', 'Conservative',   'Simplicity & reliability above all'],
+          ['moderate',      '<i class="ti ti-crosshair"></i>', 'Moderate',       'Balance of features & ease'],
+          ['performance',   '<i class="ti ti-volt"></i>', 'Performance',    'Maximum capability, willing to train'],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Dominant Hand</label>
         ${opts('dominant_hand', [
-          ['right',         '🤜', 'Right Hand',    ''],
-          ['left',          '🤛', 'Left Hand',     ''],
-          ['ambidextrous',  '🤝', 'Ambidextrous',  ''],
+          ['right',         '<i class="ti ti-right-hand"></i>', 'Right Hand',    ''],
+          ['left',          '<i class="ti ti-left-hand"></i>', 'Left Hand',     ''],
+          ['ambidextrous',  '<i class="ti ti-handshake"></i>', 'Ambidextrous',  ''],
         ])}
       </div>
 
@@ -487,7 +489,7 @@ const FPRMatchmaker = (() => {
   function renderAnalyzing() {
     return `<div class="fpr-mm-analyzing">
       <div class="fpr-mm-analyzing-orb">
-        <div class="fpr-mm-analyzing-inner">🎯</div>
+        <div class="fpr-mm-analyzing-inner"><i class="ti ti-crosshair"></i></div>
       </div>
       <h2 class="fpr-mm-analyzing-title">Analyzing Your Profile</h2>
       <ul class="fpr-mm-analyzing-steps" id="mm-analyzing-steps">
@@ -546,7 +548,7 @@ const FPRMatchmaker = (() => {
           ${warnings.length ? `<ul class="fpr-mm-warning-list">${warnings.map(w => `<li class="fpr-mm-warning-item">${w}</li>`).join('')}</ul>` : ''}
         </div>` : warnings.length ? `
         <div class="fpr-mm-warning-panel" style="margin-bottom:16px">
-          <div class="fpr-mm-warning-header">⚠️ Fit Considerations</div>
+          <div class="fpr-mm-warning-header"><i class="ti ti-cation"></i> Fit Considerations</div>
           <ul class="fpr-mm-warning-list">${warnings.map(w => `<li class="fpr-mm-warning-item">${w}</li>`).join('')}</ul>
         </div>` : ''}
 
@@ -659,7 +661,7 @@ const FPRMatchmaker = (() => {
     const items = _history;
     if (!items.length) {
       return `<div class="fpr-mm-empty">
-        <span class="fpr-mm-empty-icon">📋</span>
+        <span class="fpr-mm-empty-icon"><i class="ti ti-book"></i></span>
         <div style="font-size:15px;font-weight:700;color:#495057">No previous matches</div>
         <div style="font-size:13px;margin-top:6px">Complete the intake to generate your first match.</div>
         <button class="fpr-mm-btn fpr-mm-btn-primary" data-action="start" style="margin-top:16px">Find My Match</button>
@@ -699,7 +701,7 @@ const FPRMatchmaker = (() => {
     _el.innerHTML = `<div class="fpr-mm">
       <div class="fpr-mm-topbar">
         <div class="fpr-mm-brand">FPRMembers</div>
-        <span class="fpr-mm-topbar-title">AI Gun Matchmaker</span>
+        <span class="fpr-mm-topbar-title">VANGUARD GunFit</span>
         ${_view !== 'welcome' && _view !== 'analyzing' ? `
           <div style="margin-left:auto;display:flex;gap:8px">
             ${navItems.slice(1).map(n => `
