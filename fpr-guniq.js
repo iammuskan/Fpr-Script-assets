@@ -772,7 +772,7 @@
       </div>
 
       <div style="margin-top:24px;padding:16px;background:var(--fpr-gold-muted);border-radius:var(--fpr-radius);border:1px solid rgba(201,151,58,.2)">
-        <div style="font-size:13px;font-weight:700;color:var(--fpr-gray-900);margin-bottom:6px">${ICONS.star} How to Earn Points</div>
+        <div class="starbe" style="font-size:13px;font-weight:700;color:var(--fpr-gray-900);margin-bottom:6px">${ICONS.star} How to Earn Points</div>
         <div style="font-size:12px;color:var(--fpr-gray-700);line-height:1.7">
           Complete a lesson: <b>10 pts</b> · Quiz bonus (70%+): <b>5–15 pts</b> · Complete a course: <b>50 pts</b> · 7-day streak: <b>50 pts</b> · 30-day streak: <b>200 pts</b> · Share a certificate: <b>25 pts</b>
         </div>
@@ -910,7 +910,7 @@
             { name: state.memberName || 'You', pts: state.stats.weekly_points || 120 },
           ].sort((a, b) => b.pts - a.pts).map((r, i) => `
             <div class="fpr-guniq__mini-lb-row">
-              <div class="fpr-guniq__mini-rank">${['🥇','🥈','🥉','#4'][i]}</div>
+              <div class="fpr-guniq__mini-rank">${['🥇','🥈','🥉','🥉'][i]}</div>
               <div class="fpr-guniq__mini-name">${esc(r.name)}</div>
               <div class="fpr-guniq__mini-pts">${r.pts.toLocaleString()}</div>
             </div>
