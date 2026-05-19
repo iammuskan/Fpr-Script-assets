@@ -347,7 +347,7 @@
 
       ${state.firearms.length ? `
         <div style="background:var(--fpr-gray-50);border-radius:8px;padding:10px 12px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--fpr-gray-700)">
-          <span style="font-size:18px">🔫</span>
+          <span style="font-size:18px"><i class="ti ti-pistol" style="font-size:28px; color:#1b2f4e;"></i></span>
           <div>
             <strong>${esc(state.firearms[0].make)} ${esc(state.firearms[0].model)}</strong>
             <div style="color:var(--fpr-gray-400)">${esc(state.firearms[0].caliber)} · ${state.firearms[0].magazine_capacity}rd magazine</div>
