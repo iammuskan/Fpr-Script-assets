@@ -139,7 +139,7 @@
       <div class="fpr-echo__topbar-score">
         ${IC.target}
         <span>Spotter: <strong>${state.stats.latest_echo_score || '—'}</strong></span>
-        ${state.stats.overall_improvement_pct > 0 ? `<span style="color:#4ADE80">+${Math.round(state.stats.overall_improvement_pct)}%</span>` : ''}
+        ${state.stats.overall_improvement_pct > 0 ? `<span style="color:#032238">+${Math.round(state.stats.overall_improvement_pct)}%</span>` : ''}
       </div>
     `;
     return bar;
@@ -177,7 +177,7 @@
         <div class="fpr-echo__sidebar-stat">
           <div class="fpr-echo__sidebar-stat-icon">${IC.chart}</div>
           <div>
-            <div class="fpr-echo__sidebar-stat-val" style="color:${state.stats.overall_improvement_pct > 0 ? '#4ADE80' : '#F87171'}">
+            <div class="fpr-echo__sidebar-stat-val" style="color:${state.stats.overall_improvement_pct > 0 ? '#032238' : '#F87171'}">
               ${state.stats.overall_improvement_pct > 0 ? '+' : ''}${Math.round(state.stats.overall_improvement_pct || 0)}%
             </div>
             <div class="fpr-echo__sidebar-stat-lbl">Improvement</div>
@@ -1001,7 +1001,7 @@
 
     // Improvement
     const imp = Math.round(stats.overall_improvement_pct || 0);
-    ctx.fillStyle = '#4ADE80';
+    ctx.fillStyle = '#032238';
     ctx.font = 'bold 36px Inter, sans-serif';
     ctx.fillText((imp > 0 ? '+' : '') + imp + '%', 32, 200);
 
