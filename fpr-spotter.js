@@ -328,7 +328,7 @@
       </div>
 
       <div class="fpr-echo__disclaimer">
-        <i class="ti ti-info-circle" style=" color:#1b2f4e;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.
+        <i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.
       </div>
 
       <div style="display:flex;gap:10px;align-items:center">
@@ -583,7 +583,7 @@
           </div>
         </div>
 
-        <div class="fpr-echo__disclaimer"><i class="ti ti-info-circle" style=" color:#1b2f4e;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+        <div class="fpr-echo__disclaimer"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
 
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="fpr-btn fpr-btn--echo" id="fpr-view-history-btn">${IC.history} Session History</button>
@@ -640,7 +640,7 @@
         ${ordered.slice().reverse().map(s => buildSessionCard(s)).join('')}
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><i class="ti ti-info-circle" style=" color:#1b2f4e;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+      <div class="fpr-echo__disclaimer" style="margin-top:20px"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
     `;
 
     // Wire accordion
@@ -674,7 +674,7 @@
           ${coaching.primary_issue ? `<p style="font-size:14px;font-weight:600;color:var(--fpr-gray-900);margin:14px 0 8px">${esc(coaching.primary_issue)}</p>` : ''}
           ${coaching.explanation ? `<p style="font-size:13px;color:var(--fpr-gray-700);line-height:1.7;margin:0 0 12px">${esc(coaching.explanation)}</p>` : ''}
           ${coaching.top_drill ? `<div style="font-size:12px;font-weight:700;color:var(--fpr-gray-400);margin-bottom:4px">Top drill</div><div style="font-size:13px;font-weight:600;color:var(--fpr-gray-900)">${esc(coaching.top_drill)}</div>` : ''}
-          <div class="fpr-echo__disclaimer" style="margin-top:12px;font-size:11px"><i class="ti ti-info-circle" style=" color:#1b2f4e;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+          <div class="fpr-echo__disclaimer" style="margin-top:12px;font-size:11px"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
         </div>
       </div>
     `;
@@ -798,7 +798,7 @@
         <button class="fpr-btn fpr-btn--dark" id="fpr-download-card-btn">Download Card</button>
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><i class="ti ti-info-circle" style=" color:#1b2f4e;"></i> For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.</div>
+      <div class="fpr-echo__disclaimer" style="margin-top:20px"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.</div>
     `;
 
     wrap.querySelector('#fpr-copy-btn')?.addEventListener('click', () => {
