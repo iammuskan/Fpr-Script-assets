@@ -14,59 +14,91 @@
   'use strict';
 
   // -------------------------------------------------------------------------
-  // SVG Icons
+  // SVG Icons — All Tabler Icons (https://tabler.io/icons)
+  // stroke-width="2", viewBox="0 0 24 24", fill="none", stroke="currentColor"
   // -------------------------------------------------------------------------
   const IC = {
-    upload:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>`,
-    target:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
-    history:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.29"/></svg>`,
-    badge:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="m15.477 12.89 1.515 5.789A1.5 1.5 0 0 1 15.03 20.5l-3.03-3.03-3.03 3.03a1.5 1.5 0 0 1-1.962-1.821l1.515-5.789"/></svg>`,
-    share:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
-    shield:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-    chart:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-    copy:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
-    check:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`,
-    chevron:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`,
-    lock:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
-    info:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
-    star:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-    arrow:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
-    // ---- Tabler Icon replacements for emojis ----
-    // 💬  speech bubble
-    message:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0-7.5-5.25L3 20l5.25-1.5A8 8 0 0 0 12 20z"/></svg>`,
-    // 🏅  medal
-    medal:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5"/><path d="M8.5 8.5 7 4h10l-1.5 4.5"/><path d="m8.5 8.5 3.5 3 3.5-3"/></svg>`,
-    // 🎯  already covered by 'target' above — alias
-    // 🔍  search / magnifier
-    search:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
-    // 📈  trending up
-    trending: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
-    // 🎩  top hat
-    hat:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M6 17h12"/><path d="M10 17V9a2 2 0 0 1 4 0v8"/><path d="M7 9h10"/></svg>`,
-    // 💪  muscle / arm
-    arm:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8.5a2.5 2.5 0 0 0-5 0v1a6 6 0 0 0 6 6h1a6 6 0 0 0 6-6 2 2 0 0 0-4 0 2 2 0 0 1-4 0z"/><path d="M15 8.5V8a3 3 0 0 0-6 0v.5"/></svg>`,
-    // 🔥  flame
-    flame:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.5 2-5 0-7-2 2.5-4 5-2 9-1-1-2-2.5-2-4-2 1.5-2 4 0 6 .9 1.1 2.1 1.8 3.5 2 1.2-.1 2.3-.7 3-1.5 1.5-2 1.5-4.5 0-6.5-.5 1.5-1.5 2-2.5 2z"/></svg>`,
-    // ⭐ / 🌟  star — already 'star' above, adding starFilled variant
-    starFilled:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-    // ⚡  bolt / lightning
-    bolt:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
-    // 💎  diamond
-    diamond:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>`,
-    // 🏆  trophy
-    trophy:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-4 0v-4m0 0a7 7 0 0 0 7-7V5H5v5a7 7 0 0 0 7 7z"/><path d="M5 8H3a2 2 0 0 0 0 4h2"/><path d="M19 8h2a2 2 0 0 1 0 4h-2"/></svg>`,
-    // 👑  crown
-    crown:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2-8 5 5 4-9 4 9 5-5 2 8H3z"/></svg>`,
-    // 💫  sparkles
-    sparkles: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1M4.22 4.22l.7.7m13.16 13.16.7.7M3 12h1m16 0h1M4.22 19.78l.7-.7M18.36 5.64l.7-.7"/><circle cx="12" cy="12" r="3"/></svg>`,
-    // 🦅  eagle / bird
-    bird:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg>`,
-    // 🔱  trident
-    trident:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"/><path d="M8 4v4l4 2 4-2V4"/><path d="M6 4v2"/><path d="M18 4v2"/></svg>`,
-    // 🚀  rocket
-    rocket:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
-    // 📋  clipboard
-    clipboard:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>`,
+    // upload — tabler: cloud-upload
+    upload:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><polyline points="7 9 12 4 17 9"/><line x1="12" y1="4" x2="12" y2="16"/></svg>`,
+    // target — tabler: target
+    target:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9"/></svg>`,
+    // history — tabler: history
+    history:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/></svg>`,
+    // badge — tabler: award
+    badge:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15v7"/><path d="m9 19 3-3 3 3"/></svg>`,
+    // share — tabler: share
+    share:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+    // shield — tabler: shield-check
+    shield:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21 12 12 0 0 1 3.5 6 12 12 0 0 0 12 3"/><path d="m9 12 2 2 4-4"/></svg>`,
+    // chart — tabler: activity
+    chart:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 3 18 3-12 3 6h3"/></svg>`,
+    // copy — tabler: copy
+    copy:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>`,
+    // check — tabler: check
+    check:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"/></svg>`,
+    // chevron — tabler: chevron-down
+    chevron:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
+    // lock — tabler: lock
+    lock:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
+    // info — tabler: info-circle
+    info:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12.01" y2="8"/><polyline points="11 12 12 12 12 16"/></svg>`,
+    // star — tabler: star
+    star:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2.25l3.086 5.998 6.9 1.002-4.993 4.867 1.179 6.873z"/></svg>`,
+    // arrow — tabler: arrow-left
+    arrow:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
+
+    // ---- Tabler Icons replacing emojis ----
+
+    // 💬 speech bubble — tabler: message-circle
+    message:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l1.3-3.9C1.976 14.177 2.018 11.243 3.765 9.132a9 9 0 1 1 16.235 5.868C17.345 18.048 13.76 20 10 20a9.09 9.09 0 0 1-2.6-.4L3 20z"/></svg>`,
+
+    // 🏅 medal — tabler: medal
+    medal:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5"/><path d="M8.5 8.5 7 4h10l-1.5 4.5"/><path d="m8.5 8.5 3.5 3 3.5-3"/></svg>`,
+
+    // 🔍 magnifier — tabler: zoom
+    search:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>`,
+
+    // 📈 trending up — tabler: trending-up
+    trending:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+
+    // 🎩 top hat — tabler: top-hat (hat variant)
+    hat:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-9-4h10a1 1 0 0 0 1-1v-1H7v1a1 1 0 0 0 1 1z"/><path d="M10 16V9m4 7V9"/><path d="M7 9h10l-1-6H8L7 9z"/></svg>`,
+
+    // 💪 muscle / strength — tabler: barbell
+    arm:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1m18 0h1M6 12h12"/><rect x="4" y="10" width="2" height="4" rx="1"/><rect x="18" y="10" width="2" height="4" rx="1"/><rect x="2" y="11" width="2" height="2" rx="1"/><rect x="20" y="11" width="2" height="2" rx="1"/></svg>`,
+
+    // 🔥 flame — tabler: flame
+    flame:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>`,
+
+    // ⭐ star filled — tabler: star (filled)
+    starFilled:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2.25l3.086 5.998 6.9 1.002-4.993 4.867 1.179 6.873z"/></svg>`,
+
+    // ⚡ bolt / lightning — tabler: bolt
+    bolt:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+
+    // 💎 diamond — tabler: diamond
+    diamond:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>`,
+
+    // 🏆 trophy — tabler: trophy
+    trophy:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M5 9H3a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h3"/><path d="M19 9h2a2 2 0 0 0 2-2V6a1 1 0 0 0-1-1h-3"/></svg>`,
+
+    // 👑 crown — tabler: crown
+    crown:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6l4 6 5-4-2 10H5L3 8l5 4z"/><line x1="5" y1="20" x2="19" y2="20"/></svg>`,
+
+    // 💫 sparkles — tabler: sparkles
+    sparkles:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2zm0-16a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2zM4 12a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2z"/><path d="M20 12c-3.333.667-5 2.333-5 5-.667-3.333-2.333-5-5-5 3.333-.667 5-2.333 5-5 .667 3.333 2.333 5 5 5z"/></svg>`,
+
+    // 🦅 eagle / bird — tabler: feather
+    bird:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>`,
+
+    // 🔱 trident — tabler: anchor (best match for authority/power)
+    trident:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 15H19"/><path d="M5 15c0 3.314 3.134 6 7 6s7-2.686 7-6"/></svg>`,
+
+    // 🚀 rocket — tabler: rocket
+    rocket:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
+
+    // 📋 clipboard — tabler: clipboard-list
+    clipboard: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
   };
 
   function ic(name) { return `<span style="display:inline-flex;align-items:center">${IC[name] || ''}</span>`; }
@@ -328,7 +360,7 @@
       </div>
 
       <div class="fpr-echo__disclaimer">
-        <i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.
+        <span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.
       </div>
 
       <div style="display:flex;gap:10px;align-items:center">
@@ -459,7 +491,7 @@
       <div class="fpr-echo__analyzing-text">Spotter is analyzing your target</div>
       <div class="fpr-echo__analyzing-sub">This takes about 5–8 seconds</div>
       <div class="fpr-echo__analyzing-steps" id="fpr-steps">
-        ${steps.map(s => `<div class="fpr-echo__analyzing-step" id="step-${s.id}">${IC.info} ${s.label}</div>`).join('')}
+        ${steps.map(s => `<div class="fpr-echo__analyzing-step" id="step-${s.id}"><span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.info}</span> ${s.label}</div>`).join('')}
       </div>
     `;
 
@@ -468,7 +500,7 @@
     state.analyzeStepInterval = setInterval(() => {
       if (i > 0) {
         const prev = wrap.querySelector(`#step-${ids[i - 1]}`);
-        if (prev) { prev.classList.remove('--active'); prev.classList.add('--done'); prev.innerHTML = `${IC.check} ${steps[i-1].label}`; }
+        if (prev) { prev.classList.remove('--active'); prev.classList.add('--done'); prev.innerHTML = `<span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.check}</span> ${steps[i-1].label}`; }
       }
       if (i < ids.length) {
         const curr = wrap.querySelector(`#step-${ids[i]}`);
@@ -583,7 +615,7 @@
           </div>
         </div>
 
-        <div class="fpr-echo__disclaimer"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+        <div class="fpr-echo__disclaimer"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
 
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="fpr-btn fpr-btn--echo" id="fpr-view-history-btn">${IC.history} Session History</button>
@@ -592,7 +624,7 @@
 
         <div style="display:flex;justify-content:flex-end;margin-top:12px">
           <button onclick="FPRShare.open('Share Your Shot')" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
             Share Your Shot
           </button>
         </div>
@@ -640,7 +672,7 @@
         ${ordered.slice().reverse().map(s => buildSessionCard(s)).join('')}
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+      <div class="fpr-echo__disclaimer" style="margin-top:20px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
     `;
 
     // Wire accordion
@@ -674,7 +706,7 @@
           ${coaching.primary_issue ? `<p style="font-size:14px;font-weight:600;color:var(--fpr-gray-900);margin:14px 0 8px">${esc(coaching.primary_issue)}</p>` : ''}
           ${coaching.explanation ? `<p style="font-size:13px;color:var(--fpr-gray-700);line-height:1.7;margin:0 0 12px">${esc(coaching.explanation)}</p>` : ''}
           ${coaching.top_drill ? `<div style="font-size:12px;font-weight:700;color:var(--fpr-gray-400);margin-bottom:4px">Top drill</div><div style="font-size:13px;font-weight:600;color:var(--fpr-gray-900)">${esc(coaching.top_drill)}</div>` : ''}
-          <div class="fpr-echo__disclaimer" style="margin-top:12px;font-size:11px"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+          <div class="fpr-echo__disclaimer" style="margin-top:12px;font-size:11px"><span style="display:inline-flex;align-items:center;width:12px;height:12px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
         </div>
       </div>
     `;
@@ -725,7 +757,7 @@
   function buildBadgeCard(b, earned) {
     const tier = b.tier || 'bronze';
     const date = b.earned_at ? new Date(b.earned_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : null;
-    // icon_emoji now stores an IC key string; render as SVG icon
+    // icon_emoji stores an IC key string; render as SVG icon
     const iconKey = b.icon_emoji || 'medal';
     const iconSvg = IC[iconKey] || IC.medal;
     return `
@@ -735,7 +767,7 @@
         <div class="fpr-echo__badge-name">${esc(b.name)}</div>
         <div class="fpr-echo__badge-desc">${esc(b.description)}</div>
         ${earned && date ? `<div class="fpr-echo__badge-earned-date">Earned ${date}</div>` : ''}
-        ${!earned ? `<div style="margin-top:8px;font-size:11px;color:var(--fpr-gray-400)">${IC.lock} Locked</div>` : ''}
+        ${!earned ? `<div style="margin-top:8px;font-size:11px;color:var(--fpr-gray-400);display:inline-flex;align-items:center;gap:4px"><span style="display:inline-flex;align-items:center;width:12px;height:12px">${IC.lock}</span> Locked</div>` : ''}
       </div>
     `;
   }
@@ -756,7 +788,7 @@
       : `I scored ${s.latest_echo_score}/100 on my latest Spotter session. Think you can match it?`;
 
     const topBadgeName = topBadge ? topBadge.name : '';
-    const shareText = `[Target Icon] ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
+    const shareText = `[Spotter] ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Challenge a Friend</h2>
@@ -798,7 +830,7 @@
         <button class="fpr-btn fpr-btn--dark" id="fpr-download-card-btn">Download Card</button>
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><i class="ti ti-info-circle" style=" color:#fff;"></i> For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.</div>
+      <div class="fpr-echo__disclaimer" style="margin-top:20px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.</div>
     `;
 
     wrap.querySelector('#fpr-copy-btn')?.addEventListener('click', () => {
