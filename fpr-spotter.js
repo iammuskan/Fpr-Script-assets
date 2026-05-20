@@ -1,4 +1,4 @@
-﻿/**
+/**
  * FPRMembers.com — Build 6: Spotter — Shot Analysis System
  * File: fpr-spotter.js
  *
@@ -31,9 +31,50 @@
     info:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
     star:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     arrow:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
+    // ---- Tabler Icon replacements for emojis ----
+    // 💬  speech bubble
+    message:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0-7.5-5.25L3 20l5.25-1.5A8 8 0 0 0 12 20z"/></svg>`,
+    // 🏅  medal
+    medal:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5"/><path d="M8.5 8.5 7 4h10l-1.5 4.5"/><path d="m8.5 8.5 3.5 3 3.5-3"/></svg>`,
+    // 🎯  already covered by 'target' above — alias
+    // 🔍  search / magnifier
+    search:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+    // 📈  trending up
+    trending: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+    // 🎩  top hat
+    hat:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M6 17h12"/><path d="M10 17V9a2 2 0 0 1 4 0v8"/><path d="M7 9h10"/></svg>`,
+    // 💪  muscle / arm
+    arm:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8.5a2.5 2.5 0 0 0-5 0v1a6 6 0 0 0 6 6h1a6 6 0 0 0 6-6 2 2 0 0 0-4 0 2 2 0 0 1-4 0z"/><path d="M15 8.5V8a3 3 0 0 0-6 0v.5"/></svg>`,
+    // 🔥  flame
+    flame:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.5 2-5 0-7-2 2.5-4 5-2 9-1-1-2-2.5-2-4-2 1.5-2 4 0 6 .9 1.1 2.1 1.8 3.5 2 1.2-.1 2.3-.7 3-1.5 1.5-2 1.5-4.5 0-6.5-.5 1.5-1.5 2-2.5 2z"/></svg>`,
+    // ⭐ / 🌟  star — already 'star' above, adding starFilled variant
+    starFilled:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    // ⚡  bolt / lightning
+    bolt:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    // 💎  diamond
+    diamond:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>`,
+    // 🏆  trophy
+    trophy:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-4 0v-4m0 0a7 7 0 0 0 7-7V5H5v5a7 7 0 0 0 7 7z"/><path d="M5 8H3a2 2 0 0 0 0 4h2"/><path d="M19 8h2a2 2 0 0 1 0 4h-2"/></svg>`,
+    // 👑  crown
+    crown:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2-8 5 5 4-9 4 9 5-5 2 8H3z"/></svg>`,
+    // 💫  sparkles
+    sparkles: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1M4.22 4.22l.7.7m13.16 13.16.7.7M3 12h1m16 0h1M4.22 19.78l.7-.7M18.36 5.64l.7-.7"/><circle cx="12" cy="12" r="3"/></svg>`,
+    // 🦅  eagle / bird
+    bird:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg>`,
+    // 🔱  trident
+    trident:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"/><path d="M8 4v4l4 2 4-2V4"/><path d="M6 4v2"/><path d="M18 4v2"/></svg>`,
+    // 🚀  rocket
+    rocket:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
+    // 📋  clipboard
+    clipboard:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>`,
   };
 
   function ic(name) { return `<span style="display:inline-flex;align-items:center">${IC[name] || ''}</span>`; }
+
+  // Helper: inline Tabler icon span sized for badge/label contexts
+  function icBadge(name, size = 20) {
+    return `<span style="display:inline-flex;align-items:center;width:${size}px;height:${size}px">${IC[name] || ''}</span>`;
+  }
 
   // -------------------------------------------------------------------------
   // Demo data (shown when API is not connected)
@@ -48,30 +89,30 @@
   ];
 
   const DEMO_BADGES = [
-    { badge_slug: 'first_shot',    name: 'First Shot',       icon_emoji: '🎯', tier: 'bronze', description: 'Submitted your first target for Spotter analysis.',  earned_at: '2026-04-07' },
-    { badge_slug: 'pattern_found', name: 'Pattern Detected', icon_emoji: '🔍', tier: 'bronze', description: 'Spotter identified a specific shot pattern.',          earned_at: '2026-04-12' },
-    { badge_slug: 'first_improve', name: 'On the Way Up',    icon_emoji: '📈', tier: 'bronze', description: 'Improved your Echo Score session over session.',           earned_at: '2026-04-12' },
-    { badge_slug: 'three_sessions',name: 'Hat Trick',        icon_emoji: '🎩', tier: 'bronze', description: 'Completed 3 shooting sessions with Spotter.',           earned_at: '2026-04-18' },
-    { badge_slug: 'ten_pct_up',    name: 'Ten Percent Club', icon_emoji: '💪', tier: 'silver', description: 'Improved Echo Score 10% from baseline.',                   earned_at: '2026-04-18' },
-    { badge_slug: 'five_sessions', name: 'Five and Counting',icon_emoji: '🔥', tier: 'silver', description: 'Completed 5 sessions with Spotter.',                    earned_at: '2026-04-30' },
-    { badge_slug: 'score_70',      name: 'Developing Shooter',icon_emoji:'⭐', tier: 'silver', description: 'Achieved an Echo Score of 70+.',                           earned_at: '2026-04-24' },
-    { badge_slug: 'pattern_fixed', name: 'Pattern Broken',   icon_emoji: '🔧', tier: 'silver', description: 'Went 3 sessions without your most common error.',          earned_at: '2026-04-30' },
-    { badge_slug: 'score_80',      name: 'Proficient',       icon_emoji: '⭐', tier: 'gold',   description: 'Achieved an Echo Score of 80+.',                           earned_at: '2026-04-30' },
-    { badge_slug: 'score_85',      name: 'Advanced',         icon_emoji: '🌟', tier: 'gold',   description: 'Achieved an Echo Score of 85+.',                           earned_at: '2026-05-04' },
-    { badge_slug: 'five_streak',   name: 'Streak Builder',   icon_emoji: '⚡', tier: 'gold',   description: '5 consecutive improvement sessions.',                      earned_at: '2026-05-04' },
-    { badge_slug: 'sub_2inch',     name: 'Sub-2 Group',      icon_emoji: '💎', tier: 'gold',   description: 'Recorded a grouping under 2 inches at 7 yards.',           earned_at: '2026-05-04' },
+    { badge_slug: 'first_shot',    name: 'First Shot',        icon_emoji: 'target',   tier: 'bronze', description: 'Submitted your first target for Spotter analysis.',  earned_at: '2026-04-07' },
+    { badge_slug: 'pattern_found', name: 'Pattern Detected',  icon_emoji: 'search',   tier: 'bronze', description: 'Spotter identified a specific shot pattern.',          earned_at: '2026-04-12' },
+    { badge_slug: 'first_improve', name: 'On the Way Up',     icon_emoji: 'trending', tier: 'bronze', description: 'Improved your Echo Score session over session.',       earned_at: '2026-04-12' },
+    { badge_slug: 'three_sessions',name: 'Hat Trick',         icon_emoji: 'hat',      tier: 'bronze', description: 'Completed 3 shooting sessions with Spotter.',         earned_at: '2026-04-18' },
+    { badge_slug: 'ten_pct_up',    name: 'Ten Percent Club',  icon_emoji: 'arm',      tier: 'silver', description: 'Improved Echo Score 10% from baseline.',              earned_at: '2026-04-18' },
+    { badge_slug: 'five_sessions', name: 'Five and Counting', icon_emoji: 'flame',    tier: 'silver', description: 'Completed 5 sessions with Spotter.',                  earned_at: '2026-04-30' },
+    { badge_slug: 'score_70',      name: 'Developing Shooter',icon_emoji: 'star',     tier: 'silver', description: 'Achieved an Echo Score of 70+.',                     earned_at: '2026-04-24' },
+    { badge_slug: 'pattern_fixed', name: 'Pattern Broken',    icon_emoji: 'bolt',     tier: 'silver', description: 'Went 3 sessions without your most common error.',     earned_at: '2026-04-30' },
+    { badge_slug: 'score_80',      name: 'Proficient',        icon_emoji: 'starFilled',tier:'gold',   description: 'Achieved an Echo Score of 80+.',                     earned_at: '2026-04-30' },
+    { badge_slug: 'score_85',      name: 'Advanced',          icon_emoji: 'sparkles', tier: 'gold',   description: 'Achieved an Echo Score of 85+.',                     earned_at: '2026-05-04' },
+    { badge_slug: 'five_streak',   name: 'Streak Builder',    icon_emoji: 'bolt',     tier: 'gold',   description: '5 consecutive improvement sessions.',                 earned_at: '2026-05-04' },
+    { badge_slug: 'sub_2inch',     name: 'Sub-2 Group',       icon_emoji: 'diamond',  tier: 'gold',   description: 'Recorded a grouping under 2 inches at 7 yards.',     earned_at: '2026-05-04' },
   ];
 
   const ALL_BADGES = [
-    { badge_slug: 'score_90',   name: 'Expert',        icon_emoji: '🏆', tier: 'platinum', description: 'Achieve an Echo Score of 90+.' },
-    { badge_slug: 'score_95',   name: 'Master',        icon_emoji: '👑', tier: 'platinum', description: 'Achieve an Echo Score of 95+.' },
-    { badge_slug: 'sub_1inch',  name: 'Sub-1 Group',   icon_emoji: '💫', tier: 'platinum', description: 'Record a grouping under 1 inch at 7 yards.' },
-    { badge_slug: 'twenty_five',name: 'Elite Member',  icon_emoji: '🦅', tier: 'platinum', description: 'Complete 25 sessions with Spotter.' },
-    { badge_slug: 'ten_streak', name: 'Unstoppable',   icon_emoji: '🔱', tier: 'platinum', description: '10 consecutive improvement sessions.' },
-    { badge_slug: 'ten_sessions',name:'Committed',     icon_emoji: '🏅', tier: 'gold',     description: 'Complete 10 sessions with Spotter.' },
-    { badge_slug: 'twenty_pct_up',name:'Twenty Percent',icon_emoji:'🚀',tier:'gold',       description: 'Improve 20% from your baseline.' },
-    { badge_slug: 'sub_3inch',  name: 'Sub-3 Group',   icon_emoji: '🎯', tier: 'silver',   description: 'Record a grouping under 3 inches at 7 yards.' },
-    { badge_slug: 'drills_assigned',name:'Drills Assigned',icon_emoji:'📋',tier:'bronze',  description: 'Receive your first personalized drill assignments.' },
+    { badge_slug: 'score_90',    name: 'Expert',        icon_emoji: 'trophy',    tier: 'platinum', description: 'Achieve an Echo Score of 90+.' },
+    { badge_slug: 'score_95',    name: 'Master',        icon_emoji: 'crown',     tier: 'platinum', description: 'Achieve an Echo Score of 95+.' },
+    { badge_slug: 'sub_1inch',   name: 'Sub-1 Group',   icon_emoji: 'sparkles',  tier: 'platinum', description: 'Record a grouping under 1 inch at 7 yards.' },
+    { badge_slug: 'twenty_five', name: 'Elite Member',  icon_emoji: 'bird',      tier: 'platinum', description: 'Complete 25 sessions with Spotter.' },
+    { badge_slug: 'ten_streak',  name: 'Unstoppable',   icon_emoji: 'trident',   tier: 'platinum', description: '10 consecutive improvement sessions.' },
+    { badge_slug: 'ten_sessions',name: 'Committed',     icon_emoji: 'medal',     tier: 'gold',     description: 'Complete 10 sessions with Spotter.' },
+    { badge_slug: 'twenty_pct_up',name:'Twenty Percent',icon_emoji: 'rocket',    tier: 'gold',     description: 'Improve 20% from your baseline.' },
+    { badge_slug: 'sub_3inch',   name: 'Sub-3 Group',   icon_emoji: 'target',    tier: 'silver',   description: 'Record a grouping under 3 inches at 7 yards.' },
+    { badge_slug: 'drills_assigned',name:'Drills Assigned',icon_emoji:'clipboard',tier:'bronze',   description: 'Receive your first personalized drill assignments.' },
   ];
 
   // -------------------------------------------------------------------------
@@ -381,7 +422,7 @@
       state.lastResult = newSession;
       state.stats.latest_echo_score = data.analysis.echo_score;
       if (data.new_badges?.length) {
-        showToast(`🏅 Badge Earned: ${data.new_badges.join(', ')}`, 'gold');
+        showToast(`Badge Earned: ${data.new_badges.join(', ')}`, 'gold');
       }
       state.view = 'result';
       render();
@@ -535,7 +576,9 @@
             ` : ''}
 
             ${analysis.encouragement
-              ? `<div class="fpr-echo__encouragement">💬 ${esc(analysis.encouragement)}</div>`
+              ? `<div class="fpr-echo__encouragement">
+                  <span style="display:inline-flex;align-items:center;width:16px;height:16px;margin-right:6px;vertical-align:middle">${IC.message}</span>${esc(analysis.encouragement)}
+                 </div>`
               : ''}
           </div>
         </div>
@@ -682,9 +725,12 @@
   function buildBadgeCard(b, earned) {
     const tier = b.tier || 'bronze';
     const date = b.earned_at ? new Date(b.earned_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : null;
+    // icon_emoji now stores an IC key string; render as SVG icon
+    const iconKey = b.icon_emoji || 'medal';
+    const iconSvg = IC[iconKey] || IC.medal;
     return `
       <div class="fpr-echo__badge-card ${earned ? '--earned --' + tier : '--locked'}">
-        <span class="fpr-echo__badge-emoji">${b.icon_emoji || '🎖'}</span>
+        <span class="fpr-echo__badge-emoji" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px">${iconSvg}</span>
         <div class="fpr-echo__badge-tier --${tier}">${tier}</div>
         <div class="fpr-echo__badge-name">${esc(b.name)}</div>
         <div class="fpr-echo__badge-desc">${esc(b.description)}</div>
@@ -709,7 +755,8 @@
       ? `I improved my shooting accuracy by ${improve}% in ${s.total_sessions} sessions with Spotter on FPRMembers.com. Can you beat that?`
       : `I scored ${s.latest_echo_score}/100 on my latest Spotter session. Think you can match it?`;
 
-    const shareText = `🎯 ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadge.icon_emoji} ${topBadge.name}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
+    const topBadgeName = topBadge ? topBadge.name : '';
+    const shareText = `[Target Icon] ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Challenge a Friend</h2>
@@ -734,7 +781,11 @@
             <div class="fpr-echo__challenge-improve-sub">Sessions</div>
           </div>
         </div>
-        ${topBadge ? `<div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:12px">${topBadge.icon_emoji} ${topBadge.name} earned</div>` : ''}
+        ${topBadge ? `
+          <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:12px;display:flex;align-items:center;gap:6px">
+            <span style="display:inline-flex;align-items:center;width:16px;height:16px">${IC[topBadge.icon_emoji] || IC.medal}</span>
+            ${esc(topBadge.name)} earned
+          </div>` : ''}
         <div class="fpr-echo__challenge-headline">${esc(headline)}</div>
         <div class="fpr-echo__challenge-cta">Can you beat it? Upload your target at FPRMembers.com →</div>
       </div>
@@ -1021,12 +1072,10 @@
     });
     ctx.fillText(line, 32, y);
 
-    // Badge
+    // Badge label (canvas can't render SVG, so show badge name as text)
     if (topBadge) {
-      ctx.font = '20px sans-serif';
-      ctx.fillText(topBadge.icon_emoji || '🏅', 490, 160);
       ctx.fillStyle = 'rgba(255,255,255,.35)';
-      ctx.font = '10px Inter, sans-serif';
+      ctx.font = '11px Inter, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(topBadge.name, 503, 178);
       ctx.textAlign = 'left';
