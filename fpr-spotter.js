@@ -46,64 +46,58 @@
     star:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2.25l3.086 5.998 6.9 1.002-4.993 4.867 1.179 6.873z"/></svg>`,
     // arrow — tabler: arrow-left
     arrow:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
-    // arrow-up — tabler: arrow-up
-    arrowUp:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`,
-    // arrow-down — tabler: arrow-down
-    arrowDown: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>`,
-    // arrow-right — tabler: arrow-right
-    arrowRight:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
 
     // ---- Tabler Icons replacing emojis ----
 
-    // speech bubble — tabler: message-circle
+    // 💬 speech bubble — tabler: message-circle
     message:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l1.3-3.9C1.976 14.177 2.018 11.243 3.765 9.132a9 9 0 1 1 16.235 5.868C17.345 18.048 13.76 20 10 20a9.09 9.09 0 0 1-2.6-.4L3 20z"/></svg>`,
 
-    // medal — tabler: medal
+    // 🏅 medal — tabler: medal
     medal:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5"/><path d="M8.5 8.5 7 4h10l-1.5 4.5"/><path d="m8.5 8.5 3.5 3 3.5-3"/></svg>`,
 
-    // magnifier — tabler: zoom
+    // 🔍 magnifier — tabler: zoom
     search:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>`,
 
-    // trending up — tabler: trending-up
+    // 📈 trending up — tabler: trending-up
     trending:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
 
-    // top hat — tabler: top-hat (hat variant)
+    // 🎩 top hat — tabler: top-hat (hat variant)
     hat:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-9-4h10a1 1 0 0 0 1-1v-1H7v1a1 1 0 0 0 1 1z"/><path d="M10 16V9m4 7V9"/><path d="M7 9h10l-1-6H8L7 9z"/></svg>`,
 
-    // strength — tabler: barbell
+    // 💪 muscle / strength — tabler: barbell
     arm:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1m18 0h1M6 12h12"/><rect x="4" y="10" width="2" height="4" rx="1"/><rect x="18" y="10" width="2" height="4" rx="1"/><rect x="2" y="11" width="2" height="2" rx="1"/><rect x="20" y="11" width="2" height="2" rx="1"/></svg>`,
 
-    // flame — tabler: flame
+    // 🔥 flame — tabler: flame
     flame:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>`,
 
-    // star filled — tabler: star (filled)
+    // ⭐ star filled — tabler: star (filled)
     starFilled:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2.25l3.086 5.998 6.9 1.002-4.993 4.867 1.179 6.873z"/></svg>`,
 
-    // bolt / lightning — tabler: bolt
+    // ⚡ bolt / lightning — tabler: bolt
     bolt:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
 
-    // diamond — tabler: diamond
+    // 💎 diamond — tabler: diamond
     diamond:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>`,
 
-    // trophy — tabler: trophy
+    // 🏆 trophy — tabler: trophy
     trophy:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M5 9H3a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h3"/><path d="M19 9h2a2 2 0 0 0 2-2V6a1 1 0 0 0-1-1h-3"/></svg>`,
 
-    // crown — tabler: crown
+    // 👑 crown — tabler: crown
     crown:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6l4 6 5-4-2 10H5L3 8l5 4z"/><line x1="5" y1="20" x2="19" y2="20"/></svg>`,
 
-    // sparkles — tabler: sparkles
+    // 💫 sparkles — tabler: sparkles
     sparkles:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2zm0-16a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2zM4 12a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2z"/><path d="M20 12c-3.333.667-5 2.333-5 5-.667-3.333-2.333-5-5-5 3.333-.667 5-2.333 5-5 .667 3.333 2.333 5 5 5z"/></svg>`,
 
-    // bird — tabler: feather
+    // 🦅 eagle / bird — tabler: feather
     bird:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>`,
 
-    // trident — tabler: anchor (best match for authority/power)
+    // 🔱 trident — tabler: anchor (best match for authority/power)
     trident:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 15H19"/><path d="M5 15c0 3.314 3.134 6 7 6s7-2.686 7-6"/></svg>`,
 
-    // rocket — tabler: rocket
+    // 🚀 rocket — tabler: rocket
     rocket:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
 
-    // clipboard — tabler: clipboard-list
+    // 📋 clipboard — tabler: clipboard-list
     clipboard: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
   };
 
@@ -171,8 +165,6 @@
     },
     root: null,
     analyzeStepInterval: null,
-    activeShareUrl: '',
-    activeShareText: '',
   };
 
   // -------------------------------------------------------------------------
@@ -233,6 +225,7 @@
       { view: 'upload',    label: 'Analyze Target',    icon: 'upload'  },
       { view: 'history',   label: 'Session History',   icon: 'history' },
       { view: 'badges',    label: 'My Badges',         icon: 'badge'   },
+      { view: 'challenge', label: 'Challenge a Friend',icon: 'share'   },
     ];
 
     sb.innerHTML = `
@@ -289,7 +282,6 @@
     const tier  = scoreTier(s.echo_score);
     const delta = s.improvement_pct;
     const date  = new Date(s.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const deltaIcon = delta > 0 ? IC.arrowUp : delta < 0 ? IC.arrowDown : '';
     return `
       <div class="fpr-echo__sidebar-session-row" data-session-id="${s.id}">
         <div class="fpr-echo__sidebar-session-score --${tier}">${s.echo_score}</div>
@@ -298,7 +290,7 @@
           <div class="fpr-echo__sidebar-session-date">${date} · ${esc(patternLabel(s.pattern))}</div>
         </div>
         <div class="fpr-echo__sidebar-session-delta ${delta > 0 ? '--up' : delta < 0 ? '--down' : '--flat'}">
-          ${delta ? `<span style="display:inline-flex;width:11px;height:11px">${deltaIcon}</span>${Math.abs(delta).toFixed(1)}%` : 'N/A'}
+          ${delta > 0 ? '↑' + Math.abs(delta).toFixed(1) + '%' : delta < 0 ? '↓' + Math.abs(delta).toFixed(1) + '%' : '—'}
         </div>
       </div>
     `;
@@ -312,6 +304,7 @@
     else if (state.view === 'result')    main.appendChild(buildResultView(state.lastResult));
     else if (state.view === 'history')   main.appendChild(buildHistoryView());
     else if (state.view === 'badges')    main.appendChild(buildBadgesView());
+    else if (state.view === 'challenge') main.appendChild(buildChallengeView());
     return main;
   }
 
@@ -555,10 +548,7 @@
           <div class="fpr-echo__score-chips">
             <div class="fpr-echo__chip --blue">${IC.target} ${patternLabel(session.pattern)}</div>
             ${session.improvement_pct !== null && session.improvement_pct !== undefined
-              ? `<div class="fpr-echo__chip ${session.improvement_pct >= 0 ? '--green' : '--red'}">
-                  <span style="display:inline-flex;width:13px;height:13px">${session.improvement_pct >= 0 ? IC.arrowUp : IC.arrowDown}</span>
-                  ${Math.abs(session.improvement_pct).toFixed(1)}% vs last
-                </div>`
+              ? `<div class="fpr-echo__chip ${session.improvement_pct >= 0 ? '--green' : '--red'}">${session.improvement_pct >= 0 ? '↑' : '↓'} ${Math.abs(session.improvement_pct).toFixed(1)}% vs last</div>`
               : `<div class="fpr-echo__chip --blue">Baseline session</div>`}
             ${session.grouping_radius_mm ? `<div class="fpr-echo__chip --gold">${IC.target} ${(session.grouping_radius_mm / 12.7).toFixed(1)}" group</div>` : ''}
           </div>
@@ -633,8 +623,8 @@
         </div>
 
         <div style="display:flex;justify-content:flex-end;margin-top:12px">
-          <button id="fpr-share-shot-btn" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">
-            ${IC.share}
+          <button onclick="FPRShare.open('Share Your Shot')" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
             Share Your Shot
           </button>
         </div>
@@ -649,10 +639,7 @@
       state.view = 'history'; render();
     });
     wrap.querySelector('#fpr-challenge-btn')?.addEventListener('click', () => {
-      openChallengeModal(session);
-    });
-    wrap.querySelector('#fpr-share-shot-btn')?.addEventListener('click', () => {
-      openShareModal(session);
+      state.view = 'challenge'; render();
     });
 
     // Draw target after DOM settles
@@ -711,7 +698,7 @@
             <div class="fpr-echo__session-card-meta">${date} · ${s.distance_yards || '?'}yd · ${esc(patternLabel(s.pattern))}</div>
           </div>
           ${delta !== null && delta !== undefined
-            ? `<div class="fpr-echo__session-card-delta ${delta >= 0 ? '--up' : '--down'}"><span style="display:inline-flex;width:12px;height:12px">${delta >= 0 ? IC.arrowUp : IC.arrowDown}</span>${Math.abs(delta).toFixed(1)}%</div>`
+            ? `<div class="fpr-echo__session-card-delta ${delta >= 0 ? '--up' : '--down'}">${delta >= 0 ? '↑' : '↓'}${Math.abs(delta).toFixed(1)}%</div>`
             : ''}
           <div class="fpr-echo__session-card-chevron">${IC.chevron}</div>
         </div>
@@ -786,9 +773,9 @@
   }
 
   // ==========================================================================
-  // MODALS: CHALLENGE + SHARE
+  // VIEW: CHALLENGE SHARE
   // ==========================================================================
-  function buildChallengeContent() {
+  function buildChallengeView() {
     const wrap = el('div', 'fpr-echo__challenge-view');
     const s    = state.stats;
     const improve = Math.round(s.overall_improvement_pct || 0);
@@ -801,7 +788,7 @@
       : `I scored ${s.latest_echo_score}/100 on my latest Spotter session. Think you can match it?`;
 
     const topBadgeName = topBadge ? topBadge.name : '';
-    const shareText = `[Spotter] ${headline}\n\nMy stats:\n- Spotter: ${s.latest_echo_score}/100\n- Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n- Sessions logged: ${s.total_sessions}\n${topBadge ? `- Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
+    const shareText = `[Spotter] ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Challenge a Friend</h2>
@@ -832,7 +819,7 @@
             ${esc(topBadge.name)} earned
           </div>` : ''}
         <div class="fpr-echo__challenge-headline">${esc(headline)}</div>
-        <div class="fpr-echo__challenge-cta">Can you beat it? Upload your target at FPRMembers.com <span style="display:inline-flex;width:14px;height:14px;vertical-align:middle">${IC.arrowRight}</span></div>
+        <div class="fpr-echo__challenge-cta">Can you beat it? Upload your target at FPRMembers.com →</div>
       </div>
 
       <textarea class="fpr-echo__challenge-share-text" id="fpr-share-text" rows="6" readonly>${shareText}</textarea>
@@ -847,13 +834,17 @@
     `;
 
     wrap.querySelector('#fpr-copy-btn')?.addEventListener('click', () => {
-      copyText(shareText).then(() => showToast('Challenge text copied!', 'success'));
+      navigator.clipboard.writeText(shareText).then(() => showToast('Challenge text copied!', 'success'));
     });
 
     wrap.querySelector('#fpr-generate-link-btn')?.addEventListener('click', async () => {
-      const data = await createShareLink(state.lastResult);
+      const data = await api('/api/echo/challenge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ memberId: state.memberId, memberName: state.memberName }),
+      });
       if (data?.shareUrl) {
-        copyText(data.shareUrl).then(() =>
+        navigator.clipboard.writeText(data.shareUrl).then(() =>
           showToast('Share link copied: ' + data.shareUrl, 'success')
         );
       } else {
@@ -866,143 +857,6 @@
     });
 
     return wrap;
-  }
-
-  function openChallengeModal() {
-    openSpotterModal('Challenge a Friend', buildChallengeContent());
-  }
-
-  async function openShareModal(session) {
-    const body = el('div', 'fpr-echo__share-box');
-    body.innerHTML = `
-      <div class="fpr-echo__share-status">Generating public share link...</div>
-      <div class="fpr-echo__share-actions" style="display:none">
-        <button class="fpr-share-action --facebook" data-platform="facebook">Facebook</button>
-        <button class="fpr-share-action --x" data-platform="x">X / Twitter</button>
-        <button class="fpr-share-action --whatsapp" data-platform="whatsapp">WhatsApp</button>
-        <button class="fpr-share-action --copy" data-platform="copy">${IC.copy} Copy Link</button>
-      </div>
-    `;
-    openSpotterModal('Share Your Shot', body);
-
-    const data = await createShareLink(session);
-    const status = body.querySelector('.fpr-echo__share-status');
-    const actions = body.querySelector('.fpr-echo__share-actions');
-    if (!data?.shareUrl) {
-      status.textContent = 'Connect the Railway API to generate public share links.';
-      return;
-    }
-
-    const text = data.shareText || data.headline || buildShareText(session);
-    state.activeShareUrl = data.shareUrl;
-    state.activeShareText = text;
-    status.innerHTML = `<strong>Public link ready</strong><span>${esc(data.shareUrl)}</span>`;
-    actions.style.display = 'grid';
-    actions.querySelectorAll('[data-platform]').forEach(btn => {
-      btn.addEventListener('click', () => shareToPlatform(btn.dataset.platform, text, data.shareUrl));
-    });
-  }
-
-  function openSpotterModal(title, contentEl) {
-    closeSpotterModal();
-    const modal = el('div', 'fpr-echo__modal');
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-modal', 'true');
-    modal.innerHTML = `
-      <div class="fpr-echo__modal-backdrop" data-close="1"></div>
-      <div class="fpr-echo__modal-panel">
-        <button class="fpr-echo__modal-close" type="button" aria-label="Close">&times;</button>
-        <div class="fpr-echo__modal-kicker">Spotter</div>
-        <h2 class="fpr-echo__modal-title">${esc(title)}</h2>
-        <div class="fpr-echo__modal-body"></div>
-      </div>
-    `;
-    modal.querySelector('.fpr-echo__modal-body').appendChild(contentEl);
-    modal.querySelector('[data-close]').addEventListener('click', closeSpotterModal);
-    modal.querySelector('.fpr-echo__modal-close').addEventListener('click', closeSpotterModal);
-    document.body.appendChild(modal);
-    document.addEventListener('keydown', modalEscHandler);
-  }
-
-  function modalEscHandler(e) {
-    if (e.key === 'Escape') closeSpotterModal();
-  }
-
-  function closeSpotterModal() {
-    document.querySelector('.fpr-echo__modal')?.remove();
-    document.removeEventListener('keydown', modalEscHandler);
-  }
-
-  async function createShareLink(session) {
-    if (!session) return null;
-    const fallbackToken = makeShareToken(session);
-    if (!state.apiUrl) {
-      const shareUrl = `${publicShareBase()}/${fallbackToken}`;
-      return { shareToken: fallbackToken, shareUrl, shareText: buildShareText(session), demo: true };
-    }
-    return api('/api/echo/share', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        memberId: state.memberId,
-        memberName: state.memberName,
-        sessionId: session.id,
-      }),
-    });
-  }
-
-  function buildShareText(session) {
-    const score = session?.echo_score || state.stats.latest_echo_score || 0;
-    const insight = shareInsight(session);
-    return `I scored ${score}/100 with Spotter on FPRMembers.com. ${insight}`;
-  }
-
-  function shareInsight(session) {
-    if (!session) return 'Check out the result.';
-    const delta = session.improvement_pct !== null && session.improvement_pct !== undefined
-      ? ` - ${Math.abs(session.improvement_pct).toFixed(1)}% ${session.improvement_pct >= 0 ? 'improvement' : 'change'}`
-      : '';
-    return `${patternLabel(session.pattern)}${delta}`;
-  }
-
-  function publicShareBase() {
-    return 'https://www.fprmembers.com/spotter/share';
-  }
-
-  function makeShareToken(session) {
-    const raw = `${session.id || 'session'}-${state.memberId}-${Date.now()}`;
-    let hash = 0;
-    for (let i = 0; i < raw.length; i++) hash = ((hash << 5) - hash + raw.charCodeAt(i)) | 0;
-    return `spotter-${Math.abs(hash).toString(36)}-${Date.now().toString(36)}`;
-  }
-
-  function shareToPlatform(platform, text, url) {
-    const encodedUrl = encodeURIComponent(url);
-    const encodedText = encodeURIComponent(text);
-    const fullText = encodeURIComponent(`${text} ${url}`);
-    const targets = {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-      x: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
-      whatsapp: `https://wa.me/?text=${fullText}`,
-    };
-    if (platform === 'copy') {
-      copyText(url).then(() => showToast('Share link copied!', 'success'));
-      return;
-    }
-    window.open(targets[platform], '_blank', 'noopener,noreferrer');
-  }
-
-  function copyText(text) {
-    if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-999px';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    ta.remove();
-    return Promise.resolve();
   }
 
   // ==========================================================================
