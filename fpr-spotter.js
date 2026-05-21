@@ -49,56 +49,68 @@
 
     // ---- Tabler Icons replacing emojis ----
 
-    // 💬 speech bubble — tabler: message-circle
+    // speech bubble — tabler: message-circle
     message:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l1.3-3.9C1.976 14.177 2.018 11.243 3.765 9.132a9 9 0 1 1 16.235 5.868C17.345 18.048 13.76 20 10 20a9.09 9.09 0 0 1-2.6-.4L3 20z"/></svg>`,
 
-    // 🏅 medal — tabler: medal
+    // medal — tabler: medal
     medal:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5"/><path d="M8.5 8.5 7 4h10l-1.5 4.5"/><path d="m8.5 8.5 3.5 3 3.5-3"/></svg>`,
 
-    // 🔍 magnifier — tabler: zoom
+    // magnifier — tabler: zoom
     search:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>`,
 
-    // 📈 trending up — tabler: trending-up
+    // trending up — tabler: trending-up
     trending:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
 
-    // 🎩 top hat — tabler: top-hat (hat variant)
+    // top hat — tabler hat variant
     hat:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-9-4h10a1 1 0 0 0 1-1v-1H7v1a1 1 0 0 0 1 1z"/><path d="M10 16V9m4 7V9"/><path d="M7 9h10l-1-6H8L7 9z"/></svg>`,
 
-    // 💪 muscle / strength — tabler: barbell
+    // muscle / strength — tabler: barbell
     arm:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1m18 0h1M6 12h12"/><rect x="4" y="10" width="2" height="4" rx="1"/><rect x="18" y="10" width="2" height="4" rx="1"/><rect x="2" y="11" width="2" height="2" rx="1"/><rect x="20" y="11" width="2" height="2" rx="1"/></svg>`,
 
-    // 🔥 flame — tabler: flame
+    // flame — tabler: flame
     flame:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>`,
 
-    // ⭐ star filled — tabler: star (filled)
+    // star filled — tabler: star filled
     starFilled:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2.25l3.086 5.998 6.9 1.002-4.993 4.867 1.179 6.873z"/></svg>`,
 
-    // ⚡ bolt / lightning — tabler: bolt
+    // bolt / lightning — tabler: bolt
     bolt:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
 
-    // 💎 diamond — tabler: diamond
+    // diamond — tabler: diamond
     diamond:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>`,
 
-    // 🏆 trophy — tabler: trophy
+    // trophy — tabler: trophy
     trophy:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M5 9H3a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h3"/><path d="M19 9h2a2 2 0 0 0 2-2V6a1 1 0 0 0-1-1h-3"/></svg>`,
 
-    // 👑 crown — tabler: crown
+    // crown — tabler: crown
     crown:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6l4 6 5-4-2 10H5L3 8l5 4z"/><line x1="5" y1="20" x2="19" y2="20"/></svg>`,
 
-    // 💫 sparkles — tabler: sparkles
+    // sparkles — tabler: sparkles
     sparkles:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2zm0-16a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2zM4 12a2 2 0 0 1 2 2 2 2 0 0 1 2-2 2 2 0 0 1-2-2 2 2 0 0 1-2 2z"/><path d="M20 12c-3.333.667-5 2.333-5 5-.667-3.333-2.333-5-5-5 3.333-.667 5-2.333 5-5 .667 3.333 2.333 5 5 5z"/></svg>`,
 
-    // 🦅 eagle / bird — tabler: feather
+    // eagle / bird — tabler: feather
     bird:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>`,
 
-    // 🔱 trident — tabler: anchor (best match for authority/power)
+    // trident — tabler: anchor
     trident:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 15H19"/><path d="M5 15c0 3.314 3.134 6 7 6s7-2.686 7-6"/></svg>`,
 
-    // 🚀 rocket — tabler: rocket
+    // rocket — tabler: rocket
     rocket:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
 
-    // 📋 clipboard — tabler: clipboard-list
+    // clipboard — tabler: clipboard-list
     clipboard: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
+
+    // warning — tabler: alert-triangle
+    warning:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+
+    // refresh — tabler: refresh
+    refresh:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11A8.1 8.1 0 0 0 4.5 9M4 5v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></svg>`,
+
+    // user — tabler: user
+    user:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`,
+
+    // settings — tabler: settings
+    settings:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
   };
 
   function ic(name) { return `<span style="display:inline-flex;align-items:center">${IC[name] || ''}</span>`; }
@@ -121,18 +133,18 @@
   ];
 
   const DEMO_BADGES = [
-    { badge_slug: 'first_shot',    name: 'First Shot',        icon_emoji: 'target',   tier: 'bronze', description: 'Submitted your first target for Spotter analysis.',  earned_at: '2026-04-07' },
-    { badge_slug: 'pattern_found', name: 'Pattern Detected',  icon_emoji: 'search',   tier: 'bronze', description: 'Spotter identified a specific shot pattern.',          earned_at: '2026-04-12' },
-    { badge_slug: 'first_improve', name: 'On the Way Up',     icon_emoji: 'trending', tier: 'bronze', description: 'Improved your Echo Score session over session.',       earned_at: '2026-04-12' },
-    { badge_slug: 'three_sessions',name: 'Hat Trick',         icon_emoji: 'hat',      tier: 'bronze', description: 'Completed 3 shooting sessions with Spotter.',         earned_at: '2026-04-18' },
-    { badge_slug: 'ten_pct_up',    name: 'Ten Percent Club',  icon_emoji: 'arm',      tier: 'silver', description: 'Improved Echo Score 10% from baseline.',              earned_at: '2026-04-18' },
-    { badge_slug: 'five_sessions', name: 'Five and Counting', icon_emoji: 'flame',    tier: 'silver', description: 'Completed 5 sessions with Spotter.',                  earned_at: '2026-04-30' },
-    { badge_slug: 'score_70',      name: 'Developing Shooter',icon_emoji: 'star',     tier: 'silver', description: 'Achieved an Echo Score of 70+.',                     earned_at: '2026-04-24' },
-    { badge_slug: 'pattern_fixed', name: 'Pattern Broken',    icon_emoji: 'bolt',     tier: 'silver', description: 'Went 3 sessions without your most common error.',     earned_at: '2026-04-30' },
-    { badge_slug: 'score_80',      name: 'Proficient',        icon_emoji: 'starFilled',tier:'gold',   description: 'Achieved an Echo Score of 80+.',                     earned_at: '2026-04-30' },
-    { badge_slug: 'score_85',      name: 'Advanced',          icon_emoji: 'sparkles', tier: 'gold',   description: 'Achieved an Echo Score of 85+.',                     earned_at: '2026-05-04' },
-    { badge_slug: 'five_streak',   name: 'Streak Builder',    icon_emoji: 'bolt',     tier: 'gold',   description: '5 consecutive improvement sessions.',                 earned_at: '2026-05-04' },
-    { badge_slug: 'sub_2inch',     name: 'Sub-2 Group',       icon_emoji: 'diamond',  tier: 'gold',   description: 'Recorded a grouping under 2 inches at 7 yards.',     earned_at: '2026-05-04' },
+    { badge_slug: 'first_shot',    name: 'First Shot',        icon_emoji: 'target',    tier: 'bronze', description: 'Submitted your first target for Spotter analysis.',  earned_at: '2026-04-07' },
+    { badge_slug: 'pattern_found', name: 'Pattern Detected',  icon_emoji: 'search',    tier: 'bronze', description: 'Spotter identified a specific shot pattern.',          earned_at: '2026-04-12' },
+    { badge_slug: 'first_improve', name: 'On the Way Up',     icon_emoji: 'trending',  tier: 'bronze', description: 'Improved your Echo Score session over session.',       earned_at: '2026-04-12' },
+    { badge_slug: 'three_sessions',name: 'Hat Trick',         icon_emoji: 'hat',       tier: 'bronze', description: 'Completed 3 shooting sessions with Spotter.',         earned_at: '2026-04-18' },
+    { badge_slug: 'ten_pct_up',    name: 'Ten Percent Club',  icon_emoji: 'arm',       tier: 'silver', description: 'Improved Echo Score 10% from baseline.',              earned_at: '2026-04-18' },
+    { badge_slug: 'five_sessions', name: 'Five and Counting', icon_emoji: 'flame',     tier: 'silver', description: 'Completed 5 sessions with Spotter.',                  earned_at: '2026-04-30' },
+    { badge_slug: 'score_70',      name: 'Developing Shooter',icon_emoji: 'star',      tier: 'silver', description: 'Achieved an Echo Score of 70+.',                     earned_at: '2026-04-24' },
+    { badge_slug: 'pattern_fixed', name: 'Pattern Broken',    icon_emoji: 'bolt',      tier: 'silver', description: 'Went 3 sessions without your most common error.',     earned_at: '2026-04-30' },
+    { badge_slug: 'score_80',      name: 'Proficient',        icon_emoji: 'starFilled',tier: 'gold',   description: 'Achieved an Echo Score of 80+.',                     earned_at: '2026-04-30' },
+    { badge_slug: 'score_85',      name: 'Advanced',          icon_emoji: 'sparkles',  tier: 'gold',   description: 'Achieved an Echo Score of 85+.',                     earned_at: '2026-05-04' },
+    { badge_slug: 'five_streak',   name: 'Streak Builder',    icon_emoji: 'bolt',      tier: 'gold',   description: '5 consecutive improvement sessions.',                 earned_at: '2026-05-04' },
+    { badge_slug: 'sub_2inch',     name: 'Sub-2 Group',       icon_emoji: 'diamond',   tier: 'gold',   description: 'Recorded a grouping under 2 inches at 7 yards.',     earned_at: '2026-05-04' },
   ];
 
   const ALL_BADGES = [
@@ -152,7 +164,7 @@
   // -------------------------------------------------------------------------
   let state = {
     apiUrl: '', memberId: '', memberName: '',
-    view: 'upload',          // upload | analyzing | result | history | badges | challenge
+    view: 'upload',
     sessions: [...DEMO_SESSIONS],
     badges: [...DEMO_BADGES],
     pendingFile: null,
@@ -202,7 +214,7 @@
     return shell;
   }
 
-  // ——— Topbar ———
+  // --- Topbar ---
   function buildTopbar() {
     const bar = el('div', 'fpr-echo__topbar');
     bar.innerHTML = `
@@ -212,13 +224,18 @@
       <div class="fpr-echo__topbar-score">
         ${IC.target}
         <span>Spotter: <strong>${state.stats.latest_echo_score || '—'}</strong></span>
-        ${state.stats.overall_improvement_pct > 0 ? `<span style="color:#032238">+${Math.round(state.stats.overall_improvement_pct)}%</span>` : ''}
+        ${state.stats.overall_improvement_pct > 0
+          ? `<span style="color:#032238;display:inline-flex;align-items:center;gap:3px">
+               <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.trending}</span>
+               +${Math.round(state.stats.overall_improvement_pct)}%
+             </span>`
+          : ''}
       </div>
     `;
     return bar;
   }
 
-  // ——— Sidebar ———
+  // --- Sidebar ---
   function buildSidebar() {
     const sb = el('div', 'fpr-echo__sidebar');
     const tabs = [
@@ -290,16 +307,20 @@
           <div class="fpr-echo__sidebar-session-date">${date} · ${esc(patternLabel(s.pattern))}</div>
         </div>
         <div class="fpr-echo__sidebar-session-delta ${delta > 0 ? '--up' : delta < 0 ? '--down' : '--flat'}">
-          ${delta > 0 ? '↑' + Math.abs(delta).toFixed(1) + '%' : delta < 0 ? '↓' + Math.abs(delta).toFixed(1) + '%' : '—'}
+          ${delta > 0
+            ? `<span style="display:inline-flex;align-items:center;gap:2px"><span style="display:inline-flex;align-items:center;width:10px;height:10px">${IC.trending}</span>${Math.abs(delta).toFixed(1)}%</span>`
+            : delta < 0
+              ? `<span style="display:inline-flex;align-items:center;gap:2px"><span style="display:inline-flex;align-items:center;width:10px;height:10px;transform:scaleY(-1)">${IC.trending}</span>${Math.abs(delta).toFixed(1)}%</span>`
+              : '—'}
         </div>
       </div>
     `;
   }
 
-  // ——— Main ———
+  // --- Main ---
   function buildMain() {
     const main = el('div', 'fpr-echo__main');
-    if (state.view === 'upload')    main.appendChild(buildUploadView());
+    if (state.view === 'upload')         main.appendChild(buildUploadView());
     else if (state.view === 'analyzing') main.appendChild(buildAnalyzingView());
     else if (state.view === 'result')    main.appendChild(buildResultView(state.lastResult));
     else if (state.view === 'history')   main.appendChild(buildHistoryView());
@@ -328,7 +349,10 @@
       </div>
 
       <div>
-        <div style="font-size:13px;font-weight:700;color:var(--fpr-gray-700);margin-bottom:12px">Session Details <span style="font-weight:400;color:var(--fpr-gray-400)">(optional)</span></div>
+        <div style="font-size:13px;font-weight:700;color:var(--fpr-gray-700);margin-bottom:12px">
+          Session Details
+          <span style="font-weight:400;color:var(--fpr-gray-400)">(optional)</span>
+        </div>
         <div class="fpr-echo__meta-form">
           <div class="fpr-echo__field">
             <label class="fpr-echo__label">Distance (yards)</label>
@@ -356,27 +380,31 @@
 
       <div class="fpr-echo__privacy-note">
         ${IC.shield}
-        <div><strong>Privacy First:</strong> Your photo is analyzed in memory and immediately deleted — it is never written to disk, stored, or shared. Only the coaching results are saved.</div>
+        <div>
+          <strong>Privacy First:</strong> Your photo is analyzed in memory and immediately deleted — it is never written to disk, stored, or shared. Only the coaching results are saved.
+        </div>
       </div>
 
       <div class="fpr-echo__disclaimer">
-        <span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.
+        <span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span>
+        For training purposes only. Always follow range safety rules and local firearms regulations.
       </div>
 
       <div style="display:flex;gap:10px;align-items:center">
         <button class="fpr-btn fpr-btn--echo" id="fpr-analyze-btn" disabled>
-          ${IC.target} Analyze My Target
+          <span style="display:inline-flex;align-items:center;width:16px;height:16px">${IC.target}</span>
+          Analyze My Target
         </button>
         <button class="fpr-btn fpr-btn--ghost fpr-btn--sm" id="fpr-demo-btn">
+          <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.search}</span>
           Try Demo Analysis
         </button>
       </div>
     `;
 
-    // Drag and drop
-    const dz    = wrap.querySelector('#fpr-dropzone');
-    const input = wrap.querySelector('#fpr-file-input');
-    const preview = wrap.querySelector('#fpr-preview-img');
+    const dz       = wrap.querySelector('#fpr-dropzone');
+    const input    = wrap.querySelector('#fpr-file-input');
+    const preview  = wrap.querySelector('#fpr-preview-img');
     const analyzeBtn = wrap.querySelector('#fpr-analyze-btn');
 
     dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('--drag-over'); });
@@ -418,12 +446,12 @@
 
   async function submitAnalysis(formEl) {
     const formData = new FormData();
-    formData.append('target_image', state.pendingFile);
-    formData.append('memberId',     state.memberId);
-    formData.append('memberName',   state.memberName);
-    formData.append('distanceYards', formEl.querySelector('#fpr-distance')?.value || '7');
-    formData.append('firearmType',   formEl.querySelector('#fpr-firearm')?.value || 'pistol');
-    formData.append('caliber',       formEl.querySelector('#fpr-caliber')?.value || '');
+    formData.append('target_image',     state.pendingFile);
+    formData.append('memberId',         state.memberId);
+    formData.append('memberName',       state.memberName);
+    formData.append('distanceYards',    formEl.querySelector('#fpr-distance')?.value || '7');
+    formData.append('firearmType',      formEl.querySelector('#fpr-firearm')?.value || 'pistol');
+    formData.append('caliber',          formEl.querySelector('#fpr-caliber')?.value || '');
     formData.append('shotCountClaimed', formEl.querySelector('#fpr-shots')?.value || '');
 
     state.view = 'analyzing';
@@ -439,13 +467,16 @@
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || 'Analysis failed');
 
-      // Merge new session into state
       const newSession = {
-        id: data.sessionId, session_number: data.sessionNumber,
-        echo_score: data.analysis.echo_score, pattern: data.analysis.pattern,
+        id: data.sessionId,
+        session_number: data.sessionNumber,
+        echo_score: data.analysis.echo_score,
+        pattern: data.analysis.pattern,
         grouping_radius_mm: data.analysis.grouping_radius_mm,
-        center_x_mm: data.analysis.center_x_mm, center_y_mm: data.analysis.center_y_mm,
-        improvement_pct: data.improvement_pct, coaching_json: data.analysis,
+        center_x_mm: data.analysis.center_x_mm,
+        center_y_mm: data.analysis.center_y_mm,
+        improvement_pct: data.improvement_pct,
+        coaching_json: data.analysis,
         distance_yards: parseInt(formEl?.querySelector('#fpr-distance')?.value) || 7,
         firearm_type: formEl?.querySelector('#fpr-firearm')?.value || 'pistol',
         created_at: new Date().toISOString(),
@@ -454,7 +485,7 @@
       state.lastResult = newSession;
       state.stats.latest_echo_score = data.analysis.echo_score;
       if (data.new_badges?.length) {
-        showToast(`Badge Earned: ${data.new_badges.join(', ')}`, 'gold');
+        showToast('Badge Earned: ' + data.new_badges.join(', '), 'gold');
       }
       state.view = 'result';
       render();
@@ -466,7 +497,7 @@
   }
 
   function loadDemoResult(fromAnalyzing = false) {
-    const demo = DEMO_SESSIONS[1]; // A session with a clear pattern
+    const demo = DEMO_SESSIONS[1];
     state.lastResult = demo;
     state.view = 'result';
     if (fromAnalyzing && state.analyzeStepInterval) clearInterval(state.analyzeStepInterval);
@@ -480,18 +511,22 @@
   function buildAnalyzingView() {
     const wrap = el('div', 'fpr-echo__analyzing');
     const steps = [
-      { id: 's1', label: 'Uploading image securely…' },
-      { id: 's2', label: 'Detecting target and bullet holes…' },
-      { id: 's3', label: 'Analyzing shot grouping pattern…' },
-      { id: 's4', label: 'Generating personalized coaching…' },
-      { id: 's5', label: 'Deleting image from memory…' },
+      { id: 's1', label: 'Uploading image securely...' },
+      { id: 's2', label: 'Detecting target and bullet holes...' },
+      { id: 's3', label: 'Analyzing shot grouping pattern...' },
+      { id: 's4', label: 'Generating personalized coaching...' },
+      { id: 's5', label: 'Deleting image from memory...' },
     ];
     wrap.innerHTML = `
       <div class="fpr-echo__radar"></div>
       <div class="fpr-echo__analyzing-text">Spotter is analyzing your target</div>
-      <div class="fpr-echo__analyzing-sub">This takes about 5–8 seconds</div>
+      <div class="fpr-echo__analyzing-sub">This takes about 5-8 seconds</div>
       <div class="fpr-echo__analyzing-steps" id="fpr-steps">
-        ${steps.map(s => `<div class="fpr-echo__analyzing-step" id="step-${s.id}"><span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.info}</span> ${s.label}</div>`).join('')}
+        ${steps.map(s => `
+          <div class="fpr-echo__analyzing-step" id="step-${s.id}">
+            <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.info}</span>
+            ${s.label}
+          </div>`).join('')}
       </div>
     `;
 
@@ -500,7 +535,11 @@
     state.analyzeStepInterval = setInterval(() => {
       if (i > 0) {
         const prev = wrap.querySelector(`#step-${ids[i - 1]}`);
-        if (prev) { prev.classList.remove('--active'); prev.classList.add('--done'); prev.innerHTML = `<span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.check}</span> ${steps[i-1].label}`; }
+        if (prev) {
+          prev.classList.remove('--active');
+          prev.classList.add('--done');
+          prev.innerHTML = `<span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.check}</span> ${steps[i - 1].label}`;
+        }
       }
       if (i < ids.length) {
         const curr = wrap.querySelector(`#step-${ids[i]}`);
@@ -527,7 +566,11 @@
     const offset   = circ - (score / 100) * circ;
 
     const wrap = el('div', 'fpr-echo__result-view');
-    window.fprAwardTicket('shot_analyzed', { sessionNum: session.session_number || 0, score: score });
+
+    if (typeof window.fprAwardTicket === 'function') {
+      window.fprAwardTicket('shot_analyzed', { sessionNum: session.session_number || 0, score: score });
+    }
+
     wrap.innerHTML = `
       <!-- Score hero -->
       <div class="fpr-echo__score-hero">
@@ -544,26 +587,40 @@
         </div>
         <div class="fpr-echo__score-hero-info">
           <div class="fpr-echo__score-hero-heading">${scoreTierLabel(tier)}</div>
-          <div class="fpr-echo__score-hero-sub">Session ${session.session_number} · ${session.distance_yards || 7} yards · ${session.firearm_type || 'pistol'}</div>
+          <div class="fpr-echo__score-hero-sub">
+            Session ${session.session_number} · ${session.distance_yards || 7} yards · ${session.firearm_type || 'pistol'}
+          </div>
           <div class="fpr-echo__score-chips">
-            <div class="fpr-echo__chip --blue">${IC.target} ${patternLabel(session.pattern)}</div>
+            <div class="fpr-echo__chip --blue">
+              <span style="display:inline-flex;align-items:center;width:12px;height:12px">${IC.target}</span>
+              ${patternLabel(session.pattern)}
+            </div>
             ${session.improvement_pct !== null && session.improvement_pct !== undefined
-              ? `<div class="fpr-echo__chip ${session.improvement_pct >= 0 ? '--green' : '--red'}">${session.improvement_pct >= 0 ? '↑' : '↓'} ${Math.abs(session.improvement_pct).toFixed(1)}% vs last</div>`
+              ? `<div class="fpr-echo__chip ${session.improvement_pct >= 0 ? '--green' : '--red'}">
+                   <span style="display:inline-flex;align-items:center;width:12px;height:12px">${session.improvement_pct >= 0 ? IC.trending : IC.trending}</span>
+                   ${session.improvement_pct >= 0 ? '+' : ''}${Math.abs(session.improvement_pct).toFixed(1)}% vs last
+                 </div>`
               : `<div class="fpr-echo__chip --blue">Baseline session</div>`}
-            ${session.grouping_radius_mm ? `<div class="fpr-echo__chip --gold">${IC.target} ${(session.grouping_radius_mm / 12.7).toFixed(1)}" group</div>` : ''}
+            ${session.grouping_radius_mm
+              ? `<div class="fpr-echo__chip --gold">
+                   <span style="display:inline-flex;align-items:center;width:12px;height:12px">${IC.target}</span>
+                   ${(session.grouping_radius_mm / 12.7).toFixed(1)}" group
+                 </div>`
+              : ''}
           </div>
         </div>
         <div>
           <button class="fpr-btn fpr-btn--ghost fpr-btn--sm" id="fpr-new-analysis" style="color:#fff;border-color:rgba(255,255,255,.2)">
-            ${IC.upload} New Target
+            <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.upload}</span>
+            New Target
           </button>
         </div>
       </div>
 
       <!-- Body -->
       <div class="fpr-echo__result-body">
-
         <div class="fpr-echo__analysis-grid">
+
           <!-- Target visualization -->
           <div class="fpr-echo__target-wrap">
             <canvas class="fpr-echo__target-canvas" id="fpr-target-canvas" width="200" height="200"></canvas>
@@ -575,13 +632,17 @@
           <!-- Coaching -->
           <div class="fpr-echo__coaching">
             <div class="fpr-echo__coaching-issue">${esc(analysis.primary_issue || '')}</div>
+
             ${analysis.explanation
               ? `<div class="fpr-echo__coaching-explanation">${esc(analysis.explanation)}</div>`
               : ''}
 
             ${analysis.corrections?.length ? `
               <div>
-                <div class="fpr-echo__coaching-section-title">Immediate Corrections</div>
+                <div class="fpr-echo__coaching-section-title">
+                  <span style="display:inline-flex;align-items:center;width:14px;height:14px;margin-right:5px">${IC.clipboard}</span>
+                  Immediate Corrections
+                </div>
                 <div class="fpr-echo__corrections-list">
                   ${analysis.corrections.map((c, i) => `
                     <div class="fpr-echo__correction-item">
@@ -595,7 +656,10 @@
 
             ${analysis.drills?.length ? `
               <div>
-                <div class="fpr-echo__coaching-section-title">Prescribed Drills</div>
+                <div class="fpr-echo__coaching-section-title">
+                  <span style="display:inline-flex;align-items:center;width:14px;height:14px;margin-right:5px">${IC.star}</span>
+                  Prescribed Drills
+                </div>
                 <div class="fpr-echo__drills-list">
                   ${analysis.drills.slice(0, 3).map((d, i) => `
                     <div class="fpr-echo__drill-card">
@@ -609,26 +673,36 @@
 
             ${analysis.encouragement
               ? `<div class="fpr-echo__encouragement">
-                  <span style="display:inline-flex;align-items:center;width:16px;height:16px;margin-right:6px;vertical-align:middle">${IC.message}</span>${esc(analysis.encouragement)}
+                   <span style="display:inline-flex;align-items:center;width:16px;height:16px;margin-right:6px;vertical-align:middle">${IC.message}</span>
+                   ${esc(analysis.encouragement)}
                  </div>`
               : ''}
           </div>
         </div>
 
-        <div class="fpr-echo__disclaimer"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="fpr-btn fpr-btn--echo" id="fpr-view-history-btn">${IC.history} Session History</button>
-          <button class="fpr-btn fpr-btn--gold" id="fpr-challenge-btn">${IC.share} Challenge a Friend</button>
+        <div class="fpr-echo__disclaimer">
+          <span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span>
+          For training purposes only. Always follow range safety rules and local firearms regulations.
         </div>
 
-        <div style="display:flex;justify-content:flex-end;margin-top:12px">
-          <button onclick="FPRShare.open('Share Your Shot')" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            Share Your Shot
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="fpr-btn fpr-btn--echo" id="fpr-view-history-btn">
+            <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.history}</span>
+            Session History
+          </button>
+          <button class="fpr-btn fpr-btn--gold" id="fpr-challenge-btn">
+            <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.share}</span>
+            Challenge a Friend
           </button>
         </div>
 
+        <div style="display:flex;justify-content:flex-end;margin-top:12px">
+          <button onclick="FPRShare && FPRShare.open('Share Your Shot')"
+            style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">
+            <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.share}</span>
+            Share Your Shot
+          </button>
+        </div>
       </div>
     `;
 
@@ -642,7 +716,6 @@
       state.view = 'challenge'; render();
     });
 
-    // Draw target after DOM settles
     setTimeout(() => drawTargetCanvas('fpr-target-canvas', session), 80);
     return wrap;
   }
@@ -651,20 +724,35 @@
   // VIEW: HISTORY
   // ==========================================================================
   function buildHistoryView() {
-    const wrap = el('div', 'fpr-echo__history-view');
+    const wrap   = el('div', 'fpr-echo__history-view');
     const ordered = state.sessions.slice().sort((a, b) => a.session_number - b.session_number);
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Session History</h2>
-      <p class="fpr-echo__view-sub" style="margin:0 0 20px">${ordered.length} sessions · ${state.stats.overall_improvement_pct >= 0 ? '+' : ''}${Math.round(state.stats.overall_improvement_pct || 0)}% overall improvement</p>
+      <p class="fpr-echo__view-sub" style="margin:0 0 20px">
+        ${ordered.length} sessions ·
+        ${state.stats.overall_improvement_pct >= 0 ? '+' : ''}${Math.round(state.stats.overall_improvement_pct || 0)}% overall improvement
+      </p>
 
       <div class="fpr-echo__trend-chart-wrap">
         <canvas class="fpr-echo__trend-canvas" id="fpr-trend-canvas" width="600" height="160"></canvas>
         <div class="fpr-echo__trend-legend">
-          <div class="fpr-echo__trend-legend-item"><div class="fpr-echo__trend-legend-dot" style="background:#B91C1C"></div> Beginner (0–59)</div>
-          <div class="fpr-echo__trend-legend-item"><div class="fpr-echo__trend-legend-dot" style="background:#C25C00"></div> Developing (60–74)</div>
-          <div class="fpr-echo__trend-legend-item"><div class="fpr-echo__trend-legend-dot" style="background:#227A48"></div> Proficient (75–89)</div>
-          <div class="fpr-echo__trend-legend-item"><div class="fpr-echo__trend-legend-dot" style="background:#C9973A"></div> Expert (90–100)</div>
+          <div class="fpr-echo__trend-legend-item">
+            <div class="fpr-echo__trend-legend-dot" style="background:#B91C1C"></div>
+            Beginner (0-59)
+          </div>
+          <div class="fpr-echo__trend-legend-item">
+            <div class="fpr-echo__trend-legend-dot" style="background:#C25C00"></div>
+            Developing (60-74)
+          </div>
+          <div class="fpr-echo__trend-legend-item">
+            <div class="fpr-echo__trend-legend-dot" style="background:#227A48"></div>
+            Proficient (75-89)
+          </div>
+          <div class="fpr-echo__trend-legend-item">
+            <div class="fpr-echo__trend-legend-dot" style="background:#C9973A"></div>
+            Expert (90-100)
+          </div>
         </div>
       </div>
 
@@ -672,10 +760,12 @@
         ${ordered.slice().reverse().map(s => buildSessionCard(s)).join('')}
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+      <div class="fpr-echo__disclaimer" style="margin-top:20px">
+        <span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span>
+        For training purposes only. Always follow range safety rules and local firearms regulations.
+      </div>
     `;
 
-    // Wire accordion
     wrap.querySelectorAll('.fpr-echo__session-card-header').forEach(hdr => {
       hdr.addEventListener('click', () => hdr.closest('.fpr-echo__session-card').classList.toggle('--open'));
     });
@@ -685,9 +775,9 @@
   }
 
   function buildSessionCard(s) {
-    const tier  = scoreTier(s.echo_score);
-    const date  = new Date(s.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    const delta = s.improvement_pct;
+    const tier    = scoreTier(s.echo_score);
+    const date    = new Date(s.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    const delta   = s.improvement_pct;
     const coaching = s.coaching_json || {};
     return `
       <div class="fpr-echo__session-card">
@@ -698,15 +788,33 @@
             <div class="fpr-echo__session-card-meta">${date} · ${s.distance_yards || '?'}yd · ${esc(patternLabel(s.pattern))}</div>
           </div>
           ${delta !== null && delta !== undefined
-            ? `<div class="fpr-echo__session-card-delta ${delta >= 0 ? '--up' : '--down'}">${delta >= 0 ? '↑' : '↓'}${Math.abs(delta).toFixed(1)}%</div>`
+            ? `<div class="fpr-echo__session-card-delta ${delta >= 0 ? '--up' : '--down'}">
+                 <span style="display:inline-flex;align-items:center;width:12px;height:12px;margin-right:2px">${IC.trending}</span>
+                 ${Math.abs(delta).toFixed(1)}%
+               </div>`
             : ''}
-          <div class="fpr-echo__session-card-chevron">${IC.chevron}</div>
+          <div class="fpr-echo__session-card-chevron">
+            <span style="display:inline-flex;align-items:center;width:16px;height:16px">${IC.chevron}</span>
+          </div>
         </div>
         <div class="fpr-echo__session-card-body">
-          ${coaching.primary_issue ? `<p style="font-size:14px;font-weight:600;color:var(--fpr-gray-900);margin:14px 0 8px">${esc(coaching.primary_issue)}</p>` : ''}
-          ${coaching.explanation ? `<p style="font-size:13px;color:var(--fpr-gray-700);line-height:1.7;margin:0 0 12px">${esc(coaching.explanation)}</p>` : ''}
-          ${coaching.top_drill ? `<div style="font-size:12px;font-weight:700;color:var(--fpr-gray-400);margin-bottom:4px">Top drill</div><div style="font-size:13px;font-weight:600;color:var(--fpr-gray-900)">${esc(coaching.top_drill)}</div>` : ''}
-          <div class="fpr-echo__disclaimer" style="margin-top:12px;font-size:11px"><span style="display:inline-flex;align-items:center;width:12px;height:12px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations.</div>
+          ${coaching.primary_issue
+            ? `<p style="font-size:14px;font-weight:600;color:var(--fpr-gray-900);margin:14px 0 8px">${esc(coaching.primary_issue)}</p>`
+            : ''}
+          ${coaching.explanation
+            ? `<p style="font-size:13px;color:var(--fpr-gray-700);line-height:1.7;margin:0 0 12px">${esc(coaching.explanation)}</p>`
+            : ''}
+          ${coaching.top_drill
+            ? `<div style="font-size:12px;font-weight:700;color:var(--fpr-gray-400);margin-bottom:4px">
+                 <span style="display:inline-flex;align-items:center;width:12px;height:12px;margin-right:3px">${IC.star}</span>
+                 Top drill
+               </div>
+               <div style="font-size:13px;font-weight:600;color:var(--fpr-gray-900)">${esc(coaching.top_drill)}</div>`
+            : ''}
+          <div class="fpr-echo__disclaimer" style="margin-top:12px;font-size:11px">
+            <span style="display:inline-flex;align-items:center;width:12px;height:12px;vertical-align:middle;margin-right:4px">${IC.info}</span>
+            For training purposes only. Always follow range safety rules and local firearms regulations.
+          </div>
         </div>
       </div>
     `;
@@ -716,18 +824,16 @@
   // VIEW: BADGES
   // ==========================================================================
   function buildBadgesView() {
-    const wrap = el('div', 'fpr-echo__badges-view');
+    const wrap       = el('div', 'fpr-echo__badges-view');
     const earnedSlugs = new Set(state.badges.map(b => b.badge_slug));
-    const earnedMap   = Object.fromEntries(state.badges.map(b => [b.badge_slug, b]));
 
-    // Merge all (earned + unearned)
     const catalog = [
       ...state.badges,
       ...ALL_BADGES.filter(b => !earnedSlugs.has(b.badge_slug)),
     ];
 
-    const earned  = catalog.filter(b => earnedSlugs.has(b.badge_slug));
-    const locked  = catalog.filter(b => !earnedSlugs.has(b.badge_slug));
+    const earned = catalog.filter(b => earnedSlugs.has(b.badge_slug));
+    const locked = catalog.filter(b => !earnedSlugs.has(b.badge_slug));
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">My Badges</h2>
@@ -738,14 +844,20 @@
       </div>
 
       ${earned.length ? `
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--fpr-gray-400);text-transform:uppercase;margin-bottom:10px">Earned</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--fpr-gray-400);text-transform:uppercase;margin-bottom:10px">
+          <span style="display:inline-flex;align-items:center;width:12px;height:12px;margin-right:4px">${IC.starFilled}</span>
+          Earned
+        </div>
         <div class="fpr-echo__badges-grid" style="margin-bottom:24px">
           ${earned.map(b => buildBadgeCard(b, true)).join('')}
         </div>
       ` : ''}
 
       ${locked.length ? `
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--fpr-gray-400);text-transform:uppercase;margin-bottom:10px">To Unlock</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--fpr-gray-400);text-transform:uppercase;margin-bottom:10px">
+          <span style="display:inline-flex;align-items:center;width:12px;height:12px;margin-right:4px">${IC.lock}</span>
+          To Unlock
+        </div>
         <div class="fpr-echo__badges-grid">
           ${locked.map(b => buildBadgeCard(b, false)).join('')}
         </div>
@@ -755,19 +867,30 @@
   }
 
   function buildBadgeCard(b, earned) {
-    const tier = b.tier || 'bronze';
-    const date = b.earned_at ? new Date(b.earned_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : null;
-    // icon_emoji stores an IC key string; render as SVG icon
+    const tier    = b.tier || 'bronze';
+    const date    = b.earned_at
+      ? new Date(b.earned_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      : null;
     const iconKey = b.icon_emoji || 'medal';
     const iconSvg = IC[iconKey] || IC.medal;
     return `
       <div class="fpr-echo__badge-card ${earned ? '--earned --' + tier : '--locked'}">
-        <span class="fpr-echo__badge-emoji" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px">${iconSvg}</span>
+        <span class="fpr-echo__badge-emoji" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px">
+          ${iconSvg}
+        </span>
         <div class="fpr-echo__badge-tier --${tier}">${tier}</div>
         <div class="fpr-echo__badge-name">${esc(b.name)}</div>
         <div class="fpr-echo__badge-desc">${esc(b.description)}</div>
-        ${earned && date ? `<div class="fpr-echo__badge-earned-date">Earned ${date}</div>` : ''}
-        ${!earned ? `<div style="margin-top:8px;font-size:11px;color:var(--fpr-gray-400);display:inline-flex;align-items:center;gap:4px"><span style="display:inline-flex;align-items:center;width:12px;height:12px">${IC.lock}</span> Locked</div>` : ''}
+        ${earned && date ? `<div class="fpr-echo__badge-earned-date">
+          <span style="display:inline-flex;align-items:center;width:11px;height:11px;margin-right:3px">${IC.check}</span>
+          Earned ${date}
+        </div>` : ''}
+        ${!earned
+          ? `<div style="margin-top:8px;font-size:11px;color:var(--fpr-gray-400);display:inline-flex;align-items:center;gap:4px">
+               <span style="display:inline-flex;align-items:center;width:12px;height:12px">${IC.lock}</span>
+               Locked
+             </div>`
+          : ''}
       </div>
     `;
   }
@@ -776,8 +899,8 @@
   // VIEW: CHALLENGE SHARE
   // ==========================================================================
   function buildChallengeView() {
-    const wrap = el('div', 'fpr-echo__challenge-view');
-    const s    = state.stats;
+    const wrap    = el('div', 'fpr-echo__challenge-view');
+    const s       = state.stats;
     const improve = Math.round(s.overall_improvement_pct || 0);
     const topBadge = state.badges.find(b => b.tier === 'platinum') ||
                      state.badges.find(b => b.tier === 'gold') ||
@@ -788,16 +911,21 @@
       : `I scored ${s.latest_echo_score}/100 on my latest Spotter session. Think you can match it?`;
 
     const topBadgeName = topBadge ? topBadge.name : '';
-    const shareText = `[Spotter] ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
+    const shareText = `[Spotter] ${headline}\n\nMy stats:\n- Spotter: ${s.latest_echo_score}/100\n- Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n- Sessions logged: ${s.total_sessions}\n${topBadge ? `- Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
 
     wrap.innerHTML = `
       <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Challenge a Friend</h2>
-      <p class="fpr-echo__view-sub" style="margin:0 0 20px">Share your improvement stats and challenge friends to match your accuracy.</p>
+      <p class="fpr-echo__view-sub" style="margin:0 0 20px">
+        Share your improvement stats and challenge friends to match your accuracy.
+      </p>
 
       <!-- Challenge card -->
       <div class="fpr-echo__challenge-card">
         <div class="fpr-echo__challenge-brand">FPRMembers.com</div>
-        <div class="fpr-echo__challenge-title">Spotter — Shot Analysis</div>
+        <div class="fpr-echo__challenge-title">
+          <span style="display:inline-flex;align-items:center;width:14px;height:14px;margin-right:5px">${IC.target}</span>
+          Spotter — Shot Analysis
+        </div>
         <div class="fpr-echo__challenge-score-row">
           <div>
             <div class="fpr-echo__challenge-score-big">${s.latest_echo_score || 0}</div>
@@ -805,11 +933,17 @@
           </div>
           <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
           <div>
-            <div class="fpr-echo__challenge-improve">${improve > 0 ? '+' : ''}${improve}%</div>
+            <div class="fpr-echo__challenge-improve">
+              <span style="display:inline-flex;align-items:center;width:16px;height:16px;margin-right:3px">${IC.trending}</span>
+              ${improve > 0 ? '+' : ''}${improve}%
+            </div>
             <div class="fpr-echo__challenge-improve-sub">Improvement</div>
           </div>
           <div>
-            <div class="fpr-echo__challenge-improve" style="color:#7BBEF5">${s.total_sessions}</div>
+            <div class="fpr-echo__challenge-improve" style="color:#7BBEF5">
+              <span style="display:inline-flex;align-items:center;width:16px;height:16px;margin-right:3px">${IC.history}</span>
+              ${s.total_sessions}
+            </div>
             <div class="fpr-echo__challenge-improve-sub">Sessions</div>
           </div>
         </div>
@@ -819,18 +953,33 @@
             ${esc(topBadge.name)} earned
           </div>` : ''}
         <div class="fpr-echo__challenge-headline">${esc(headline)}</div>
-        <div class="fpr-echo__challenge-cta">Can you beat it? Upload your target at FPRMembers.com →</div>
+        <div class="fpr-echo__challenge-cta">
+          <span style="display:inline-flex;align-items:center;width:13px;height:13px;margin-right:4px">${IC.rocket}</span>
+          Can you beat it? Upload your target at FPRMembers.com
+        </div>
       </div>
 
       <textarea class="fpr-echo__challenge-share-text" id="fpr-share-text" rows="6" readonly>${shareText}</textarea>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="fpr-btn fpr-btn--echo" id="fpr-copy-btn">${IC.copy} Copy Challenge Text</button>
-        <button class="fpr-btn fpr-btn--gold" id="fpr-generate-link-btn">${IC.share} Generate Share Link</button>
-        <button class="fpr-btn fpr-btn--dark" id="fpr-download-card-btn">Download Card</button>
+        <button class="fpr-btn fpr-btn--echo" id="fpr-copy-btn">
+          <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.copy}</span>
+          Copy Challenge Text
+        </button>
+        <button class="fpr-btn fpr-btn--gold" id="fpr-generate-link-btn">
+          <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.share}</span>
+          Generate Share Link
+        </button>
+        <button class="fpr-btn fpr-btn--dark" id="fpr-download-card-btn">
+          <span style="display:inline-flex;align-items:center;width:14px;height:14px">${IC.trophy}</span>
+          Download Card
+        </button>
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.</div>
+      <div class="fpr-echo__disclaimer" style="margin-top:20px">
+        <span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span>
+        For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.
+      </div>
     `;
 
     wrap.querySelector('#fpr-copy-btn')?.addEventListener('click', () => {
@@ -868,7 +1017,6 @@
     const ctx = canvas.getContext('2d');
     const W = 200, H = 200, cx = 100, cy = 100;
 
-    // Concentric rings
     const rings = [
       { r: 90, color: '#E0E0E0' },
       { r: 72, color: '#CCCCCC' },
@@ -887,13 +1035,11 @@
       ctx.stroke();
     });
 
-    // Crosshair
     ctx.strokeStyle = 'rgba(0,0,0,0.15)';
     ctx.lineWidth = 0.8;
     ctx.beginPath(); ctx.moveTo(cx - 90, cy); ctx.lineTo(cx + 90, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, cy - 90); ctx.lineTo(cx, cy + 90); ctx.stroke();
 
-    // Generate shot positions based on detected pattern
     const shots = generateShotPositions(session);
     shots.forEach(pt => {
       ctx.beginPath();
@@ -905,8 +1051,7 @@
       ctx.stroke();
     });
 
-    // Center of mass indicator
-    const scaleF = 1.8; // px per mm (approximate for target scale)
+    const scaleF = 1.8;
     const cmX = (session.center_x_mm || 0) * scaleF;
     const cmY = (session.center_y_mm || 0) * scaleF;
     ctx.strokeStyle = '#E5B657';
@@ -920,16 +1065,15 @@
     const cx     = session.center_x_mm || 0;
     const cy_off = session.center_y_mm || 0;
     const radius = session.grouping_radius_mm || 30;
-    const scale  = 1.8; // mm to canvas px
+    const scale  = 1.8;
     const shots  = [];
 
-    // Deterministic seeded random based on session id
     let seed = Array.from(session.id || 's1').reduce((a, c) => a + c.charCodeAt(0), 0);
     const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
 
     for (let i = 0; i < count; i++) {
-      const angle  = rand() * Math.PI * 2;
-      const r      = rand() * radius * scale * 0.7;
+      const angle = rand() * Math.PI * 2;
+      const r     = rand() * radius * scale * 0.7;
       shots.push({
         x: cx * scale + Math.cos(angle) * r,
         y: cy_off * scale + Math.sin(angle) * r,
@@ -960,7 +1104,6 @@
     const gW  = W - PAD.left - PAD.right;
     const gH  = H - PAD.top  - PAD.bottom;
 
-    // Score zones
     const zones = [
       { min: 0,  max: 60,  color: 'rgba(185,28,28,.08)' },
       { min: 60, max: 75,  color: 'rgba(194,92,0,.08)' },
@@ -975,7 +1118,6 @@
       ctx.fillRect(PAD.left, y1, gW, y2 - y1);
     });
 
-    // Grid lines at 60, 75, 90
     [60, 75, 90].forEach(v => {
       const y = PAD.top + gH * (1 - v / 100);
       ctx.strokeStyle = 'rgba(0,0,0,.06)';
@@ -984,7 +1126,7 @@
       ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + gW, y); ctx.stroke();
       ctx.setLineDash([]);
       ctx.fillStyle = 'rgba(0,0,0,.25)';
-      ctx.font = `bold ${10 * dpr / dpr}px Inter, sans-serif`;
+      ctx.font = `bold 10px Inter, sans-serif`;
       ctx.fillText(v, 2, y + 4);
     });
 
@@ -999,7 +1141,6 @@
     const xs = sessions.map((_, i) => PAD.left + (i / (sessions.length - 1)) * gW);
     const ys = sessions.map(s => PAD.top + gH * (1 - s.echo_score / 100));
 
-    // Gradient fill under the line
     const grad = ctx.createLinearGradient(0, PAD.top, 0, PAD.top + gH);
     grad.addColorStop(0, 'rgba(26,107,196,.25)');
     grad.addColorStop(1, 'rgba(26,107,196,0)');
@@ -1012,7 +1153,6 @@
     ctx.fillStyle = grad;
     ctx.fill();
 
-    // Line
     ctx.beginPath();
     ctx.moveTo(xs[0], ys[0]);
     sessions.forEach((_, i) => { if (i > 0) ctx.lineTo(xs[i], ys[i]); });
@@ -1021,7 +1161,6 @@
     ctx.lineJoin    = 'round';
     ctx.stroke();
 
-    // Points + labels
     sessions.forEach((s, i) => {
       const tier = scoreTier(s.echo_score);
       const dotColor = tier === 'expert' ? '#C9973A' : tier === 'proficient' ? '#227A48' : tier === 'developing' ? '#C25C00' : '#B91C1C';
@@ -1034,13 +1173,11 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Session number below
       ctx.fillStyle = '#9AA3AF';
       ctx.font = '9px Inter, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('#' + s.session_number, xs[i], PAD.top + gH + 14);
 
-      // Score above
       ctx.fillStyle = '#374151';
       ctx.font = 'bold 9px Inter, sans-serif';
       ctx.fillText(s.echo_score, xs[i], ys[i] - 9);
@@ -1056,24 +1193,20 @@
     canvas.height = 340;
     const ctx = canvas.getContext('2d');
 
-    // Background
     ctx.fillStyle = '#0F1923';
     ctx.fillRect(0, 0, 600, 340);
 
-    // Gold accent bar
     ctx.fillStyle = '#C9973A';
     ctx.fillRect(0, 0, 600, 4);
 
-    // Brand
     ctx.fillStyle = '#E5B657';
     ctx.font = 'bold 12px Inter, sans-serif';
-    ctx.fillText('FPRMEMBERS.COM — Spotter', 32, 36);
+    ctx.fillText('FPRMEMBERS.COM - Spotter', 32, 36);
 
     ctx.fillStyle = 'rgba(255,255,255,.4)';
     ctx.font = '10px Inter, sans-serif';
     ctx.fillText('SHOT ANALYSIS CHALLENGE', 32, 52);
 
-    // Big score
     ctx.fillStyle = '#FFFFFF';
     ctx.font = 'bold 80px Inter, sans-serif';
     ctx.fillText(stats.latest_echo_score || 0, 32, 150);
@@ -1082,7 +1215,6 @@
     ctx.font = '13px Inter, sans-serif';
     ctx.fillText('/ 100 Spotter', 32 + ctx.measureText(String(stats.latest_echo_score || 0)).width + 10, 130);
 
-    // Improvement
     const imp = Math.round(stats.overall_improvement_pct || 0);
     ctx.fillStyle = '#032238';
     ctx.font = 'bold 36px Inter, sans-serif';
@@ -1092,7 +1224,6 @@
     ctx.font = '12px Inter, sans-serif';
     ctx.fillText('ACCURACY IMPROVEMENT', 32, 220);
 
-    // Headline (wrapped)
     ctx.fillStyle = 'rgba(255,255,255,.7)';
     ctx.font = '14px Inter, sans-serif';
     const words = headline.split(' ');
@@ -1104,7 +1235,6 @@
     });
     ctx.fillText(line, 32, y);
 
-    // Badge label (canvas can't render SVG, so show badge name as text)
     if (topBadge) {
       ctx.fillStyle = 'rgba(255,255,255,.35)';
       ctx.font = '11px Inter, sans-serif';
@@ -1113,14 +1243,12 @@
       ctx.textAlign = 'left';
     }
 
-    // Disclaimer
     ctx.fillStyle = 'rgba(255,255,255,.2)';
     ctx.font = '9px Inter, sans-serif';
     ctx.fillText('For training purposes only. Always follow range safety rules and local firearms regulations.', 32, 322);
 
-    // Download
     const link = document.createElement('a');
-    link.download = 'EchoCoach-Challenge-Card.png';
+    link.download = 'Spotter-Challenge-Card.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
     showToast('Challenge card downloaded!', 'success');
@@ -1137,7 +1265,12 @@
   }
 
   function scoreTierLabel(tier) {
-    return { expert: 'Expert Grouping', proficient: 'Proficient', developing: 'Developing', poor: 'Building Fundamentals' }[tier] || tier;
+    return {
+      expert: 'Expert Grouping',
+      proficient: 'Proficient',
+      developing: 'Developing',
+      poor: 'Building Fundamentals',
+    }[tier] || tier;
   }
 
   function patternLabel(p) {
@@ -1149,15 +1282,30 @@
     return map[p] || p || 'Unknown';
   }
 
-  function el(tag, cls) { const e = document.createElement(tag); if (cls) e.className = cls; return e; }
-  function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function el(tag, cls) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    return e;
+  }
+
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
 
   function showToast(msg, type = 'success') {
     let wrap = document.querySelector('.fpr-echo__toast-wrap');
-    if (!wrap) { wrap = document.createElement('div'); wrap.className = 'fpr-echo__toast-wrap'; document.body.appendChild(wrap); }
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'fpr-echo__toast-wrap';
+      document.body.appendChild(wrap);
+    }
     const t = document.createElement('div');
     t.className = `fpr-echo__toast --${type}`;
-    t.textContent = msg;
+    t.innerHTML = `<span style="display:inline-flex;align-items:center;width:14px;height:14px;margin-right:6px">${IC.info}</span>${esc(msg)}`;
     wrap.appendChild(t);
     setTimeout(() => { t.classList.add('--out'); setTimeout(() => t.remove(), 300); }, 3800);
   }
@@ -1182,4 +1330,5 @@
   });
 
   window.FPREchoCoach = { init };
+
 })();
