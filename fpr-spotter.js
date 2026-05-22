@@ -939,10 +939,10 @@
       body: JSON.stringify(payload),
     });
     if (data?.shareUrl) return data.shareUrl;
-    if (data?.token) return `${getShareBaseUrl()}/${encodeURIComponent(data.token)}`;
+    if (data?.token) return buildShareUrl(data.token);
 
     const token = 's-' + base64UrlEncode(JSON.stringify(payload));
-    return `${getShareBaseUrl()}/${token}`;
+    return buildShareUrl(token);
   }
 
   function buildPublicSharePayload(session) {
@@ -978,7 +978,13 @@
   function getShareBaseUrl() {
     const configured = window.FPR_SPOTTER_SHARE_BASE || '';
     if (configured) return configured.replace(/\/$/, '');
-    return `${window.location.origin}/spotter/share`;
+    return `${window.location.origin}/spotter-share`;
+  }
+
+  function buildShareUrl(token) {
+    const base = getShareBaseUrl();
+    const sep = base.includes('?') ? '&' : '?';
+    return `${base}${sep}token=${encodeURIComponent(token)}`;
   }
 
   function shareToPlatform(platform, url, session) {
