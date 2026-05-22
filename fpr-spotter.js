@@ -938,7 +938,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    if (data?.shareUrl) return data.shareUrl;
+    if (data?.shareUrl) return normalizeShareUrl(data.shareUrl);
     if (data?.token) return buildShareUrl(data.token);
 
     const token = 's-' + base64UrlEncode(JSON.stringify(payload));
@@ -985,6 +985,15 @@
     const base = getShareBaseUrl();
     const sep = base.includes('?') ? '&' : '?';
     return `${base}${sep}token=${encodeURIComponent(token)}`;
+  }
+
+  function normalizeShareUrl(url) {
+    try {
+      const parsed = new URL(url, window.location.origin);
+      const token = parsed.searchParams.get('token') || parsed.pathname.split('/').filter(Boolean).pop();
+      if (token && token !== 'spotter-share' && token !== 'share') return buildShareUrl(token);
+    } catch { /* fall through */ }
+    return url;
   }
 
   function shareToPlatform(platform, url, session) {
