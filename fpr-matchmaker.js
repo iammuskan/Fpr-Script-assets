@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
 
 /* FPRMembers.com — Build 11: AI Gun Matchmaker — Biometric Fitment Engine
