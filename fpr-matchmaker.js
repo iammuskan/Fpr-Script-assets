@@ -986,9 +986,9 @@ Finding the right fit changes everything — comfort, confidence, and control   
   }
 
   // ─── PUBLIC INIT ─────────────────────────────────────────────────────────────
-  async function init(el) {
+  async function init(el, options = {}) {
     if (!el) return;
-    if (el.dataset.fprMmInitialized === 'true') return;
+    if (el.dataset.fprMmInitialized === 'true' && !options.force) return;
 
     _el         = el;
     _api        = normalizeApiUrl(el.dataset.apiUrl);
@@ -1020,13 +1020,13 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
 window.FPRMatchmaker = FPRMatchmaker;
 
-function initFPRMatchmakerMounts() {
-  const mounts = document.querySelectorAll('.fpr-mm-mount');
+function initFPRMatchmakerMounts(options = {}) {
+  const mounts = document.querySelectorAll(options.selector || '.fpr-mm-mount');
   if (!mounts.length) {
     console.warn('[FPRMatchmaker] No .fpr-mm-mount element found yet.');
     return false;
   }
-  mounts.forEach(el => FPRMatchmaker.init(el));
+  mounts.forEach(el => FPRMatchmaker.init(el, options));
   return true;
 }
 
@@ -1036,7 +1036,7 @@ function bootFPRMatchmaker() {
   let tries = 0;
   const retry = window.setInterval(() => {
     tries += 1;
-    if (initFPRMatchmakerMounts() || tries >= 20) {
+    if (initFPRMatchmakerMounts() || tries >= 120) {
       window.clearInterval(retry);
     }
   }, 250);
@@ -1046,9 +1046,12 @@ function bootFPRMatchmaker() {
       if (initFPRMatchmakerMounts()) observer.disconnect();
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
-    window.setTimeout(() => observer.disconnect(), 10000);
+    window.setTimeout(() => observer.disconnect(), 30000);
   }
 }
+
+window.initFPRMatchmakerMounts = initFPRMatchmakerMounts;
+window.bootFPRMatchmaker = bootFPRMatchmaker;
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', bootFPRMatchmaker);
