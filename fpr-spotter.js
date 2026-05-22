@@ -34,6 +34,10 @@
     chart:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 3 18 3-12 3 6h3"/></svg>`,
     // copy — tabler: copy
     copy:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>`,
+    // external-link — tabler: external-link
+    external:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/><path d="M11 13 20 4"/><path d="M15 4h5v5"/></svg>`,
+    // x — tabler: x
+    x:         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>`,
     // check — tabler: check
     check:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"/></svg>`,
     // chevron — tabler: chevron-down
@@ -152,7 +156,7 @@
   // -------------------------------------------------------------------------
   let state = {
     apiUrl: '', memberId: '', memberName: '',
-    view: 'upload',          // upload | analyzing | result | history | badges | challenge
+    view: 'upload',          // upload | analyzing | result | history | badges
     sessions: [...DEMO_SESSIONS],
     badges: [...DEMO_BADGES],
     pendingFile: null,
@@ -165,6 +169,7 @@
     },
     root: null,
     analyzeStepInterval: null,
+    lastShareUrl: '',
   };
 
   // -------------------------------------------------------------------------
@@ -225,7 +230,6 @@
       { view: 'upload',    label: 'Analyze Target',    icon: 'upload'  },
       { view: 'history',   label: 'Session History',   icon: 'history' },
       { view: 'badges',    label: 'My Badges',         icon: 'badge'   },
-      { view: 'challenge', label: 'Challenge a Friend',icon: 'share'   },
     ];
 
     sb.innerHTML = `
@@ -236,6 +240,9 @@
             <span style="width:16px;height:16px;display:flex">${IC[t.icon] || ''}</span> ${t.label}
           </button>
         `).join('')}
+        <button class="fpr-echo__nav-tab" data-action="challenge-modal">
+          <span style="width:16px;height:16px;display:flex">${IC.share}</span> Challenge a Friend
+        </button>
       </div>
 
       <div class="fpr-echo__sidebar-heading">Your Stats</div>
@@ -274,6 +281,7 @@
     sb.querySelectorAll('[data-view]').forEach(btn => {
       btn.addEventListener('click', () => { state.view = btn.dataset.view; render(); });
     });
+    sb.querySelector('[data-action="challenge-modal"]')?.addEventListener('click', () => openChallengeModal());
 
     return sb;
   }
@@ -304,7 +312,6 @@
     else if (state.view === 'result')    main.appendChild(buildResultView(state.lastResult));
     else if (state.view === 'history')   main.appendChild(buildHistoryView());
     else if (state.view === 'badges')    main.appendChild(buildBadgesView());
-    else if (state.view === 'challenge') main.appendChild(buildChallengeView());
     return main;
   }
 
@@ -527,7 +534,9 @@
     const offset   = circ - (score / 100) * circ;
 
     const wrap = el('div', 'fpr-echo__result-view');
-    window.fprAwardTicket('shot_analyzed', { sessionNum: session.session_number || 0, score: score });
+    if (typeof window.fprAwardTicket === 'function') {
+      window.fprAwardTicket('shot_analyzed', { sessionNum: session.session_number || 0, score: score });
+    }
     wrap.innerHTML = `
       <!-- Score hero -->
       <div class="fpr-echo__score-hero">
@@ -623,8 +632,8 @@
         </div>
 
         <div style="display:flex;justify-content:flex-end;margin-top:12px">
-          <button onclick="FPRShare.open('Share Your Shot')" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <button class="fpr-btn fpr-btn--gold fpr-btn--sm" id="fpr-share-shot-btn">
+            ${IC.share}
             Share Your Shot
           </button>
         </div>
@@ -639,7 +648,10 @@
       state.view = 'history'; render();
     });
     wrap.querySelector('#fpr-challenge-btn')?.addEventListener('click', () => {
-      state.view = 'challenge'; render();
+      openChallengeModal();
+    });
+    wrap.querySelector('#fpr-share-shot-btn')?.addEventListener('click', () => {
+      openShareModal(session);
     });
 
     // Draw target after DOM settles
@@ -773,10 +785,9 @@
   }
 
   // ==========================================================================
-  // VIEW: CHALLENGE SHARE
+  // MODALS: CHALLENGE + SHARE
   // ==========================================================================
-  function buildChallengeView() {
-    const wrap = el('div', 'fpr-echo__challenge-view');
+  function openChallengeModal() {
     const s    = state.stats;
     const improve = Math.round(s.overall_improvement_pct || 0);
     const topBadge = state.badges.find(b => b.tier === 'platinum') ||
@@ -790,73 +801,261 @@
     const topBadgeName = topBadge ? topBadge.name : '';
     const shareText = `[Spotter] ${headline}\n\nMy stats:\n• Spotter: ${s.latest_echo_score}/100\n• Improvement: ${improve > 0 ? '+' : ''}${improve}% from baseline\n• Sessions logged: ${s.total_sessions}\n${topBadge ? `• Top badge: ${topBadgeName}\n` : ''}\nUpload your own target at FPRMembers.com | #EchoCoach #ResponsibleGunOwner #FPRMembers`;
 
-    wrap.innerHTML = `
-      <h2 class="fpr-echo__view-heading" style="margin:0 0 4px">Challenge a Friend</h2>
-      <p class="fpr-echo__view-sub" style="margin:0 0 20px">Share your improvement stats and challenge friends to match your accuracy.</p>
+    const modal = openModal('Challenge a Friend', `
+      <p class="fpr-echo__view-sub" style="margin:0 0 16px">Select a friend or copy the challenge text. This quick action keeps your Spotter result open.</p>
 
-      <!-- Challenge card -->
       <div class="fpr-echo__challenge-card">
-        <div class="fpr-echo__challenge-brand">FPRMembers.com</div>
-        <div class="fpr-echo__challenge-title">Spotter — Shot Analysis</div>
-        <div class="fpr-echo__challenge-score-row">
-          <div>
-            <div class="fpr-echo__challenge-score-big">${s.latest_echo_score || 0}</div>
-            <div class="fpr-echo__challenge-score-sub">Spotter</div>
-          </div>
-          <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
-          <div>
-            <div class="fpr-echo__challenge-improve">${improve > 0 ? '+' : ''}${improve}%</div>
-            <div class="fpr-echo__challenge-improve-sub">Improvement</div>
-          </div>
-          <div>
-            <div class="fpr-echo__challenge-improve" style="color:#7BBEF5">${s.total_sessions}</div>
-            <div class="fpr-echo__challenge-improve-sub">Sessions</div>
-          </div>
-        </div>
-        ${topBadge ? `
-          <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:12px;display:flex;align-items:center;gap:6px">
-            <span style="display:inline-flex;align-items:center;width:16px;height:16px">${IC[topBadge.icon_emoji] || IC.medal}</span>
-            ${esc(topBadge.name)} earned
-          </div>` : ''}
-        <div class="fpr-echo__challenge-headline">${esc(headline)}</div>
-        <div class="fpr-echo__challenge-cta">Can you beat it? Upload your target at FPRMembers.com →</div>
+        ${buildChallengeCardMarkup(s, improve, headline, topBadge)}
       </div>
 
-      <textarea class="fpr-echo__challenge-share-text" id="fpr-share-text" rows="6" readonly>${shareText}</textarea>
+      <div class="fpr-echo__field" style="margin:16px 0">
+        <label class="fpr-echo__label">Friend email or name</label>
+        <input class="fpr-echo__input" id="fpr-challenge-friend" type="text" placeholder="friend@example.com" />
+      </div>
 
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="fpr-btn fpr-btn--echo" id="fpr-copy-btn">${IC.copy} Copy Challenge Text</button>
-        <button class="fpr-btn fpr-btn--gold" id="fpr-generate-link-btn">${IC.share} Generate Share Link</button>
+      <textarea class="fpr-echo__challenge-share-text" id="fpr-share-text" rows="5" readonly>${esc(shareText)}</textarea>
+
+      <div class="fpr-echo__modal-actions">
+        <button class="fpr-btn fpr-btn--echo" id="fpr-send-challenge-btn">${IC.share} Send Challenge</button>
+        <button class="fpr-btn fpr-btn--ghost" id="fpr-copy-btn">${IC.copy} Copy Text</button>
         <button class="fpr-btn fpr-btn--dark" id="fpr-download-card-btn">Download Card</button>
       </div>
 
-      <div class="fpr-echo__disclaimer" style="margin-top:20px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> For training purposes only. Always follow range safety rules and local firearms regulations. Share only aggregate stats — never share target photos publicly.</div>
-    `;
+      <div class="fpr-echo__disclaimer" style="margin-top:16px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> Share only aggregate stats. Target photos are not included.</div>
+    `);
 
-    wrap.querySelector('#fpr-copy-btn')?.addEventListener('click', () => {
-      navigator.clipboard.writeText(shareText).then(() => showToast('Challenge text copied!', 'success'));
+    modal.querySelector('#fpr-copy-btn')?.addEventListener('click', () => {
+      copyText(shareText, 'Challenge text copied!');
     });
 
-    wrap.querySelector('#fpr-generate-link-btn')?.addEventListener('click', async () => {
+    modal.querySelector('#fpr-send-challenge-btn')?.addEventListener('click', async () => {
+      const friend = modal.querySelector('#fpr-challenge-friend')?.value.trim();
+      if (!friend) { showToast('Add a friend email or name first.', 'gold'); return; }
+      const payload = { memberId: state.memberId, memberName: state.memberName, friend, message: shareText };
       const data = await api('/api/echo/challenge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ memberId: state.memberId, memberName: state.memberName }),
+        body: JSON.stringify(payload),
       });
-      if (data?.shareUrl) {
-        navigator.clipboard.writeText(data.shareUrl).then(() =>
-          showToast('Share link copied: ' + data.shareUrl, 'success')
-        );
-      } else {
-        showToast('Connect API to generate a share link.', 'blue');
+      if (data?.success) showToast('Challenge sent!', 'success');
+      else {
+        await copyText(shareText, 'Challenge copied. Send it to your friend.');
+      }
+      closeModal(modal);
+    });
+
+    modal.querySelector('#fpr-download-card-btn')?.addEventListener('click', () => {
+      downloadChallengeCard(s, headline, topBadge);
+    });
+  }
+
+  function buildChallengeCardMarkup(s, improve, headline, topBadge) {
+    return `
+      <div class="fpr-echo__challenge-brand">FPRMembers.com</div>
+      <div class="fpr-echo__challenge-title">Spotter — Shot Analysis</div>
+      <div class="fpr-echo__challenge-score-row">
+        <div>
+          <div class="fpr-echo__challenge-score-big">${s.latest_echo_score || 0}</div>
+          <div class="fpr-echo__challenge-score-sub">Spotter</div>
+        </div>
+        <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
+        <div>
+          <div class="fpr-echo__challenge-improve">${improve > 0 ? '+' : ''}${improve}%</div>
+          <div class="fpr-echo__challenge-improve-sub">Improvement</div>
+        </div>
+        <div>
+          <div class="fpr-echo__challenge-improve" style="color:#7BBEF5">${s.total_sessions}</div>
+          <div class="fpr-echo__challenge-improve-sub">Sessions</div>
+        </div>
+      </div>
+      ${topBadge ? `
+        <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:12px;display:flex;align-items:center;gap:6px">
+          <span style="display:inline-flex;align-items:center;width:16px;height:16px">${IC[topBadge.icon_emoji] || IC.medal}</span>
+          ${esc(topBadge.name)} earned
+        </div>` : ''}
+      <div class="fpr-echo__challenge-headline">${esc(headline)}</div>
+      <div class="fpr-echo__challenge-cta">Can you beat it? Upload your target at FPRMembers.com →</div>
+    `;
+  }
+
+  function openShareModal(session) {
+    const modal = openModal('Share Your Shot', `
+      <p class="fpr-echo__view-sub" style="margin:0 0 16px">Generate a public Spotter result link, then share it without leaving this page.</p>
+      <div class="fpr-echo__share-summary">
+        <div class="fpr-echo__share-score">${session.echo_score || 0}</div>
+        <div>
+          <div class="fpr-echo__share-title">${esc(buildShareHeadline(session))}</div>
+          <div class="fpr-echo__share-sub">${esc(buildKeyInsight(session))}</div>
+        </div>
+      </div>
+      <div class="fpr-echo__share-link-row">
+        <input class="fpr-echo__input" id="fpr-share-url" readonly placeholder="Generate a share link first" />
+        <button class="fpr-btn fpr-btn--gold" id="fpr-generate-link-btn">${IC.share} Generate Share Link</button>
+      </div>
+      <div class="fpr-echo__social-grid">
+        <button class="fpr-echo__social-btn" data-platform="facebook" disabled>Facebook</button>
+        <button class="fpr-echo__social-btn" data-platform="twitter" disabled>Twitter/X</button>
+        <button class="fpr-echo__social-btn" data-platform="whatsapp" disabled>WhatsApp</button>
+        <button class="fpr-echo__social-btn" data-platform="copy" disabled>${IC.copy} Copy Link</button>
+      </div>
+      <div class="fpr-echo__disclaimer" style="margin-top:16px"><span style="display:inline-flex;align-items:center;width:14px;height:14px;vertical-align:middle;margin-right:4px">${IC.info}</span> Shared links are public and do not require login. Target photos are not included.</div>
+    `);
+
+    const input = modal.querySelector('#fpr-share-url');
+    const socialBtns = Array.from(modal.querySelectorAll('[data-platform]'));
+    const enableShare = url => {
+      state.lastShareUrl = url;
+      input.value = url;
+      socialBtns.forEach(btn => { btn.disabled = false; });
+    };
+    if (state.lastShareUrl) enableShare(state.lastShareUrl);
+
+    modal.querySelector('#fpr-generate-link-btn')?.addEventListener('click', async btnEvt => {
+      const btn = btnEvt.currentTarget;
+      btn.disabled = true;
+      btn.innerHTML = `${IC.share} Generating...`;
+      try {
+        const url = await generatePublicShareUrl(session);
+        enableShare(url);
+        await copyText(url, 'Share link generated and copied!');
+      } catch (err) {
+        showToast(err.message || 'Could not generate share link.', 'gold');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `${IC.share} Generate Share Link`;
       }
     });
 
-    wrap.querySelector('#fpr-download-card-btn')?.addEventListener('click', () => {
-      downloadChallengeCard(s, headline, topBadge);
+    socialBtns.forEach(btn => {
+      btn.addEventListener('click', () => shareToPlatform(btn.dataset.platform, input.value, session));
     });
+  }
 
-    return wrap;
+  async function generatePublicShareUrl(session) {
+    const payload = buildPublicSharePayload(session);
+    const data = await api('/api/echo/share', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (data?.shareUrl) return data.shareUrl;
+    if (data?.token) return `${getShareBaseUrl()}/${encodeURIComponent(data.token)}`;
+
+    const token = 's-' + base64UrlEncode(JSON.stringify(payload));
+    return `${getShareBaseUrl()}/${token}`;
+  }
+
+  function buildPublicSharePayload(session) {
+    return {
+      sessionId: session.id || ('spotter-' + Date.now()),
+      memberId: state.memberId,
+      memberName: state.memberName,
+      spotterScore: session.echo_score || 0,
+      headline: buildShareHeadline(session),
+      keyInsight: buildKeyInsight(session),
+      primaryIssue: session.coaching_json?.primary_issue || '',
+      improvementPct: session.improvement_pct,
+      pattern: patternLabel(session.pattern),
+      generatedAt: new Date().toISOString(),
+    };
+  }
+
+  function buildShareHeadline(session) {
+    const improvement = session.improvement_pct;
+    const label = patternLabel(session.pattern);
+    if (improvement !== null && improvement !== undefined && improvement > 0) {
+      return `${label} — ${Math.abs(improvement).toFixed(1)}% improvement`;
+    }
+    return `${label} — ${session.echo_score || 0}/100 Spotter score`;
+  }
+
+  function buildKeyInsight(session) {
+    const coaching = session.coaching_json || {};
+    if (coaching.primary_issue) return coaching.primary_issue;
+    return `${patternLabel(session.pattern)} with a ${session.echo_score || 0}/100 Spotter score.`;
+  }
+
+  function getShareBaseUrl() {
+    const configured = window.FPR_SPOTTER_SHARE_BASE || '';
+    if (configured) return configured.replace(/\/$/, '');
+    return `${window.location.origin}/spotter/share`;
+  }
+
+  function shareToPlatform(platform, url, session) {
+    if (!url) return;
+    const text = `I just analyzed my target with FPR Spotter: ${buildShareHeadline(session)}`;
+    const encodedUrl = encodeURIComponent(url);
+    const encodedText = encodeURIComponent(text);
+    const links = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      twitter: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`,
+    };
+    if (platform === 'copy') {
+      copyText(url, 'Share link copied!');
+      return;
+    }
+    window.open(links[platform], '_blank', 'noopener,noreferrer,width=720,height=560');
+  }
+
+  function openModal(title, bodyHtml) {
+    closeAllModals();
+    const overlay = el('div', 'fpr-echo__modal-overlay');
+    overlay.innerHTML = `
+      <div class="fpr-echo__modal" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+        <div class="fpr-echo__modal-head">
+          <h3>${esc(title)}</h3>
+          <button class="fpr-echo__modal-close" type="button" aria-label="Close">${IC.x}</button>
+        </div>
+        <div class="fpr-echo__modal-body">${bodyHtml}</div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    overlay.querySelector('.fpr-echo__modal-close')?.addEventListener('click', () => closeModal(overlay));
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeModal(overlay);
+    });
+    const escHandler = e => {
+      if (e.key === 'Escape') {
+        closeModal(overlay);
+        document.removeEventListener('keydown', escHandler);
+      }
+    };
+    document.addEventListener('keydown', escHandler);
+    return overlay;
+  }
+
+  function closeModal(modal) {
+    if (modal) modal.remove();
+  }
+
+  function closeAllModals() {
+    document.querySelectorAll('.fpr-echo__modal-overlay').forEach(m => m.remove());
+  }
+
+  async function copyText(text, successMessage) {
+    try {
+      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
+      else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      showToast(successMessage || 'Copied!', 'success');
+    } catch {
+      showToast('Copy failed. Select and copy manually.', 'gold');
+    }
+  }
+
+  function base64UrlEncode(str) {
+    const utf8 = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode(parseInt(p1, 16)));
+    return btoa(utf8).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
   }
 
   // ==========================================================================
@@ -1166,6 +1365,8 @@
   // Bootstrap
   // -------------------------------------------------------------------------
   async function init(root) {
+    if (!root || (root.dataset.fprEchoInitialized === 'true')) return;
+    root.dataset.fprEchoInitialized = 'true';
     state.root       = root;
     state.apiUrl     = (root.dataset.apiUrl || '').replace(/\/$/, '');
     state.memberId   = root.dataset.memberId   || 'demo-member';
@@ -1177,9 +1378,15 @@
     render();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function boot() {
     document.querySelectorAll('.fpr-echo-mount').forEach(root => init(root));
-  });
+  }
 
-  window.FPREchoCoach = { init };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  window.FPREchoCoach = { init, boot };
 })();
