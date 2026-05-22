@@ -8,7 +8,7 @@
    Pricing only surfaces after the member clicks "See Pricing & Availability."
 */
 
-const FPRMatchmaker = (() => {
+var FPRMatchmaker = window.FPRMatchmaker || (() => {
   // ─── STATE ──────────────────────────────────────────────────────────────────
   let _el, _api, _memberId, _memberName;
   let _view     = 'welcome';  // welcome / intake / analyzing / recommendation / history
@@ -258,11 +258,42 @@ const FPRMatchmaker = (() => {
   // ─── SCORE COLOR HELPERS ───────────────────────────────────────────────────
   function scoreColor(s)   { return s >= 80 ? '#059669' : s >= 65 ? '#D97706' : s >= 50 ? '#EA580C' : '#DC2626'; }
   function tierClass(tier) { return tier || 'good'; }
+  function icon(name, className = 'fpr-mm-svg-icon') {
+    const paths = {
+      target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
+      hand: '<path d="M8 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M11 10V4.5a1.5 1.5 0 0 1 3 0V10"/><path d="M14 10V6.5a1.5 1.5 0 0 1 3 0V13"/><path d="M8 11V8.5a1.5 1.5 0 0 0-3 0V14c0 4 2.5 7 7 7h1c4 0 6-2.5 6-6v-2"/>',
+      chart: '<path d="M4 19V5"/><path d="M4 19h16"/><path d="M7 15l4-4 3 3 5-7"/><circle cx="7" cy="15" r="1"/><circle cx="11" cy="11" r="1"/><circle cx="14" cy="14" r="1"/><circle cx="19" cy="7" r="1"/>',
+      message: '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-6a8 8 0 1 1 18-5Z"/><path d="M8 12h8M8 9h6M8 15h4"/>',
+      alert: '<path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17h.01"/>',
+      lock: '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+      check: '<path d="m5 12 4 4L19 6"/>',
+      upload: '<path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M5 20h14"/>',
+      clipboard: '<rect x="6" y="5" width="12" height="16" rx="2"/><path d="M9 5a3 3 0 0 1 6 0"/><path d="M9 12h6M9 16h4"/>',
+      book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M4 5.5v16"/><path d="M8 7h8"/>',
+      star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.2l-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>',
+      medal: '<path d="M8 3h8l-2 5h-4L8 3Z"/><circle cx="12" cy="14" r="5"/>',
+      trophy: '<path d="M8 4h8v4a4 4 0 0 1-8 0V4Z"/><path d="M8 6H5a3 3 0 0 0 3 3M16 6h3a3 3 0 0 1-3 3M12 12v4M9 20h6M10 16h4"/>',
+      home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+      user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+      flag: '<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>',
+      box: '<path d="m3 7 9-4 9 4-9 4-9-4Z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>',
+      infinity: '<path d="M6.5 15C4.6 15 3 13.7 3 12s1.6-3 3.5-3c3.5 0 7 6 11 6 1.9 0 3.5-1.3 3.5-3s-1.6-3-3.5-3c-3.5 0-7 6-11 6Z"/>',
+      building: '<path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M16 8h2a2 2 0 0 1 2 2v11"/><path d="M8 7h4M8 11h4M8 15h4M6 21h16"/>',
+      tree: '<path d="M12 22v-6"/><path d="M7 16h10l-3-4h2l-4-6-4 6h2l-3 4Z"/>',
+      shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>',
+      bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+      handshake: '<path d="M8 12 5 9l-3 3 5 5 5-5"/><path d="m16 12 3-3 3 3-5 5-5-5"/><path d="M8 12h8"/>',
+      camera: '<path d="M4 8h4l2-3h4l2 3h4v11H4V8Z"/><circle cx="12" cy="13.5" r="3.5"/>',
+      thumbsUp: '<path d="M7 11v10H3V11h4Z"/><path d="M7 11l5-8 1 1a3 3 0 0 1 .5 3L13 9h6a2 2 0 0 1 2 2l-1 7a3 3 0 0 1-3 3H7"/>',
+      thumbsDown: '<path d="M7 13V3H3v10h4Z"/><path d="M7 13l5 8 1-1a3 3 0 0 0 .5-3L13 15h6a2 2 0 0 0 2-2l-1-7a3 3 0 0 0-3-3H7"/>',
+    };
+    return `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.target}</svg>`;
+  }
 
   // ─── RENDER FUNCTIONS ──────────────────────────────────────────────────────
   function renderWelcome() {
     return `<div class="fpr-mm-welcome">
-      <div class="fpr-mm-welcome-icon">🎯</div>
+      <div class="fpr-mm-welcome-icon">${icon('target')}</div>
       <h1 class="fpr-mm-welcome-title">VANGUARD GunFit</h1>
       <p class="fpr-mm-welcome-sub">
         Precision firearm matching powered by GunDNA analysis.
@@ -273,28 +304,28 @@ The right firearm should feel natural the moment you pick it up.      </p>
 Finding the right fit changes everything — comfort, confidence, and control     </p>
       <div class="fpr-mm-feature-list">
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon"><i class="ti ti-hand-finger"></i></span>
+          <span class="fpr-mm-feature-item-icon">${icon('hand')}</span>
           <div class="fpr-mm-feature-item-text">
             <strong>Biometric Fitment</strong>
             <span>Optional hand photo maps your grip geometry to specific firearms</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon"><i class="ti ti-chart-dots"></i></span>
+          <span class="fpr-mm-feature-item-icon">${icon('chart')}</span>
           <div class="fpr-mm-feature-item-text">
             <strong>Compatibility Heatmap</strong>
             <span>Visual breakdown of grip fit, trigger reach, and bore axis</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon"><i class="ti ti-message-circle"></i></span>
+          <span class="fpr-mm-feature-item-icon">${icon('message')}</span>
           <div class="fpr-mm-feature-item-text">
             <strong>Fitment Explanation</strong>
             <span>"Why This Gun" narrative specific to your profile</span>
           </div>
         </div>
         <div class="fpr-mm-feature-item">
-          <span class="fpr-mm-feature-item-icon"><i class="ti ti-alert-triangle"></i></span>
+          <span class="fpr-mm-feature-item-icon">${icon('alert')}</span>
           <div class="fpr-mm-feature-item-text">
             <strong>Honest Warnings</strong>
             <span>Poor matches are flagged clearly — no overselling</span>
@@ -302,7 +333,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
         </div>
       </div>
       <div class="fpr-mm-price-notice">
-        <i class="ti ti-lock"></i> <strong>Pricing is never shown on the recommendation page.</strong>
+        ${icon('lock')} <strong>Pricing is never shown on the recommendation page.</strong>
         All recommendations are purely about fit, feel, and use-case.
         Pricing appears only after you click "See Pricing &amp; Availability."
       </div>
@@ -320,7 +351,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
       ${steps.map((s, i) => `
         ${i > 0 ? `<div class="fpr-mm-step-line${_step > i ? ' complete' : ''}"></div>` : ''}
         <div class="fpr-mm-step${_step === s.n ? ' active' : _step > s.n ? ' complete' : ''}">
-          <div class="fpr-mm-step-circle">${_step > s.n ? '✓' : s.n}</div>
+          <div class="fpr-mm-step-circle">${_step > s.n ? icon('check') : s.n}</div>
           <span class="fpr-mm-step-label">${s.label}</span>
         </div>
       `).join('')}
@@ -346,23 +377,23 @@ Finding the right fit changes everything — comfort, confidence, and control   
       <div class="fpr-mm-field">
         <label class="fpr-mm-label">Experience Level</label>
         ${opts('experience_level', [
-          ['never_shot', '<i class="ti ti-new"></i>', 'Never Shot', 'First time buyer'],
-          ['beginner',   '<i class="ti ti-shoot"></i>', 'Beginner',   'Shot a few times'],
-          ['intermediate','<i class="ti ti-prize"></i>','Intermediate','Regular range time'],
-          ['experienced','<i class="ti ti-star"></i>','Experienced', '3+ years active'],
-          ['expert',     '<i class="ti ti-medal"></i>', 'Expert',     'Competition / professional'],
+          ['never_shot', icon('target'), 'Never Shot', 'First time buyer'],
+          ['beginner',   icon('target'), 'Beginner',   'Shot a few times'],
+          ['intermediate', icon('trophy'), 'Intermediate', 'Regular range time'],
+          ['experienced', icon('star'), 'Experienced', '3+ years active'],
+          ['expert',     icon('medal'), 'Expert',     'Competition / professional'],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Primary Intent</label>
         ${opts('primary_intent', [
-          ['home_defense', '<i class="ti ti-home"></i>', 'Home Defense',  'Bedside or safe'],
-          ['ccw',          '<i class="ti ti-person"></i>', 'CCW / Carry',  'Everyday carry'],
-          ['hunting',      '<i class="ti ti-hunting"></i>', 'Hunting',       'Field use'],
-          ['competition',  '<i class="ti ti-competition"></i>', 'Competition',  'USPSA / IDPA / 3-Gun'],
-          ['collection',   '<i class="ti ti-collection"></i>', 'Collection',  'Historical / investment'],
-          ['all_purpose',  '<i class="ti ti-infinity"></i>', 'All-Purpose',   'Versatile use'],
+          ['home_defense', icon('home'), 'Home Defense',  'Bedside or safe'],
+          ['ccw',          icon('user'), 'CCW / Carry',  'Everyday carry'],
+          ['hunting',      icon('target'), 'Hunting',       'Field use'],
+          ['competition',  icon('flag'), 'Competition',  'USPSA / IDPA / 3-Gun'],
+          ['collection',   icon('box'), 'Collection',  'Historical / investment'],
+          ['all_purpose',  icon('infinity'), 'All-Purpose',   'Versatile use'],
         ])}
       </div>
 
@@ -392,38 +423,38 @@ Finding the right fit changes everything — comfort, confidence, and control   
       <div class="fpr-mm-field">
         <label class="fpr-mm-label">Living Environment</label>
         ${opts('living_environment', [
-          ['apartment', '<i class="ti ti-apartment"></i>', 'Apartment',  'Urban / close quarters'],
-          ['suburban',  '<i class="ti ti-house"></i>', 'Suburban',   'Single-family home'],
-          ['rural',     '<i class="ti ti-leave"></i>', 'Rural',      'Property / acreage'],
+          ['apartment', icon('building'), 'Apartment',  'Urban / close quarters'],
+          ['suburban',  icon('home'), 'Suburban',   'Single-family home'],
+          ['rural',     icon('tree'), 'Rural',      'Property / acreage'],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Risk Tolerance / Priority</label>
         ${opts('risk_tolerance', [
-          ['conservative',  '<i class="ti ti-shield"></i>', 'Conservative',   'Simplicity & reliability above all'],
-          ['moderate',      '<i class="ti ti-crosshair"></i>', 'Moderate',       'Balance of features & ease'],
-          ['performance',   '<i class="ti ti-volt"></i>', 'Performance',    'Maximum capability, willing to train'],
+          ['conservative',  icon('shield'), 'Conservative',   'Simplicity & reliability above all'],
+          ['moderate',      icon('target'), 'Moderate',       'Balance of features & ease'],
+          ['performance',   icon('bolt'), 'Performance',    'Maximum capability, willing to train'],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Dominant Hand</label>
         ${opts('dominant_hand', [
-          ['right',         '<i class="ti ti-right-hand"></i>', 'Right Hand',    ''],
-          ['left',          '<i class="ti ti-left-hand"></i>', 'Left Hand',     ''],
-          ['ambidextrous',  '<i class="ti ti-handshake"></i>', 'Ambidextrous',  ''],
+          ['right',         icon('hand'), 'Right Hand',    ''],
+          ['left',          icon('hand'), 'Left Hand',     ''],
+          ['ambidextrous',  icon('handshake'), 'Ambidextrous',  ''],
         ])}
       </div>
 
       <div class="fpr-mm-field" style="margin-top:16px">
         <label class="fpr-mm-label">Self-Assessed Hand Size <span>(used if no photo uploaded)</span></label>
         ${opts('hand_size', [
-          ['XS', '🤏', 'XS', 'Very small'],
-          ['S',  '✋', 'S',  'Small'],
-          ['M',  '🖐', 'M',  'Medium / Average'],
-          ['L',  '🖖', 'L',  'Large'],
-          ['XL', '👋', 'XL', 'Extra large'],
+          ['XS', icon('hand'), 'XS', 'Very small'],
+          ['S',  icon('hand'), 'S',  'Small'],
+          ['M',  icon('hand'), 'M',  'Medium / Average'],
+          ['L',  icon('hand'), 'L',  'Large'],
+          ['XL', icon('hand'), 'XL', 'Extra large'],
         ])}
       </div>
 
@@ -453,19 +484,19 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
       ${hasPriorAnalysis ? `
         <div style="background:#ECFDF5;border:1px solid rgba(5,150,105,.3);border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#065F46">
-          ✓ <strong>Previous scan on file:</strong> Hand size ${_handAnalysis.estimated_hand_size},
+          ${icon('check')} <strong>Previous scan on file:</strong> Hand size ${_handAnalysis.estimated_hand_size},
           grip width ~${_handAnalysis.estimated_grip_width_mm}mm — will be used automatically.
           <button class="fpr-mm-btn-outline" style="margin-top:8px;display:block" data-action="clear-analysis">Use New Photo Instead</button>
         </div>` : `
         <label class="fpr-mm-hand-upload" for="mm-hand-file">
           ${hasFile
-            ? `<span class="fpr-mm-hand-upload-icon">✅</span><div class="fpr-mm-hand-upload-title">Photo Ready</div><div class="fpr-mm-hand-upload-sub">${_handFile.name}</div>`
-            : `<span class="fpr-mm-hand-upload-icon">📸</span><div class="fpr-mm-hand-upload-title">Upload Hand Photo</div><div class="fpr-mm-hand-upload-sub">JPEG, PNG, or WebP · Max 10MB</div>`}
+            ? `<span class="fpr-mm-hand-upload-icon">${icon('check')}</span><div class="fpr-mm-hand-upload-title">Photo Ready</div><div class="fpr-mm-hand-upload-sub">${_handFile.name}</div>`
+            : `<span class="fpr-mm-hand-upload-icon">${icon('camera')}</span><div class="fpr-mm-hand-upload-title">Upload Hand Photo</div><div class="fpr-mm-hand-upload-sub">JPEG, PNG, or WebP · Max 10MB</div>`}
         </label>
         <input type="file" id="mm-hand-file" accept="image/jpeg,image/png,image/webp" style="display:none" data-action="file-select">
 
         <div class="fpr-mm-hand-instructions">
-          <strong>📋 Best results:</strong>
+          <strong>${icon('clipboard')} Best results:</strong>
           <ol>
             <li>Flatten your dominant hand against a neutral background, palm facing camera</li>
             <li>Spread fingers slightly — natural position, not strained</li>
@@ -475,7 +506,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
         </div>
 
         <div class="fpr-mm-privacy-note">
-          🔒 Your photo is analyzed by AI and <strong>immediately deleted</strong> — never stored.
+          ${icon('lock')} Your photo is analyzed by AI and <strong>immediately deleted</strong> — never stored.
           Only the numerical measurements are saved.
         </div>`}
 
@@ -491,7 +522,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
   function renderAnalyzing() {
     return `<div class="fpr-mm-analyzing">
       <div class="fpr-mm-analyzing-orb">
-        <div class="fpr-mm-analyzing-inner"><i class="ti ti-crosshair"></i></div>
+        <div class="fpr-mm-analyzing-inner">${icon('target')}</div>
       </div>
       <h2 class="fpr-mm-analyzing-title">Analyzing Your Profile</h2>
       <ul class="fpr-mm-analyzing-steps" id="mm-analyzing-steps">
@@ -542,15 +573,15 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
       ${isPoorMatch ? `
         <div class="fpr-mm-warning-panel poor" style="margin-bottom:16px">
-          <div class="fpr-mm-warning-header">⛔ Poor Compatibility Match</div>
+          <div class="fpr-mm-warning-header">${icon('alert')} Poor Compatibility Match</div>
           <p style="font-size:12px;color:#6B7684;margin:0 0 8px">
             Based on your profile, this firearm has significant fit concerns.
             Review our alternatives below for better-matched options.
           </p>
           ${warnings.length ? `<ul class="fpr-mm-warning-list">${warnings.map(w => `<li class="fpr-mm-warning-item">${w}</li>`).join('')}</ul>` : ''}
-        </div>` : warnings.length ? `
+      </div>` : warnings.length ? `
         <div class="fpr-mm-warning-panel" style="margin-bottom:16px">
-          <div class="fpr-mm-warning-header"><i class="ti ti-cation"></i> Fit Considerations</div>
+          <div class="fpr-mm-warning-header">${icon('alert')} Fit Considerations</div>
           <ul class="fpr-mm-warning-list">${warnings.map(w => `<li class="fpr-mm-warning-item">${w}</li>`).join('')}</ul>
         </div>` : ''}
 
@@ -637,8 +668,8 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
           <div class="fpr-mm-feedback">
             <span class="fpr-mm-feedback-label">Was this match helpful?</span>
-            <button class="fpr-mm-feedback-btn" data-action="feedback" data-value="yes">👍 Yes</button>
-            <button class="fpr-mm-feedback-btn" data-action="feedback" data-value="no">👎 Improve</button>
+            <button class="fpr-mm-feedback-btn" data-action="feedback" data-value="yes">${icon('thumbsUp')} Yes</button>
+            <button class="fpr-mm-feedback-btn" data-action="feedback" data-value="no">${icon('thumbsDown')} Improve</button>
             <button class="fpr-mm-btn-outline" data-action="restart" style="margin-left:8px">Try Again</button>
           </div>
 
@@ -663,7 +694,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
     const items = _history;
     if (!items.length) {
       return `<div class="fpr-mm-empty">
-        <span class="fpr-mm-empty-icon"><i class="ti ti-book"></i></span>
+        <span class="fpr-mm-empty-icon">${icon('book')}</span>
         <div style="font-size:15px;font-weight:700;color:#495057">No previous matches</div>
         <div style="font-size:13px;margin-top:6px">Complete the intake to generate your first match.</div>
         <button class="fpr-mm-btn fpr-mm-btn-primary" data-action="start" style="margin-top:16px">Find My Match</button>
@@ -809,7 +840,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
       _recommendation = { ...DEMO.recommendation, scores: { ...DEMO.recommendation.scores } };
       _handAnalysis   = DEMO.handAnalysis;
       _view = 'recommendation';
-      window.fprAwardTicket('match_generated', {});
+      awardTicket('match_generated', {});
       render();
       return;
     }
@@ -840,11 +871,11 @@ Finding the right fit changes everything — comfort, confidence, and control   
       const recData = await apiPost(`/api/matchmaker/member/${_memberId}/recommend`, {});
       _recommendation = recData.recommendation;
       _view = 'recommendation';
-      window.fprAwardTicket('match_generated', {});
+      awardTicket('match_generated', {});
       render();
     } catch (err) {
       _el.querySelector('#mm-body').innerHTML = `<div class="fpr-mm-empty">
-        <span class="fpr-mm-empty-icon">⚠️</span>
+        <span class="fpr-mm-empty-icon">${icon('alert')}</span>
         <div style="font-size:15px;font-weight:700">Match failed</div>
         <div style="font-size:13px;color:#6B7684;margin-top:6px">${err.message}</div>
         <button class="fpr-mm-btn fpr-mm-btn-secondary" data-action="step1" style="margin-top:16px">Try Again</button>
@@ -883,14 +914,14 @@ Finding the right fit changes everything — comfort, confidence, and control   
       }).catch(() => {});
     }
     const fb = _el.querySelector('.fpr-mm-feedback');
-    if (fb) fb.innerHTML = '<span style="color:#059669;font-size:13px;font-weight:700">✓ Thanks for the feedback</span>';
+    if (fb) fb.innerHTML = `<span style="color:#059669;font-size:13px;font-weight:700">${icon('check')} Thanks for the feedback</span>`;
   }
 
   function markStep(id, state) {
     const el = document.getElementById(id);
     if (!el) return;
     el.className = 'fpr-mm-analyzing-step ' + state;
-    if (state === 'done' && !el.textContent.startsWith('✓')) {
+    if (state === 'done') {
       el.textContent = el.textContent.replace('⟳ ', '');
     }
   }
@@ -920,6 +951,18 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
   function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+  function awardTicket(action, ctx) {
+    if (typeof window.fprAwardTicket === 'function') {
+      window.fprAwardTicket(action, ctx || {});
+    }
+  }
+
+  function normalizeApiUrl(value) {
+    const api = (value || '').trim();
+    if (!api || api === 'YOUR_API_URL' || api === '#') return '';
+    return api.replace(/\/$/, '');
+  }
+
   // ─── LOAD DATA ───────────────────────────────────────────────────────────────
   async function loadData() {
     if (_demoMode) return;
@@ -935,20 +978,36 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
   // ─── PUBLIC INIT ─────────────────────────────────────────────────────────────
   async function init(el) {
+    if (!el) return;
+    if (el.dataset.fprMmInitialized === 'true') return;
+    el.dataset.fprMmInitialized = 'true';
+
     _el         = el;
-    _api        = (el.dataset.apiUrl || '').replace(/\/$/, '');
+    _api        = normalizeApiUrl(el.dataset.apiUrl);
     _memberId   = el.dataset.memberId   || 'preview-member';
     _memberName = el.dataset.memberName || 'Demo Member';
     _demoMode   = !_api;
 
-    if (!_demoMode) await loadData();
     render();
+
+    if (!_demoMode) {
+      loadData()
+        .then(render)
+        .catch(err => console.warn('[FPRMatchmaker] Initial data load skipped:', err));
+    }
   }
 
   return { init };
 })();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const el = document.querySelector('.fpr-mm-mount');
-  if (el) FPRMatchmaker.init(el);
-});
+window.FPRMatchmaker = FPRMatchmaker;
+
+function initFPRMatchmakerMounts() {
+  document.querySelectorAll('.fpr-mm-mount').forEach(el => FPRMatchmaker.init(el));
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFPRMatchmakerMounts);
+} else {
+  initFPRMatchmakerMounts();
+}
