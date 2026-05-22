@@ -935,7 +935,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
   // ─── API HELPERS ────────────────────────────────────────────────────────────
   async function apiPost(path, body) {
-    const res = await fetch(`${_api}${path}`, {
+    const res = await fetch(apiUrl(path), {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
@@ -944,7 +944,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
   }
 
   async function apiGet(path) {
-    const res = await fetch(`${_api}${path}`);
+    const res = await fetch(apiUrl(path));
     if (!res.ok) throw new Error((await res.json()).error || res.statusText);
     return res.json();
   }
@@ -961,6 +961,15 @@ Finding the right fit changes everything — comfort, confidence, and control   
     const api = (value || '').trim();
     if (!api || api === 'YOUR_API_URL' || api === '#') return '';
     return api.replace(/\/$/, '');
+  }
+
+  function apiUrl(path) {
+    if (!_api) return path;
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    if (_api.endsWith('/api') && cleanPath.startsWith('/api/')) {
+      return `${_api}${cleanPath.slice(4)}`;
+    }
+    return `${_api}${cleanPath}`;
   }
 
   // ─── LOAD DATA ───────────────────────────────────────────────────────────────
@@ -980,7 +989,6 @@ Finding the right fit changes everything — comfort, confidence, and control   
   async function init(el) {
     if (!el) return;
     if (el.dataset.fprMmInitialized === 'true') return;
-    el.dataset.fprMmInitialized = 'true';
 
     _el         = el;
     _api        = normalizeApiUrl(el.dataset.apiUrl);
@@ -988,7 +996,17 @@ Finding the right fit changes everything — comfort, confidence, and control   
     _memberName = el.dataset.memberName || 'Demo Member';
     _demoMode   = !_api;
 
-    render();
+    try {
+      render();
+      el.dataset.fprMmInitialized = 'true';
+    } catch (err) {
+      console.error('[FPRMatchmaker] Render failed:', err);
+      el.innerHTML = `<div style="min-height:240px;padding:24px;border:1px solid #e5e7eb;background:#fff;color:#111827;font-family:Inter,system-ui,sans-serif">
+        <strong>FPR Matchmaker could not render.</strong>
+        <div style="margin-top:8px;color:#6b7280;font-size:13px">${err.message || 'Unknown script error'}</div>
+      </div>`;
+      throw err;
+    }
 
     if (!_demoMode) {
       loadData()
@@ -1003,11 +1021,37 @@ Finding the right fit changes everything — comfort, confidence, and control   
 window.FPRMatchmaker = FPRMatchmaker;
 
 function initFPRMatchmakerMounts() {
-  document.querySelectorAll('.fpr-mm-mount').forEach(el => FPRMatchmaker.init(el));
+  const mounts = document.querySelectorAll('.fpr-mm-mount');
+  if (!mounts.length) {
+    console.warn('[FPRMatchmaker] No .fpr-mm-mount element found yet.');
+    return false;
+  }
+  mounts.forEach(el => FPRMatchmaker.init(el));
+  return true;
+}
+
+function bootFPRMatchmaker() {
+  if (initFPRMatchmakerMounts()) return;
+
+  let tries = 0;
+  const retry = window.setInterval(() => {
+    tries += 1;
+    if (initFPRMatchmakerMounts() || tries >= 20) {
+      window.clearInterval(retry);
+    }
+  }, 250);
+
+  if ('MutationObserver' in window) {
+    const observer = new MutationObserver(() => {
+      if (initFPRMatchmakerMounts()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    window.setTimeout(() => observer.disconnect(), 10000);
+  }
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initFPRMatchmakerMounts);
+  document.addEventListener('DOMContentLoaded', bootFPRMatchmaker);
 } else {
-  initFPRMatchmakerMounts();
+  bootFPRMatchmaker();
 }
