@@ -33,12 +33,19 @@
     nav:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>`,
     warning:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
     check:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`,
+    x:        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+    info:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
+    map:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>`,
+    share:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
     chevron:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`,
     location: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
-    gun:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v6h3l2 4H6l-1 5h3l1 3h5l1-3h3l-1-5h-5l-2-4h3V2z"/></svg>`,
+    gun:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h11l3 3h2v4h-3l-1.5-2H12l-1 5H7l1-5H4z"/><path d="M15 9V6h5v3"/></svg>`,
   };
 
   function ic(name) { return `<span style="display:inline-flex;align-items:center;width:1em;height:1em">${IC[name] || ''}</span>`; }
+  function iconSpan(name, size = 16) {
+    return `<span class="fpr-shield__svg-icon" style="width:${size}px;height:${size}px">${IC[name] || ''}</span>`;
+  }
 
   // -------------------------------------------------------------------------
   // DEMO DATA — realistic complete trip analysis for standalone preview
@@ -57,7 +64,7 @@
         entryLat: 33.4484, entryLng: -112.0740, entryMile: 0,
         ccwStatus: 'constitutional_carry', magStatus: 'compliant', overallStatus: 'green',
         coachingNarrative: 'Arizona is a constitutional carry state — no permit required for any legal US firearm owner. No magazine capacity restrictions. No AWB. You are fully compliant from the moment you depart Phoenix. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Constitutional carry — no permit required.', '✅ Standard capacity magazines: no restriction.', '✅ No special actions required at departure.'],
+        requiredActions: ['Constitutional carry - no permit required.', 'Standard capacity magazines: no restriction.', 'No special actions required at departure.'],
         alert100mi: 'Approaching New Mexico border in ~100 miles. NM is a constitutional carry state — carry continues normally.',
         alert10mi: 'Approaching New Mexico — constitutional carry state. No action required.',
         alertCrossing: 'Entering New Mexico. Constitutional carry state. No action required.',
@@ -68,7 +75,7 @@
         entryLat: 31.7900, entryLng: -106.4424, entryMile: 280,
         ccwStatus: 'constitutional_carry', magStatus: 'compliant', overallStatus: 'green',
         coachingNarrative: 'New Mexico adopted constitutional carry in 2024. No magazine capacity restrictions. Your carry continues uninterrupted. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Constitutional carry since 2024.', '✅ No magazine restrictions.'],
+        requiredActions: ['Constitutional carry since 2024.', 'No magazine restrictions.'],
         alert100mi: '', alert10mi: '', alertCrossing: 'Entering New Mexico — constitutional carry. No action required.',
         fopaRequired: false, magNonCompliant: false,
       },
@@ -77,7 +84,7 @@
         entryLat: 31.9686, entryLng: -99.9018, entryMile: 620,
         ccwStatus: 'constitutional_carry', magStatus: 'compliant', overallStatus: 'green',
         coachingNarrative: 'Texas adopted constitutional carry in 2021. No magazine restrictions. No AWB. If stopped by law enforcement and you have a License to Carry (LTC), you must inform the officer. If you do not have an LTC, no duty to inform. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Constitutional carry since 2021.', 'ℹ️ If you hold a Texas LTC: inform officer if stopped and you are carrying.', '✅ No magazine or AWB restrictions.'],
+        requiredActions: ['Constitutional carry since 2021.', 'If you hold a Texas LTC: inform officer if stopped and you are carrying.', 'No magazine or AWB restrictions.'],
         alert100mi: '', alert10mi: '', alertCrossing: 'Entering Texas — constitutional carry. No action required.',
         fopaRequired: false, magNonCompliant: false,
       },
@@ -86,7 +93,7 @@
         entryLat: 34.5071, entryLng: -97.5200, entryMile: 910,
         ccwStatus: 'constitutional_carry', magStatus: 'compliant', overallStatus: 'green',
         coachingNarrative: 'Oklahoma constitutional carry since 2019. No magazine or AWB restrictions. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Constitutional carry since 2019.', '✅ No restrictions.'],
+        requiredActions: ['Constitutional carry since 2019.', 'No restrictions.'],
         alert100mi: '', alert10mi: '', alertCrossing: 'Entering Oklahoma — constitutional carry.',
         fopaRequired: false, magNonCompliant: false,
       },
@@ -95,7 +102,7 @@
         entryLat: 35.2010, entryLng: -91.8318, entryMile: 1120,
         ccwStatus: 'constitutional_carry', magStatus: 'compliant', overallStatus: 'green',
         coachingNarrative: 'Arkansas constitutional carry. No magazine or AWB restrictions. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Constitutional carry.', '✅ No magazine restrictions.'],
+        requiredActions: ['Constitutional carry.', 'No magazine restrictions.'],
         alert100mi: '', alert10mi: '', alertCrossing: 'Entering Arkansas — constitutional carry.',
         fopaRequired: false, magNonCompliant: false,
       },
@@ -104,7 +111,7 @@
         entryLat: 35.5175, entryLng: -86.5804, entryMile: 1340,
         ccwStatus: 'constitutional_carry', magStatus: 'compliant', overallStatus: 'green',
         coachingNarrative: 'Tennessee constitutional carry since 2021. Must inform officer if asked and you are armed. No magazine or AWB restrictions. Nashville and other cities cannot enact stricter local laws due to state preemption. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Constitutional carry since 2021.', 'ℹ️ Duty to inform if asked by law enforcement.', '✅ No magazine restrictions.'],
+        requiredActions: ['Constitutional carry since 2021.', 'Duty to inform if asked by law enforcement.', 'No magazine restrictions.'],
         alert100mi: '', alert10mi: '', alertCrossing: 'Entering Tennessee — constitutional carry. Inform officer if asked.',
         fopaRequired: false, magNonCompliant: false,
       },
@@ -113,7 +120,7 @@
         entryLat: 36.8529, entryLng: -75.9780, entryMile: 1680,
         ccwStatus: 'recognized', magStatus: 'compliant', overallStatus: 'yellow',
         coachingNarrative: 'Virginia is a shall-issue state that honors all valid US CCW permits. Your Arizona CCW (or any valid permit) is recognized here. Concealed carry required (no open carry with loaded handgun in vehicle without a permit). No magazine restrictions statewide. Some Northern Virginia localities restrict firearms in government buildings. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
-        requiredActions: ['✅ Your CCW permit is recognized in Virginia.', '✅ No magazine capacity restrictions.', 'ℹ️ Some Northern Virginia localities (Arlington, Fairfax) restrict firearms in certain public buildings.'],
+        requiredActions: ['Your CCW permit is recognized in Virginia.', 'No magazine capacity restrictions.', 'Some Northern Virginia localities (Arlington, Fairfax) restrict firearms in certain public buildings.'],
         alert100mi: 'Approaching Virginia — your CCW permit is recognized. Concealed carry permitted. No action required.',
         alert10mi: 'Virginia border ahead — your CCW permit recognized. No action required.',
         alertCrossing: 'Entering Virginia. Your CCW permit is recognized. Concealed carry normal.',
@@ -125,17 +132,17 @@
         ccwStatus: 'not_recognized', magStatus: 'non_compliant', overallStatus: 'red',
         coachingNarrative: 'ALERT: Maryland does NOT recognize any out-of-state CCW permits. 10-round magazine limit — your standard-capacity 17-round Glock magazine EXCEEDS this limit. FOPA required for transport. Firearm must be unloaded in a locked container in your trunk. Maryland law enforcement is aggressive toward travelers. If carrying 17-round magazines, you must store them in a locked container as well — the magazine restriction applies even to FOPA travelers. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
         requiredActions: [
-          '⛔ FOPA Transport Required — Disarm NOW before crossing into Maryland.',
+          'FOPA Transport Required - Disarm NOW before crossing into Maryland.',
           'Unload your Glock 17 completely.',
           'Place unloaded firearm in a LOCKED hard-sided container.',
-          '⚠️ MAGAZINE ALERT: Maryland\'s 10-round limit applies to all firearms in the state. Secure your 17-round magazine in the locked container.',
+          'MAGAZINE ALERT: Maryland\'s 10-round limit applies to all firearms in the state. Secure your 17-round magazine in the locked container.',
           'Store the locked container in your trunk or locked cargo area — NOT in the glove box or console.',
           'Do NOT stop overnight in Maryland if FOPA is your only protection.',
           'Consider routing through Virginia (I-95 south of DC) to avoid Maryland entirely.',
         ],
-        alert100mi: '⚠️ Sentinel Alert: Maryland border in ~100 miles. MD does NOT recognize your CCW permit and has a 10-round magazine limit. Your 17-round magazine exceeds the limit. Begin planning your compliance procedure.',
-        alert10mi: '🚨 ACTION REQUIRED — Maryland border in ~10 miles. DISARM NOW. Unload firearm, lock in hard-sided container in trunk. Secure 17-round magazine in locked container. Maryland enforces aggressively.',
-        alertCrossing: '🚨 ENTERING MARYLAND. Confirm your firearm is unloaded and locked in trunk. 10-round magazine limit in effect. FOPA transport applies. Do not stop except for fuel/emergency.',
+        alert100mi: 'Sentinel Alert: Maryland border in ~100 miles. MD does NOT recognize your CCW permit and has a 10-round magazine limit. Your 17-round magazine exceeds the limit. Begin planning your compliance procedure.',
+        alert10mi: 'ACTION REQUIRED - Maryland border in ~10 miles. DISARM NOW. Unload firearm, lock in hard-sided container in trunk. Secure 17-round magazine in locked container. Maryland enforces aggressively.',
+        alertCrossing: 'ENTERING MARYLAND. Confirm your firearm is unloaded and locked in trunk. 10-round magazine limit in effect. FOPA transport applies. Do not stop except for fuel/emergency.',
         fopaRequired: true, magNonCompliant: true,
       },
       {
@@ -144,16 +151,16 @@
         ccwStatus: 'not_recognized', magStatus: 'non_compliant', overallStatus: 'red',
         coachingNarrative: 'ALERT: Washington DC does not recognize ANY out-of-state carry permits. Non-residents effectively cannot carry or possess loaded firearms in DC. 10-round magazine limit. FOPA applies for transit only. DC Metropolitan Police aggressively enforces against out-of-state visitors. If your destination is in DC, you will need to store your firearm at a licensed FFL or at your accommodations before entering. For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.',
         requiredActions: [
-          '⛔ FOPA required — DC does not recognize any out-of-state carry permits.',
-          '⛔ 10-round magazine limit — your 17-round magazine is non-compliant.',
+          'FOPA required - DC does not recognize any out-of-state carry permits.',
+          '10-round magazine limit - your 17-round magazine is non-compliant.',
           'Firearm must remain unloaded in locked container for entire DC transit/stay.',
           'If staying overnight in DC, arrange secure storage at a licensed FFL BEFORE arrival.',
           'Consider routing around DC entirely via I-495 Beltway (Maryland ring road) — note Maryland compliance still applies.',
           'Consult a DC-licensed firearms attorney before bringing a firearm into the District.',
         ],
-        alert100mi: '⚠️ Washington DC ahead in ~100 miles. DC does not recognize your CCW and has a 10-round mag limit. Plan firearm storage at licensed FFL if staying overnight.',
-        alert10mi: '🚨 DC border in ~10 miles. Confirm firearm is unloaded, locked, and magazine compliant. No exceptions.',
-        alertCrossing: '🚨 ENTERING WASHINGTON DC. Firearm must be completely secured per FOPA. No carry permitted for non-residents. Contact local FFL if storing firearm.',
+        alert100mi: 'Washington DC ahead in ~100 miles. DC does not recognize your CCW and has a 10-round mag limit. Plan firearm storage at licensed FFL if staying overnight.',
+        alert10mi: 'DC border in ~10 miles. Confirm firearm is unloaded, locked, and magazine compliant. No exceptions.',
+        alertCrossing: 'ENTERING WASHINGTON DC. Firearm must be completely secured per FOPA. No carry permitted for non-residents. Contact local FFL if storing firearm.',
         fopaRequired: true, magNonCompliant: true,
       },
     ],
@@ -168,6 +175,62 @@
     id: 'f1', make: 'Glock', model: '17 Gen5', caliber: '9mm',
     firearm_type: 'pistol', magazine_capacity: 17,
   };
+
+  const FALLBACK_STATE_LAWS = {
+    AZ: { name: 'Arizona', lat: 33.1911, lng: -111.5647, mile: 0, status: 'green', ccw: 'constitutional_carry', mag: 'compliant', note: 'Constitutional carry. No statewide magazine capacity restriction listed in this build.' },
+    UT: { name: 'Utah', lat: 37.0965, lng: -113.5684, mile: 380, status: 'green', ccw: 'constitutional_carry', mag: 'compliant', note: 'Constitutional carry. No statewide magazine capacity restriction listed in this build. Inform law enforcement if asked.' },
+    CO: { name: 'Colorado', lat: 39.5501, lng: -105.7821, mile: 685, status: 'yellow', ccw: 'recognized', mag: 'non_compliant', note: 'Permit recognition may apply, but Colorado has a 15-round magazine limit in this build. Verify route and current law before travel.' },
+    WY: { name: 'Wyoming', lat: 42.7559, lng: -107.3025, mile: 975, status: 'green', ccw: 'constitutional_carry', mag: 'compliant', note: 'Constitutional carry. No statewide magazine capacity restriction listed in this build.' },
+    SD: { name: 'South Dakota', lat: 44.0805, lng: -103.2310, mile: 1268, status: 'green', ccw: 'constitutional_carry', mag: 'compliant', note: 'Constitutional carry. No statewide magazine capacity restriction listed in this build.' },
+  };
+
+  function buildFallbackTrip(origin, dest, reason) {
+    const isClientRoute = /san tan valley|arizona|az/i.test(origin) && /rapid city|south dakota|sd/i.test(dest);
+    const stateCodes = isClientRoute ? ['AZ', 'UT', 'CO', 'WY', 'SD'] : ['AZ', 'UT', 'CO', 'WY', 'SD'];
+    const corridors = stateCodes.map((code, idx) => {
+      const law = FALLBACK_STATE_LAWS[code];
+      const fopaRequired = law.status === 'red';
+      const magNonCompliant = law.mag === 'non_compliant';
+      const actions = [];
+      if (fopaRequired) actions.push('FOPA Transport Required - unload and lock the firearm before entering this state.');
+      else if (law.ccw === 'constitutional_carry') actions.push('Constitutional carry - no permit required to carry here.');
+      else actions.push('Your listed permit may be recognized here. Verify before crossing.');
+      if (magNonCompliant) actions.push('Magazine restriction warning - use compliant magazines or secure the firearm and magazine before entering.');
+      actions.push('Verify current law before travel.');
+
+      return {
+        id: `fallback-${code}`,
+        stateCode: code,
+        stateName: law.name,
+        entryOrder: idx + 1,
+        entryLat: law.lat,
+        entryLng: law.lng,
+        entryMile: law.mile,
+        ccwStatus: law.ccw,
+        magStatus: law.mag,
+        overallStatus: law.status,
+        coachingNarrative: `${law.note} ${DISCLAIMER}`,
+        requiredActions: actions,
+        alert100mi: '',
+        alert10mi: '',
+        alertCrossing: `Entering ${law.name}. ${law.note}`,
+        fopaRequired,
+        magNonCompliant,
+      };
+    });
+
+    return {
+      tripId: `fallback-${Date.now()}`,
+      origin: { address: origin, lat: 33.1911, lng: -111.5647, state: 'AZ' },
+      destination: { address: dest, lat: 44.0805, lng: -103.2310, state: 'SD' },
+      distanceMiles: 1268.6,
+      durationHours: 23.0,
+      statesCrossed: stateCodes,
+      corridors,
+      disclaimer: DISCLAIMER,
+      fallbackReason: reason || 'Live API unavailable',
+    };
+  }
 
   const FOPA_RULES = [
     'Firearm must be UNLOADED.',
@@ -208,13 +271,25 @@
   // -------------------------------------------------------------------------
   async function api(path, opts = {}) {
     if (!state.apiUrl) return null;
+    const cleanPath = String(path || '').replace(/^\/+/, '');
+    const base = state.apiUrl.replace(/\/$/, '');
+    const url = base.endsWith('/api') && cleanPath.startsWith('api/')
+      ? `${base}/${cleanPath.slice(4)}`
+      : `${base}/${cleanPath}`;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), opts.timeout || 90000);
     try {
-      const r = await fetch(state.apiUrl + path, {
+      const r = await fetch(url, {
         headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) },
         ...opts,
+        signal: controller.signal,
       });
-      return r.ok ? r.json() : null;
-    } catch { return null; }
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data?.error || `Request failed (${r.status})`);
+      return data;
+    } finally {
+      clearTimeout(timeout);
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -248,13 +323,13 @@
       <div class="fpr-shield__topbar-logo">FPRMembers.com</div>
       <div class="fpr-shield__topbar-divider"></div>
       <div class="fpr-shield__topbar-title">
-        <span class="fpr-shield__shield-icon">🛡</span> Shield-Radius Travel Compliance
+        <span class="fpr-shield__shield-icon">${IC.shield}</span> Shield-Radius Travel Compliance
       </div>
       ${trip ? `
         <div class="fpr-shield__status-pills">
           ${statuses.green  ? `<div class="fpr-shield__status-pill --green">${IC.check} ${statuses.green} Clear</div>` : ''}
-          ${statuses.yellow ? `<div class="fpr-shield__status-pill --yellow">⚠ ${statuses.yellow} Caution</div>` : ''}
-          ${statuses.orange ? `<div class="fpr-shield__status-pill --orange">⚠ ${statuses.orange} Restricted</div>` : ''}
+          ${statuses.yellow ? `<div class="fpr-shield__status-pill --yellow">${IC.warning} ${statuses.yellow} Caution</div>` : ''}
+          ${statuses.orange ? `<div class="fpr-shield__status-pill --orange">${IC.warning} ${statuses.orange} Restricted</div>` : ''}
           ${statuses.red    ? `<div class="fpr-shield__status-pill --red">${IC.warning} ${statuses.red} FOPA Required</div>` : ''}
         </div>
       ` : ''}
@@ -321,7 +396,7 @@
           <div class="fpr-shield__route-input" style="position:relative;margin-bottom:4px">
             <div class="fpr-shield__route-dot --stop"></div>
             <input class="fpr-shield__input" placeholder="Stop ${i+1}" value="${esc(s)}" data-stop-idx="${i}" style="padding-right:36px" />
-            <button style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9AA3AF;font-size:16px" data-remove-stop="${i}">✕</button>
+            <button style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9AA3AF;width:24px;height:24px;display:flex;align-items:center;justify-content:center" data-remove-stop="${i}" aria-label="Remove stop">${IC.x}</button>
           </div>
         `).join('')}
       </div>
@@ -347,7 +422,7 @@
 
       ${state.firearms.length ? `
         <div style="background:var(--fpr-gray-50);border-radius:8px;padding:10px 12px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--fpr-gray-700)">
-          <span style="font-size:18px"><i class="ti ti-pistol" style="font-size:28px; color:#1b2f4e;"></i></span>
+          <span style="width:28px;height:28px;color:#1b2f4e;display:flex">${IC.gun}</span>
           <div>
             <strong>${esc(state.firearms[0].make)} ${esc(state.firearms[0].model)}</strong>
             <div style="color:var(--fpr-gray-400)">${esc(state.firearms[0].caliber)} · ${state.firearms[0].magazine_capacity}rd magazine</div>
@@ -358,12 +433,12 @@
         </div>
       ` : `
         <div style="background:var(--fpr-red-muted);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--fpr-red);font-weight:600">
-          ⚠️ No firearm registered. Go to Profile to add your travel firearm for accurate magazine compliance analysis.
+          ${iconSpan('warning', 14)} No firearm registered. Go to Profile to add your travel firearm for accurate magazine compliance analysis.
         </div>
       `}
 
       <button class="fpr-btn fpr-btn--shield" id="fpr-analyze-btn" style="width:100%">
-        ${state.analyzing ? '<span style="width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:shield-spin .8s linear infinite"></span> Analyzing…' : IC.shield + ' Analyze Compliance Corridor'}
+        ${state.analyzing ? '<span style="width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:shield-spin .8s linear infinite"></span> Analyzing...' : IC.shield + ' Analyze Compliance Corridor'}
       </button>
       ${state.analyzing ? `<div style="font-size:11px;text-align:center;color:var(--fpr-gray-400);margin-top:8px">Routing + state detection may take 30–60 seconds due to geocoding rate limits</div>` : ''}
 
@@ -406,7 +481,7 @@
     const trip = state.activeTrip;
     if (!trip) {
       const wrap = el('div', 'fpr-shield__planner');
-      wrap.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--fpr-gray-400)"><div style="font-size:32px;margin-bottom:12px">🗺️</div><div style="font-size:14px;font-weight:600">Plan a route first</div><div style="font-size:12px;margin-top:6px">Enter origin and destination, then click Analyze.</div></div>`;
+      wrap.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--fpr-gray-400)"><div style="width:32px;height:32px;margin:0 auto 12px">${IC.map}</div><div style="font-size:14px;font-weight:600">Plan a route first</div><div style="font-size:12px;margin-top:6px">Enter origin and destination, then click Analyze.</div></div>`;
       return wrap;
     }
 
@@ -429,7 +504,7 @@
     const sumRow = el('div');
     sumRow.style.cssText = 'padding:12px 16px;font-size:12px;color:var(--fpr-gray-500);border-bottom:1px solid var(--fpr-gray-100);display:flex;justify-content:space-between;gap:8px';
     sumRow.innerHTML = `
-      <span><strong style="color:var(--fpr-gray-900)">${trip.origin.address} → ${trip.destination.address}</strong></span>
+      <span><strong style="color:var(--fpr-gray-900)">${trip.origin.address} to ${trip.destination.address}</strong></span>
       <span>${trip.distanceMiles.toLocaleString()} mi · ${trip.durationHours.toFixed(1)}h</span>
     `;
     wrap.appendChild(sumRow);
@@ -465,7 +540,7 @@
 
           ${corridor.fopaRequired ? `
             <div class="fpr-shield__fopa-box">
-              <div class="fpr-shield__fopa-title">⚠️ FOPA Transport Required (18 U.S.C. § 926A)</div>
+              <div class="fpr-shield__fopa-title">${iconSpan('warning', 14)} FOPA Transport Required (18 U.S.C. § 926A)</div>
               <ul class="fpr-shield__fopa-list">
                 ${FOPA_RULES.map(r => `<li>${esc(r)}</li>`).join('')}
               </ul>
@@ -474,8 +549,8 @@
 
           <div class="fpr-shield__action-list">
             ${actions.map(a => {
-              const cls = a.startsWith('⛔') ? '--critical' : a.startsWith('⚠️') ? '--warn' : '';
-              return `<div class="fpr-shield__action-item ${cls}">${esc(a)}</div>`;
+              const cls = getActionClass(a);
+              return `<div class="fpr-shield__action-item ${cls}">${getActionIcon(a)}<span>${esc(cleanActionText(a))}</span></div>`;
             }).join('')}
           </div>
           <div class="fpr-shield__disclaimer" style="margin-top:10px;font-size:11px">${DISCLAIMER}</div>
@@ -508,7 +583,11 @@
 
     const shareRow = el('div');
     shareRow.style.cssText = 'padding:8px 16px 16px;display:flex;justify-content:flex-end';
-    shareRow.innerHTML = '<button onclick="FPRShare.open(\'Share Your Route\')" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share Your Route</button>';
+    shareRow.innerHTML = `<button id="fpr-share-route" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">${iconSpan('share', 14)}Share Your Route</button>`;
+    shareRow.querySelector('#fpr-share-route')?.addEventListener('click', () => {
+      if (window.FPRShare?.open) window.FPRShare.open('Share Your Route');
+      else showToast('Sharing is unavailable on this page.', 'blue');
+    });
     wrap.appendChild(shareRow);
 
     return wrap;
@@ -526,8 +605,8 @@
         <div id="fpr-permits-display" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
           ${permits.map((p, i) => `
             <div class="fpr-shield__permit-tag">
-              🛡 ${esc(p.state)} ${esc(p.permit_type || 'resident')}
-              <span class="fpr-shield__permit-tag-remove" data-remove-permit="${i}">✕</span>
+              ${iconSpan('shield', 12)} ${esc(p.state)} ${esc(p.permit_type || 'resident')}
+              <span class="fpr-shield__permit-tag-remove" data-remove-permit="${i}" aria-label="Remove permit">${IC.x}</span>
             </div>
           `).join('')}
           ${!permits.length ? '<span style="font-size:12px;color:var(--fpr-gray-400)">No permits added</span>' : ''}
@@ -558,7 +637,7 @@
       <div class="fpr-shield__section-title" style="margin-top:14px">Travel Firearm</div>
       ${state.firearms.map(f => `
         <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--fpr-gray-50);border-radius:8px;margin-bottom:8px;font-size:13px">
-          <span style="font-size:20px">🔫</span>
+          <span style="width:22px;height:22px;color:var(--fpr-navy);display:flex">${IC.gun}</span>
           <div style="flex:1">
             <strong>${esc(f.make)} ${esc(f.model)}</strong>
             <div style="color:var(--fpr-gray-400);font-size:11px">${esc(f.caliber)} · ${f.magazine_capacity}rd std capacity · ${esc(f.firearm_type)}</div>
@@ -683,18 +762,23 @@
         }),
       });
 
-      if (!data?.tripId) throw new Error('Analysis failed — check API connection.');
+      if (!data?.tripId) throw new Error('Analysis failed - check API connection.');
 
       state.activeTrip = data;
       state.view = 'alerts';
-      window.fprAwardTicket('route_analyzed', {});
+      if (typeof window.fprAwardTicket === 'function') window.fprAwardTicket('route_analyzed', {});
       render();
       updateMapWithTrip(data);
     } catch (err) {
-      showToast('Analysis error: ' + err.message, 'red');
-      state.view = 'planner';
+      state.activeTrip = buildFallbackTrip(origin, dest, err.message);
+      state.view = 'alerts';
+      showToast('Live routing is unavailable, so an offline review route was loaded. Verify before travel.', 'red');
+      render();
+      updateMapWithTrip(state.activeTrip);
     } finally {
       state.analyzing = false;
+      render();
+      if (state.activeTrip) updateMapWithTrip(state.activeTrip);
     }
   }
 
@@ -765,7 +849,7 @@
       });
       const marker = L.marker([c.entryLat, c.entryLng], { icon })
         .addTo(state.map)
-        .bindPopup(`<strong>${esc(c.stateName || c.state_name)}</strong><br>${esc(c.overallStatus === 'red' ? '⛔ FOPA Required' : c.overallStatus === 'orange' ? '⚠️ Restricted' : c.overallStatus === 'yellow' ? '⚠️ Caution' : '✅ Clear')}<br><small>${DISCLAIMER}</small>`, { maxWidth: 280 });
+        .bindPopup(`<strong>${esc(c.stateName || c.state_name)}</strong><br>${esc(statusLabel(c.overallStatus || c.overall_status))}<br><small>${DISCLAIMER}</small>`, { maxWidth: 280 });
 
       marker.on('click', () => updateMapInfo(c));
       state.markerLayers.push(marker);
@@ -802,9 +886,9 @@
     const info = state.root.querySelector('#fpr-map-info-text');
     if (!info) return;
     const color = corridor.overallStatus || corridor.overall_status || 'green';
-    const label = { green: '✅ Clear to carry', yellow: '⚠️ Caution — see details', orange: '⚠️ Restricted', red: '⛔ FOPA Required — disarm before entry' }[color] || '';
+    const label = { green: 'Clear to carry', yellow: 'Caution - see details', orange: 'Restricted', red: 'FOPA Required - disarm before entry' }[color] || '';
     info.className = 'fpr-shield__map-info-text';
-    info.innerHTML = `<strong style="color:${COMPLY_COLORS[color]}">${esc(corridor.stateName || corridor.state_name)}: ${label}</strong><br><span style="font-size:11px">${esc((corridor.coachingNarrative || corridor.coaching_narrative || '').slice(0, 120))}…</span>`;
+    info.innerHTML = `<strong style="color:${COMPLY_COLORS[color]}">${esc(corridor.stateName || corridor.state_name)}: ${label}</strong><br><span style="font-size:11px">${esc((corridor.coachingNarrative || corridor.coaching_narrative || '').slice(0, 120))}...</span>`;
   }
 
   // -------------------------------------------------------------------------
@@ -832,7 +916,7 @@
     // Map info strip
     const info = el('div', 'fpr-shield__map-info');
     info.innerHTML = `
-      <div class="fpr-shield__map-info-state">🛡</div>
+      <div class="fpr-shield__map-info-state">${IC.shield}</div>
       <div class="fpr-shield__map-info-text --select" id="fpr-map-info-text">Click a state marker to see compliance details</div>
     `;
     panel.appendChild(info);
@@ -858,11 +942,11 @@
     printView.innerHTML = `
       <div class="shield-print__header">
         <div class="shield-print__logo">FPR<span>Members</span>.com</div>
-        <div class="shield-print__title">🛡 Shield-Radius<br>CCW Travel Compliance Card</div>
+        <div class="shield-print__title">${iconSpan('shield', 18)} Shield-Radius<br>CCW Travel Compliance Card</div>
       </div>
 
       <div class="shield-print__trip-bar">
-        <div class="shield-print__trip-bar-item">Route: <span>${esc(trip.origin.address)}</span> → <span>${esc(trip.destination.address)}</span></div>
+        <div class="shield-print__trip-bar-item">Route: <span>${esc(trip.origin.address)}</span> to <span>${esc(trip.destination.address)}</span></div>
         <div class="shield-print__trip-bar-item">${trip.distanceMiles.toLocaleString()} mi · ${trip.durationHours.toFixed(1)}h</div>
         <div class="shield-print__trip-bar-item">Generated: <span>${generatedDate}</span></div>
       </div>
@@ -884,7 +968,7 @@
 
       ${fopaStates.length ? `
         <div class="shield-print__fopa-section">
-          <div class="shield-print__fopa-title">⚠️ FOPA Transport Required in: ${fopaStates.join(', ')}</div>
+          <div class="shield-print__fopa-title">${iconSpan('warning', 14)} FOPA Transport Required in: ${fopaStates.join(', ')}</div>
           <ul class="shield-print__fopa-rules">
             ${FOPA_RULES.map(r => `<li>${esc(r)}</li>`).join('')}
           </ul>
@@ -909,7 +993,7 @@
                 <div class="shield-print__fact">Entry: mi ${(c.entryMile || c.entry_mile || 0).toFixed(0)}</div>
               </div>
               <ul class="shield-print__state-actions">
-                ${actions.map(a => `<li>${esc(a)}</li>`).join('')}
+                ${actions.map(a => `<li>${esc(cleanActionText(a))}</li>`).join('')}
               </ul>
             </div>
           </div>
@@ -917,7 +1001,7 @@
       }).join('')}
 
       <div class="shield-print__disclaimer">
-        <div class="shield-print__disclaimer-title">⚠️ Required Disclaimer</div>
+        <div class="shield-print__disclaimer-title">${iconSpan('warning', 14)} Required Disclaimer</div>
         ${DISCLAIMER} Law data version: ${state.activeTrip?.lawVersion || 1}. Generated: ${generatedDate}. This card does not constitute legal advice. State and local laws change frequently. Verify all information against official state sources before travel.
       </div>
 
@@ -937,6 +1021,26 @@
   // -------------------------------------------------------------------------
   function el(tag, cls) { const e = document.createElement(tag); if (cls) e.className = cls; return e; }
   function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function statusLabel(color) {
+    return { green: 'Clear', yellow: 'Caution', orange: 'Restricted', red: 'FOPA Required' }[color] || 'Review';
+  }
+  function cleanActionText(text) {
+    return String(text || '')
+      .replace(/^[\u2705\u26d4\u26a0\ufe0f\u2139\ufe0f\ud83d\udea8\ud83d\udccb]\s*/u, '')
+      .trim();
+  }
+  function getActionClass(text) {
+    const raw = String(text || '');
+    if (/FOPA|Disarm|non-compliant|EXCEEDS|Required/i.test(raw) || raw.charCodeAt(0) === 0x26D4) return '--critical';
+    if (/Warning|Restriction|Duty|AWB|Verify/i.test(raw) || raw.charCodeAt(0) === 0x26A0) return '--warn';
+    return '';
+  }
+  function getActionIcon(text) {
+    const cls = getActionClass(text);
+    if (cls === '--critical' || cls === '--warn') return iconSpan('warning', 13);
+    if (/Inform|Note|Verify/i.test(String(text || ''))) return iconSpan('info', 13);
+    return iconSpan('check', 13);
+  }
 
   function showToast(msg, type = 'blue') {
     let wrap = document.querySelector('.fpr-shield__toast-wrap');
@@ -949,9 +1053,13 @@
   }
 
   async function loadProfile() {
-    const data = await api(`/api/shield/member/${state.memberId}/profile`);
-    if (data?.profile) { state.profile = { ...state.profile, ...data.profile, ccw_permits: data.profile.ccw_permits || [] }; }
-    if (data?.firearms?.length) state.firearms = data.firearms;
+    try {
+      const data = await api(`/api/shield/member/${state.memberId}/profile`, { timeout: 20000 });
+      if (data?.profile) { state.profile = { ...state.profile, ...data.profile, ccw_permits: data.profile.ccw_permits || [] }; }
+      if (data?.firearms?.length) state.firearms = data.firearms;
+    } catch (err) {
+      showToast('Profile API unavailable; demo profile is loaded for this session.', 'blue');
+    }
   }
 
   // -------------------------------------------------------------------------
