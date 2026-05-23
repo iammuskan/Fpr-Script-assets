@@ -286,8 +286,17 @@
         signal: controller.signal,
       });
       const data = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(data?.error || `Request failed (${r.status})`);
+      if (!r.ok) {
+        const err = new Error(data?.error || `Request failed (${r.status})`);
+        err.status = r.status;
+        err.data = data;
+        if (opts.silent) return null;
+        throw err;
+      }
       return data;
+    } catch (err) {
+      if (opts.silent) return null;
+      throw err;
     } finally {
       clearTimeout(timeout);
     }
@@ -307,7 +316,7 @@
 
   function hasUsableMemberId() {
     const id = String(state.memberId || '').trim();
-    return !!id && !/^(MEMBER_ID_VAR|member_id_var|demo-member|preview-member|undefined|null)$/i.test(id);
+    return !!id && !/(^MEMBER_ID_VAR$|_VAR$|{{|}}|undefined|null|demo-member|preview-member)/i.test(id);
   }
 
   function canUseLiveApi() {
@@ -872,15 +881,24 @@
       attributionControl: true,
     });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
       maxZoom: 18,
-    }).addTo(state.map);
+    });
+    let tilesReady = false;
+    tileLayer.on('load', () => { tilesReady = true; });
+    tileLayer.on('tileerror', () => {
+      if (!tilesReady && state.activeTrip) showRouteOverview(state.activeTrip, 'Map tiles are blocked or unavailable.');
+    });
+    tileLayer.addTo(state.map);
 
     if (state.activeTrip) updateMapWithTrip(state.activeTrip);
     setTimeout(() => {
       try { state.map.invalidateSize(true); } catch {}
     }, 120);
+    setTimeout(() => {
+      if (!tilesReady && state.activeTrip) showRouteOverview(state.activeTrip, 'Map tiles are taking too long to load.');
+    }, 4500);
   }
 
   function reinitMap() {
@@ -977,6 +995,32 @@
           <strong>Map could not load</strong>
           <span>${esc(message)} Check that Leaflet is allowed to load on this page.</span>
         </div>
+      </div>
+    `;
+  }
+
+  function showRouteOverview(trip, message) {
+    const container = state.root?.querySelector('#fpr-map-container');
+    if (!container || container.querySelector('.leaflet-tile-loaded')) return;
+    const corridors = trip?.corridors || [];
+    const states = corridors.length ? corridors : [{ stateCode: 'ROUTE', stateName: 'Route', overallStatus: 'green' }];
+    container.innerHTML = `
+      <div class="fpr-shield__route-overview">
+        <div class="fpr-shield__route-overview-head">
+          <strong>${esc(trip?.origin?.address || 'Origin')}</strong>
+          <span>to</span>
+          <strong>${esc(trip?.destination?.address || 'Destination')}</strong>
+        </div>
+        <div class="fpr-shield__route-overview-line">
+          ${states.map(c => {
+            const color = c.overallStatus || c.overall_status || 'green';
+            return `<div class="fpr-shield__route-overview-state --${color}">
+              <span>${esc(c.stateCode || c.state_code || '')}</span>
+              <small>${esc(statusLabel(color))}</small>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="fpr-shield__route-overview-note">${esc(message || 'Interactive map unavailable; route overview is shown.')}</div>
       </div>
     `;
   }
@@ -1187,7 +1231,7 @@
   async function loadProfile() {
     if (!canUseLiveApi()) return;
     try {
-      const data = await api(`/api/shield/member/${state.memberId}/profile`, { timeout: 20000 });
+      const data = await api(`/api/shield/member/${state.memberId}/profile`, { timeout: 20000, silent: true });
       if (data?.profile) { state.profile = { ...state.profile, ...data.profile, ccw_permits: data.profile.ccw_permits || [] }; }
       if (data?.firearms?.length) state.firearms = data.firearms;
     } catch (err) {
@@ -1203,6 +1247,10 @@
     state.apiUrl     = (root.dataset.apiUrl || '').replace(/\/$/, '');
     state.memberId   = root.dataset.memberId   || 'demo-member';
     state.memberName = root.dataset.memberName || 'Demo Member';
+    if (!hasUsableMemberId()) {
+      state.memberId = 'demo-member';
+      root.dataset.memberId = 'demo-member';
+    }
     root.classList.add('fpr-shield');
 
     render();
