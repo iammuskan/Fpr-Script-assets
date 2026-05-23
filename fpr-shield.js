@@ -263,6 +263,7 @@
     isRoundTrip: false,
     analyzing: false,
     geoWatchId: null,
+    leafletLoading: null,
     root: null,
   };
 
@@ -298,11 +299,19 @@
   function render() {
     const root = state.root;
     const prev = root.querySelector('.fpr-shield__shell');
+    destroyMap();
     if (prev) prev.remove();
     root.appendChild(buildShell());
-    // Restore map after re-render
-    if (state.map) reinitMap();
-    else initMap();
+    initMap();
+  }
+
+  function hasUsableMemberId() {
+    const id = String(state.memberId || '').trim();
+    return !!id && !/^(MEMBER_ID_VAR|member_id_var|demo-member|preview-member|undefined|null)$/i.test(id);
+  }
+
+  function canUseLiveApi() {
+    return !!state.apiUrl && hasUsableMemberId();
   }
 
   function buildShell() {
@@ -585,8 +594,7 @@
     shareRow.style.cssText = 'padding:8px 16px 16px;display:flex;justify-content:flex-end';
     shareRow.innerHTML = `<button id="fpr-share-route" style="display:inline-flex;align-items:center;gap:6px;background:#E5B657;color:#0F1923;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">${iconSpan('share', 14)}Share Your Route</button>`;
     shareRow.querySelector('#fpr-share-route')?.addEventListener('click', () => {
-      if (window.FPRShare?.open) window.FPRShare.open('Share Your Route');
-      else showToast('Sharing is unavailable on this page.', 'blue');
+      shareRoute(trip);
     });
     wrap.appendChild(shareRow);
 
@@ -697,10 +705,17 @@
       if (!make || !model || !caliber || !magcap) { showToast('Fill in all firearm fields.', 'red'); return; }
 
       const newF = { id: 'local-' + Date.now(), make, model, caliber, magazine_capacity: magcap, firearm_type: ftype };
-      const data = await api(`/api/shield/member/${state.memberId}/firearms`, {
-        method: 'POST',
-        body: JSON.stringify({ make, model, caliber, firearmType: ftype, magazineCapacity: magcap }),
-      });
+      let data = null;
+      if (canUseLiveApi()) {
+        try {
+          data = await api(`/api/shield/member/${state.memberId}/firearms`, {
+            method: 'POST',
+            body: JSON.stringify({ make, model, caliber, firearmType: ftype, magazineCapacity: magcap }),
+          });
+        } catch (err) {
+          showToast('Firearm saved locally for this session; profile API is unavailable.', 'blue');
+        }
+      }
       state.firearms = data?.firearm ? [...state.firearms, data.firearm] : [...state.firearms, newF];
       showToast(`${make} ${model} added.`, 'green');
       render();
@@ -709,7 +724,7 @@
     wrap.querySelectorAll('[data-remove-firearm]').forEach(btn => {
       btn.addEventListener('click', () => {
         state.firearms = state.firearms.filter(f => f.id !== btn.dataset.removeFirearm);
-        api(`/api/shield/member/${state.memberId}/firearms/${btn.dataset.removeFirearm}`, { method: 'DELETE' });
+        if (canUseLiveApi()) api(`/api/shield/member/${state.memberId}/firearms/${btn.dataset.removeFirearm}`, { method: 'DELETE' }).catch(() => {});
         render();
       });
     });
@@ -717,10 +732,16 @@
     wrap.querySelector('#fpr-save-profile')?.addEventListener('click', async () => {
       const homeState = wrap.querySelector('#fpr-home-state')?.value;
       state.profile.home_state = homeState;
-      await api('/api/shield/profile', {
-        method: 'POST',
-        body: JSON.stringify({ memberId: state.memberId, memberName: state.memberName, homeState, ccwPermits: state.profile.ccw_permits }),
-      });
+      if (canUseLiveApi()) {
+        try {
+          await api('/api/shield/profile', {
+            method: 'POST',
+            body: JSON.stringify({ memberId: state.memberId, memberName: state.memberName, homeState, ccwPermits: state.profile.ccw_permits }),
+          });
+        } catch (err) {
+          showToast('Profile saved locally for this session; profile API is unavailable.', 'blue');
+        }
+      }
       showToast('Profile saved!', 'green');
       state.view = 'planner';
       render();
@@ -736,15 +757,16 @@
     state.analyzing = true;
     render();
 
-    if (!state.apiUrl) {
-      // Demo mode — show the pre-loaded demo trip
-      await new Promise(r => setTimeout(r, 1500));
-      state.activeTrip = { ...DEMO_TRIP, origin: { address: origin, lat: 33.45, lng: -112.07 }, destination: { address: dest, lat: 38.90, lng: -77.04 } };
+    if (!canUseLiveApi()) {
+      await new Promise(r => setTimeout(r, 500));
+      state.activeTrip = state.apiUrl
+        ? buildFallbackTrip(origin, dest, 'Member ID is not connected yet.')
+        : { ...DEMO_TRIP, origin: { address: origin, lat: 33.45, lng: -112.07 }, destination: { address: dest, lat: 38.90, lng: -77.04 } };
       state.analyzing = false;
       state.view = 'alerts';
       render();
       updateMapWithTrip(state.activeTrip);
-      showToast('Demo analysis loaded. Connect API for live routing.', 'blue');
+      showToast(state.apiUrl ? 'Preview member ID detected; offline review route loaded.' : 'Demo analysis loaded. Connect API for live routing.', 'blue');
       return;
     }
 
@@ -785,9 +807,63 @@
   // -------------------------------------------------------------------------
   // Leaflet Map
   // -------------------------------------------------------------------------
+  function ensureLeaflet() {
+    if (window.L) return Promise.resolve();
+    if (state.leafletLoading) return state.leafletLoading;
+
+    state.leafletLoading = new Promise((resolve, reject) => {
+      if (!document.querySelector('link[data-fpr-leaflet-css]')) {
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        css.setAttribute('data-fpr-leaflet-css', 'true');
+        document.head.appendChild(css);
+      }
+
+      const existing = document.querySelector('script[data-fpr-leaflet-js], script[src*="leaflet"]');
+      if (existing) {
+        existing.addEventListener('load', resolve, { once: true });
+        existing.addEventListener('error', reject, { once: true });
+        setTimeout(() => window.L ? resolve() : reject(new Error('Leaflet did not initialize.')), 6000);
+        return;
+      }
+
+      const js = document.createElement('script');
+      js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      js.async = true;
+      js.setAttribute('data-fpr-leaflet-js', 'true');
+      js.onload = resolve;
+      js.onerror = () => reject(new Error('Leaflet failed to load.'));
+      document.head.appendChild(js);
+    }).catch(err => {
+      showMapFallback(err.message || 'Map library failed to load.');
+      throw err;
+    });
+
+    return state.leafletLoading;
+  }
+
+  function destroyMap() {
+    if (!state.map) return;
+    try { state.map.remove(); } catch {}
+    state.map = null;
+    state.routeLayer = null;
+    state.markerLayers = [];
+  }
+
   function initMap() {
     const container = state.root.querySelector('#fpr-map-container');
-    if (!container || !window.L) return;
+    if (!container) return;
+    if (!window.L) {
+      ensureLeaflet()
+        .then(() => initMap())
+        .catch(() => {});
+      return;
+    }
+    if (state.map) {
+      setTimeout(() => state.map.invalidateSize(true), 80);
+      return;
+    }
 
     state.map = L.map(container, {
       center:          [38.5, -97],
@@ -802,6 +878,9 @@
     }).addTo(state.map);
 
     if (state.activeTrip) updateMapWithTrip(state.activeTrip);
+    setTimeout(() => {
+      try { state.map.invalidateSize(true); } catch {}
+    }, 120);
   }
 
   function reinitMap() {
@@ -810,7 +889,10 @@
   }
 
   function updateMapWithTrip(trip) {
-    if (!state.map || !window.L) return;
+    if (!state.map || !window.L) {
+      initMap();
+      return;
+    }
 
     // Clear existing layers
     state.markerLayers.forEach(l => state.map.removeLayer(l));
@@ -880,6 +962,23 @@
       try { state.map.fitBounds(L.latLngBounds(bounds), { padding: [30, 30] }); }
       catch {}
     }
+    setTimeout(() => {
+      try { state.map.invalidateSize(true); } catch {}
+    }, 80);
+  }
+
+  function showMapFallback(message) {
+    const container = state.root?.querySelector('#fpr-map-container');
+    if (!container) return;
+    container.innerHTML = `
+      <div class="fpr-shield__map-fallback">
+        <div class="fpr-shield__map-fallback-icon">${IC.map}</div>
+        <div>
+          <strong>Map could not load</strong>
+          <span>${esc(message)} Check that Leaflet is allowed to load on this page.</span>
+        </div>
+      </div>
+    `;
   }
 
   function updateMapInfo(corridor) {
@@ -1052,7 +1151,41 @@
     setTimeout(() => { t.classList.add('--out'); setTimeout(() => t.remove(), 300); }, 4200);
   }
 
+  async function shareRoute(trip) {
+    const title = 'Shield-Radius Route';
+    const from = trip?.origin?.address || state.originInput || 'Origin';
+    const to = trip?.destination?.address || state.destInput || 'Destination';
+    const text = `Shield-Radius compliance route: ${from} to ${to}`;
+    const url = window.location.href;
+
+    try {
+      if (window.FPRShare?.open) {
+        window.FPRShare.open('Share Your Route');
+        return;
+      }
+    } catch {}
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text, url });
+        if (typeof window.fprAwardTicket === 'function') window.fprAwardTicket('route_shared', { source: 'native' });
+        return;
+      }
+    } catch (err) {
+      if (err?.name === 'AbortError') return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(`${text}\n${url}`);
+      showToast('Route share link copied.', 'green');
+      if (typeof window.fprAwardTicket === 'function') window.fprAwardTicket('route_shared', { source: 'clipboard' });
+    } catch {
+      showToast('Share is unavailable in this browser. Copy the page URL to share this route.', 'blue');
+    }
+  }
+
   async function loadProfile() {
+    if (!canUseLiveApi()) return;
     try {
       const data = await api(`/api/shield/member/${state.memberId}/profile`, { timeout: 20000 });
       if (data?.profile) { state.profile = { ...state.profile, ...data.profile, ccw_permits: data.profile.ccw_permits || [] }; }
