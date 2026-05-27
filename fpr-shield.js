@@ -15,7 +15,7 @@
 (function () {
   'use strict';
 
-  const DISCLAIMER = 'For informational purposes only. Laws change frequently. Always verify current laws before traveling. This is not legal advice. Consult a qualified firearms attorney for guidance specific to your situation.';
+  const DISCLAIMER = 'For informational purposes only. Not legal advice. Laws change frequently. Always verify current laws before traveling. Consult a qualified firearms attorney for guidance specific to your situation.';
 
   const COMPLY_COLORS = { green: '#15803D', yellow: '#D97706', orange: '#EA580C', red: '#B91C1C' };
   const COMPLY_FILLS  = { green: 'rgba(21,128,61,.15)', yellow: 'rgba(217,119,6,.15)', orange: 'rgba(234,88,12,.15)', red: 'rgba(185,28,28,.18)' };
@@ -262,6 +262,7 @@
     travelDate: '',
     isRoundTrip: false,
     analyzing: false,
+    errorMessage: null,
     geoWatchId: null,
     leafletLoading: null,
     root: null,
@@ -401,6 +402,7 @@
 
     wrap.innerHTML = `
       <div class="fpr-shield__section-title" style="margin-bottom:14px">Plan Your Route</div>
+      ${state.errorMessage ? `<div class="fpr-shield__alert-box --error">${esc(state.errorMessage)}</div>` : ''}
 
       <div class="fpr-shield__route-input">
         <div class="fpr-shield__route-dot --origin"></div>
@@ -519,6 +521,12 @@
     wrap.appendChild(summBar);
 
     // Trip summary row
+    if (state.errorMessage) {
+      const errorRow = el('div', 'fpr-shield__alert-box --error');
+      errorRow.textContent = state.errorMessage;
+      wrap.appendChild(errorRow);
+    }
+
     const sumRow = el('div');
     sumRow.style.cssText = 'padding:12px 16px;font-size:12px;color:var(--fpr-gray-500);border-bottom:1px solid var(--fpr-gray-100);display:flex;justify-content:space-between;gap:8px';
     sumRow.innerHTML = `
@@ -764,6 +772,7 @@
   // -------------------------------------------------------------------------
   async function analyzeTrip(origin, dest) {
     state.analyzing = true;
+    state.errorMessage = null;
     render();
 
     if (!canUseLiveApi()) {
@@ -771,6 +780,7 @@
       state.activeTrip = state.apiUrl
         ? buildFallbackTrip(origin, dest, 'Member ID is not connected yet.')
         : { ...DEMO_TRIP, origin: { address: origin, lat: 33.45, lng: -112.07 }, destination: { address: dest, lat: 38.90, lng: -77.04 } };
+      state.errorMessage = state.apiUrl ? 'Live API unavailable: Member ID is not connected.' : null;
       state.analyzing = false;
       state.view = 'alerts';
       render();
@@ -796,14 +806,16 @@
       if (!data?.tripId) throw new Error('Analysis failed - check API connection.');
 
       state.activeTrip = data;
+      state.errorMessage = null;
       state.view = 'alerts';
       if (typeof window.fprAwardTicket === 'function') window.fprAwardTicket('route_analyzed', {});
       render();
       updateMapWithTrip(data);
     } catch (err) {
-      state.activeTrip = buildFallbackTrip(origin, dest, err.message);
+      state.errorMessage = err?.message || 'Live routing is unavailable.';
+      state.activeTrip = buildFallbackTrip(origin, dest, state.errorMessage);
       state.view = 'alerts';
-      showToast('Live routing is unavailable, so an offline review route was loaded. Verify before travel.', 'red');
+      showToast(`Live routing unavailable: ${state.errorMessage}`, 'red');
       render();
       updateMapWithTrip(state.activeTrip);
     } finally {
@@ -1028,6 +1040,11 @@
   function updateMapInfo(corridor) {
     const info = state.root.querySelector('#fpr-map-info-text');
     if (!info) return;
+    if (!corridor) {
+      info.className = 'fpr-shield__map-info-text --select';
+      info.innerHTML = 'Click a state marker to see compliance details on the map.';
+      return;
+    }
     const color = corridor.overallStatus || corridor.overall_status || 'green';
     const label = { green: 'Clear to carry', yellow: 'Caution - see details', orange: 'Restricted', red: 'FOPA Required - disarm before entry' }[color] || '';
     info.className = 'fpr-shield__map-info-text';
