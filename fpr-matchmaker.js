@@ -18,6 +18,9 @@ var FPRMatchmaker = window.FPRMatchmaker || (() => {
   let _handAnalysis = null;
   let _recommendation = null;
   let _history  = [];
+  let _toastMessage = '';
+  let _toastTimer = null;
+  let _pricingUrl = '';
   let _demoMode = true;
 
   // ─── DEMO DATA ──────────────────────────────────────────────────────────────
@@ -183,6 +186,13 @@ var FPRMatchmaker = window.FPRMatchmaker || (() => {
       rr(W-24, H/2-6, 24, 12, 3); ctx.fill();          // muzzle
       ctx.fillStyle = '#4B5563';
       rr(8, H/2-10, 40, 30, 4); ctx.fill();             // stock area
+
+      const gripRGB = scoreRGB(scores.grip_fit);
+      ctx.fillStyle = `rgba(${gripRGB},0.25)`;
+      rr(10, H/2-8, 20, 24, 4); ctx.fill();            // long gun grip fit overlay
+      ctx.font = 'bold 9px Inter, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillStyle = `rgb(${gripRGB})`;
+      ctx.fillText('Grip Fit', 20, H/2 + 28);
 
       // Bore axis line
       const boreRGB = scoreRGB(scores.bore_axis);
@@ -741,6 +751,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
               <button class="fpr-mm-btn-outline" style="font-size:11px;padding:5px 10px" data-action="${n.action}">${n.label}</button>`).join('')}
           </div>` : `<span class="fpr-mm-topbar-badge">Biometric Fitment Engine</span>`}
       </div>
+      ${_toastMessage ? `<div class="fpr-mm-toast">${_toastMessage}</div>` : ''}
       <div class="fpr-mm-body" id="mm-body">${content()}</div>
     </div>`;
 
@@ -769,6 +780,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
     const fileInput = body.querySelector('#mm-hand-file');
     if (fileInput) fileInput.addEventListener('change', e => {
       _handFile = e.target.files[0] || null;
+      if (_handFile) showToast(`Hand photo uploaded: ${_handFile.name}`);
       render();
     });
   }
@@ -791,6 +803,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
       case 'run-recommendation': handleRunRecommendation(); break;
       case 'show-rec':         if (_recommendation) { _view = 'recommendation'; render(); } break;
       case 'show-history':     handleShowHistory(); break;
+      case 'view-rec':         handleViewHistoryRec(btn.dataset.id); break;
       case 'restart':          _view = 'welcome'; _recommendation = null; _handFile = null; render(); break;
       case 'see-pricing':      handleSeePricing(btn); break;
       case 'feedback':         handleFeedback(btn.dataset.value); break;
@@ -825,6 +838,20 @@ Finding the right fit changes everything — comfort, confidence, and control   
     if (notes) _profile.physical_notes = notes.value;
   }
 
+  function showToast(message) {
+    if (!message) return;
+    _toastMessage = message;
+    render();
+    if (_toastTimer) {
+      window.clearTimeout(_toastTimer);
+    }
+    _toastTimer = window.setTimeout(() => {
+      _toastMessage = '';
+      _toastTimer = null;
+      render();
+    }, 3200);
+  }
+
   async function handleRunRecommendation() {
     _view = 'analyzing';
     render();
@@ -837,8 +864,18 @@ Finding the right fit changes everything — comfort, confidence, and control   
       markStep('step-score', 'done');
       markStep('step-ai', 'active');
       await delay(900);
-      _recommendation = { ...DEMO.recommendation, scores: { ...DEMO.recommendation.scores } };
+      const recId = `demo-${Date.now()}`;
+      _recommendation = { ...DEMO.recommendation, scores: { ...DEMO.recommendation.scores }, id: recId };
       _handAnalysis   = DEMO.handAnalysis;
+      _history = [{
+        id: recId,
+        gun_make: _recommendation.gun.make,
+        gun_model: _recommendation.gun.model,
+        overall_compatibility: _recommendation.overall_compatibility,
+        match_tier: _recommendation.match_tier,
+        generated_at: new Date().toISOString(),
+        recommendation: _recommendation,
+      }];
       _view = 'recommendation';
       awardTicket('match_generated', {});
       render();
@@ -858,7 +895,11 @@ Finding the right fit changes everything — comfort, confidence, and control   
         const res = await fetch(`${_api}/api/matchmaker/member/${_memberId}/analyze-hand`, {
           method: 'POST', body: formData,
         });
-        if (res.ok) { const d = await res.json(); _handAnalysis = d.analysis; }
+        if (res.ok) {
+          const d = await res.json();
+          _handAnalysis = d.analysis;
+          showToast('Hand photo analyzed — biometric measurements are ready.');
+        }
         markStep('step-hand', 'done');
       }
 
@@ -878,7 +919,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
         <span class="fpr-mm-empty-icon">${icon('alert')}</span>
         <div style="font-size:15px;font-weight:700">Match failed</div>
         <div style="font-size:13px;color:#6B7684;margin-top:6px">${err.message}</div>
-        <button class="fpr-mm-btn fpr-mm-btn-secondary" data-action="step1" style="margin-top:16px">Try Again</button>
+        <button class="fpr-mm-btn fpr-mm-btn-secondary" data-action="restart" style="margin-top:16px">Try Again</button>
       </div>`;
     }
   }
@@ -894,16 +935,46 @@ Finding the right fit changes everything — comfort, confidence, and control   
     render();
   }
 
+  async function handleViewHistoryRec(id) {
+    if (!id) return;
+
+    if (_demoMode) {
+      const item = _history.find(r => r.id === id);
+      if (item) {
+        _recommendation = item.recommendation || { ...item, gun: item.gun || { make: item.gun_make, model: item.gun_model }, scores: item.scores || {} };
+        _view = 'recommendation';
+        render();
+      }
+      return;
+    }
+
+    try {
+      const d = await apiGet(`/api/matchmaker/recommendation/${id}`);
+      _recommendation = d.recommendation || _recommendation;
+      _view = 'recommendation';
+      render();
+    } catch (err) {
+      console.warn('[FPRMatchmaker] Could not load recommendation:', err);
+      showToast('Unable to open this match. Please try again later.');
+    }
+  }
+
   function handleSeePricing(btn) {
     const gunName = btn.dataset.gunName || 'this firearm';
+    const pricingUrl = btn.dataset.pricingUrl || _pricingUrl;
+
     if (!_demoMode) {
       apiPost(`/api/matchmaker/member/${_memberId}/behavior`, {
         event_type: 'add_to_cart', gun_id: btn.dataset.gunId,
         recommendation_id: _recommendation?.id,
       }).catch(() => {});
     }
-    // In production, navigate to the dealer pricing/cart page.
-    // In demo mode, show an informational alert.
+
+    if (pricingUrl) {
+      window.open(pricingUrl, '_blank');
+      return;
+    }
+
     alert(`Pricing for the ${gunName} is available through your FPR dealer.\n\nThis would navigate to the member pricing page where MAP-compliant pricing is displayed.`);
   }
 
@@ -992,6 +1063,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
 
     _el         = el;
     _api        = normalizeApiUrl(el.dataset.apiUrl);
+    _pricingUrl = normalizeApiUrl(el.dataset.pricingUrl);
     _memberId   = el.dataset.memberId   || 'preview-member';
     _memberName = el.dataset.memberName || 'Demo Member';
     _demoMode   = !_api;
