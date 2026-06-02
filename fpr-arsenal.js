@@ -272,6 +272,7 @@ const FPRArsenalIQ = (() => {
 
   // ─── VIEWS ──────────────────────────────────────────────────────────────────
   function renderWelcome() {
+    const hasSavedScoreOnly = _iq && Array.isArray(_iq.gaps) && _iq.gaps.length === 0 && Array.isArray(_iq.priorities) && _iq.priorities.length === 0 && !_analysis;
     return `<div class="fpr-iq-welcome">
       <div class="fpr-iq-welcome-icon">🔫</div>
       <h1 class="fpr-iq-welcome-title">Arsenal IQ™</h1>
@@ -302,7 +303,7 @@ const FPRArsenalIQ = (() => {
           <div class="fpr-iq-mode-time">⏱ ~5 minutes</div>
         </div>
       </div>
-      ${_iq ? `<button class="fpr-iq-btn fpr-iq-btn-outline" data-action="show-dashboard">View My Current Score (${_iq.total_score}/100) →</button>` : ''}
+      ${_iq ? `<button class="fpr-iq-btn fpr-iq-btn-outline" ${hasSavedScoreOnly ? 'disabled style="opacity:.45;cursor:not-allowed"' : ''} data-action="show-dashboard">View My Current Score (${_iq.total_score}/100) →</button>` : ''}
     </div>`;
   }
 
@@ -556,12 +557,15 @@ const FPRArsenalIQ = (() => {
     const iq = _iq || DEMO.iq;
     const analysis = _analysis || DEMO.analysis;
     const inv  = _inventory.length ? _inventory : DEMO.inventory;
-    const profile = Object.keys(_profile).length > 1 ? _profile : DEMO.profile;
+    const profile = Object.keys(_profile).length > 1 ? _profile : (_demoMode ? DEMO.profile : {});
     const relevantRoles = getRolesForProfile(profile);
     const coveredIds = inv.map(i => i.role_id);
     const color = tierColor(iq.score_tier);
 
-    const showSafeAlert = (profile.life_stage === 'family_young' || profile.life_stage === 'family_teen') && !profile.has_safe_storage;
+    const showSafeAlert = profile.life_stage && (profile.life_stage === 'family_young' || profile.life_stage === 'family_teen') && !profile.has_safe_storage;
+    const gapRows = Array.isArray(iq.gaps) ? iq.gaps : [];
+    const priorityRows = Array.isArray(iq.priorities) ? iq.priorities : [];
+    const noDetailedAnalysis = gapRows.length === 0 && priorityRows.length === 0;
 
     const breakdowns = [
       { label: 'Foundation',    v: iq.foundation_score,  max: 30 },
@@ -623,9 +627,9 @@ const FPRArsenalIQ = (() => {
         <div>
           <div class="fpr-iq-gaps-panel">
             <div class="fpr-iq-gaps-title">Gap Analysis — What's Missing & Why</div>
-            ${iq.gaps.length === 0
-              ? `<div style="text-align:center;padding:20px;color:#059669;font-weight:700">✓ No significant gaps identified for your current profile</div>`
-              : iq.gaps.map(gap => {
+            ${noDetailedAnalysis
+              ? `<div style="text-align:center;padding:20px;color:#0F1923;font-weight:700">Run the Full Armory Builder for detailed gap analysis.</div>`
+              : gapRows.map(gap => {
                   const narrative = (_analysis?.gap_narratives || DEMO.analysis.gap_narratives||[]).find(n=>n.role_id===gap.role_id);
                   return `<div class="fpr-iq-gap-card ${gap.priority}">
                     <div class="fpr-iq-gap-header">
@@ -954,14 +958,16 @@ const FPRArsenalIQ = (() => {
   async function loadData() {
     if (_demoMode) return;
     try {
-      const [prof, inv, score] = await Promise.all([
+      const [prof, inv, score, analysis] = await Promise.all([
         apiGet(`/api/arsenal/member/${_memberId}/profile`).catch(()=>null),
         apiGet(`/api/arsenal/member/${_memberId}/inventory`).catch(()=>({ inventory:[] })),
         apiGet(`/api/arsenal/member/${_memberId}/score`).catch(()=>null),
+        apiGet(`/api/arsenal/member/${_memberId}/analysis`).catch(()=>null),
       ]);
       if (prof?.profile)  _profile   = prof.profile;
       if (inv?.inventory) _inventory = inv.inventory;
       if (score?.score)   _iq        = { ...score.score, gaps: [], priorities: [] };
+      if (analysis?.analysis) _analysis = analysis.analysis;
     } catch { /* use demo */ }
   }
 
