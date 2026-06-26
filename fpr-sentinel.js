@@ -520,7 +520,7 @@
     const actions  = typeof brief.action_items  === 'string'
       ? JSON.parse(brief.action_items)  : (brief.action_items  || []);
 
-    window.fprAwardTicket('brief_viewed', { week: brief.brief_week || '' });
+    if (typeof window.fprAwardTicket === 'function') { window.fprAwardTicket('brief_viewed', { week: brief.brief_week || '' }); }
     const wrap = el('div', 'fpr-sentinel__brief');
     wrap.innerHTML = `
       <!-- Hero -->
