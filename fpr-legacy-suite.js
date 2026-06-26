@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    FPR Legacy Suite — Build 16
    Four-system dashboard IIFE: Forecaster · Ledger · Brain · Intel
    ============================================================ */
@@ -10,12 +10,11 @@
 
   const API_BASE = window.FPR_LEGACY_API || 'http://localhost:3016';
 
-  // ─── DEMO DATA ──────────────────────────────────────────────
   const DEMO = {
     memberId: 'member_001',
     portfolio_index: 71,
     total_market_value: 4395,
-    total_purchase_cost: 2319,  // shown separately — never as delta
+    total_purchase_cost: 2319,
     asset_count: 3,
     owned_count: 3,
     brain_opted_in: true,
@@ -105,7 +104,6 @@
     ],
   };
 
-  // ─── STATE ───────────────────────────────────────────────────
   let state = {
     activeView: 'forecaster',
     selectedAsset: null,
@@ -117,7 +115,6 @@
     brainOptedIn: true,
   };
 
-  // ─── SVG ICONS ───────────────────────────────────────────────
   const ICON = {
     chart:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
     vault:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>`,
@@ -135,7 +132,6 @@
     bell:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
   };
 
-  // ─── UTILITY ─────────────────────────────────────────────────
   function fmt(n) {
     if (n == null) return '—';
     return '$' + Math.round(n).toLocaleString();
@@ -161,7 +157,6 @@
     return 'lg-trust-none';
   }
 
-  // ─── CANVAS: COLLECTOR INDEX RING ────────────────────────────
   function drawCollectorRing(canvas, score, tier) {
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
@@ -171,7 +166,6 @@
     canvas.style.width  = size + 'px';
     canvas.style.height = size + 'px';
     ctx.scale(dpr, dpr);
-
     const cx = size / 2, cy = size / 2, r = 21;
     const tierColors = {
       elite_collector: '#F59E0B',
@@ -181,15 +175,11 @@
       declining:       '#EF4444',
     };
     const color = tierColors[tier] || '#94A3B8';
-
-    // Background ring
     ctx.beginPath();
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(255,255,255,0.08)';
     ctx.lineWidth = 5;
     ctx.stroke();
-
-    // Score arc
     const startAngle = -Math.PI / 2;
     const endAngle   = startAngle + (Math.PI * 2 * score / 100);
     ctx.beginPath();
@@ -198,8 +188,6 @@
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
     ctx.stroke();
-
-    // Score text
     ctx.fillStyle = '#fff';
     ctx.font = 'bold 13px Inter, sans-serif';
     ctx.textAlign = 'center';
@@ -207,7 +195,6 @@
     ctx.fillText(score, cx, cy);
   }
 
-  // ─── CANVAS: PROJECTION CHART ────────────────────────────────
   function drawProjectionChart(canvas, datasets, labels) {
     const ctx  = canvas.getContext('2d');
     const dpr  = window.devicePixelRatio || 1;
@@ -218,20 +205,14 @@
     canvas.style.width  = W + 'px';
     canvas.style.height = H + 'px';
     ctx.scale(dpr, dpr);
-
     const pad = { top: 20, right: 20, bottom: 30, left: 70 };
     const gW  = W - pad.left - pad.right;
     const gH  = H - pad.top  - pad.bottom;
-
-    // Find range
     const allVals = datasets.flatMap(d => d.data.map(p => p.value));
     const minV = Math.min(...allVals) * 0.92;
     const maxV = Math.max(...allVals) * 1.06;
-
     const xOf = (yr) => pad.left + (yr / 10) * gW;
     const yOf = (v)  => pad.top  + (1 - (v - minV) / (maxV - minV)) * gH;
-
-    // Grid lines
     ctx.strokeStyle = 'rgba(255,255,255,0.06)';
     ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
@@ -243,8 +224,6 @@
       ctx.textAlign = 'right';
       ctx.fillText('$' + Math.round(v).toLocaleString(), pad.left - 6, y + 3);
     }
-
-    // Year labels on x-axis
     [0, 1, 3, 5, 7, 10].forEach(yr => {
       const x = xOf(yr);
       ctx.fillStyle = 'rgba(148,163,184,0.7)';
@@ -252,25 +231,19 @@
       ctx.textAlign = 'center';
       ctx.fillText('Yr ' + yr, x, H - 4);
     });
-
-    // Dataset lines
     const colors = ['#F59E0B', '#3B82F6', '#10B981', '#7C3AED', '#F97316'];
     datasets.forEach((ds, di) => {
       const color = colors[di % colors.length];
       const pts = ds.data;
       if (!pts.length) return;
-
-      // Fill area
       ctx.beginPath();
       ctx.moveTo(xOf(pts[0].year), yOf(pts[0].value));
       pts.slice(1).forEach(p => ctx.lineTo(xOf(p.year), yOf(p.value)));
       ctx.lineTo(xOf(pts[pts.length - 1].year), pad.top + gH);
       ctx.lineTo(xOf(pts[0].year), pad.top + gH);
       ctx.closePath();
-      ctx.fillStyle = color.replace('#', 'rgba(') + ',0.06)'; // cheap approximation
+      ctx.fillStyle = color.replace('#', 'rgba(') + ',0.06)';
       ctx.fill();
-
-      // Line
       ctx.beginPath();
       ctx.moveTo(xOf(pts[0].year), yOf(pts[0].value));
       pts.slice(1).forEach(p => ctx.lineTo(xOf(p.year), yOf(p.value)));
@@ -278,8 +251,6 @@
       ctx.lineWidth = 2.5;
       ctx.lineJoin = 'round';
       ctx.stroke();
-
-      // End dot
       const last = pts[pts.length - 1];
       ctx.beginPath();
       ctx.arc(xOf(last.year), yOf(last.value), 4, 0, Math.PI * 2);
@@ -288,9 +259,11 @@
     });
   }
 
-  // ─── FORECASTER VIEW ─────────────────────────────────────────
   function renderForecaster(container, data) {
-    window.fprAwardTicket('legacy_portfolio_viewed', {});
+    /* FIX: safely call fprAwardTicket only if it exists */
+    if (typeof window.fprAwardTicket === 'function') {
+      window.fprAwardTicket('legacy_portfolio_viewed', {});
+    }
     container.innerHTML = '';
 
     const header = el('div', 'lg-section-header');
@@ -302,7 +275,6 @@
       <button class="lg-btn lg-btn-gold" id="lg-add-asset-btn">${ICON.plus} Add Firearm</button>`;
     container.appendChild(header);
 
-    // Stats row — purchase cost and market value shown as SEPARATE facts
     const stats = el('div', 'lg-stats-row');
     stats.innerHTML = `
       <div class="lg-stat-card">
@@ -328,7 +300,6 @@
       </div>`;
     container.appendChild(stats);
 
-    // Portfolio chart (combined)
     const portfolioChartData = data.portfolio.filter(a => a.valuation);
     if (portfolioChartData.length) {
       const chartWrap = el('div', 'lg-chart-wrap');
@@ -346,7 +317,6 @@
           data: a.valuation.chart_data,
         }));
         drawProjectionChart(canvas, datasets, []);
-
         const legend = document.getElementById('lg-portfolio-legend');
         const colors = ['#F59E0B', '#3B82F6', '#10B981'];
         portfolioChartData.forEach((a, i) => {
@@ -357,7 +327,6 @@
       });
     }
 
-    // Asset cards grid
     const grid = el('div', 'lg-portfolio-grid');
     data.portfolio.forEach(asset => {
       const card = el('div', 'lg-asset-card');
@@ -373,7 +342,6 @@
           </div>
           <canvas class="lg-collector-ring" id="ring-${asset.id}"></canvas>
         </div>
-
         <div class="lg-asset-values">
           <div class="lg-value-block">
             <div class="lg-value-label">Secondary Market Value</div>
@@ -386,7 +354,6 @@
             <div class="lg-value-sub">${fmtDate(asset.purchase_date)}</div>
           </div>
         </div>
-
         <div class="lg-asset-footer">
           <div class="lg-trust-bar-wrap">
             <div class="lg-trust-bar-label">
@@ -419,7 +386,6 @@
     document.getElementById('lg-add-asset-btn')?.addEventListener('click', () => openAddAssetModal());
   }
 
-  // ─── ASSET DETAIL MODAL ───────────────────────────────────────
   function showAssetDetail(asset) {
     const v = asset.valuation;
     const overlay = el('div', 'lg-modal-overlay');
@@ -448,7 +414,6 @@
               <div class="lg-stat-sub">Auction transaction volume</div>
             </div>
           </div>
-
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
             <div>
               <div class="lg-stat-label" style="margin-bottom:8px">Secondary Market Value</div>
@@ -461,7 +426,6 @@
               <div style="font-size:11px;color:var(--lg-slate);margin-top:2px">${fmtDate(asset.purchase_date)} · separate from market value</div>
             </div>
           </div>
-
           <div style="margin-bottom:20px">
             <div class="lg-chart-title" style="margin-bottom:4px">10-Year Projection</div>
             <div class="lg-chart-sub" style="margin-bottom:12px">Secondary market estimates based on historical auction data and rarity signals</div>
@@ -474,15 +438,13 @@
             </div>
             <canvas id="lg-detail-chart" style="width:100%;height:160px;display:block"></canvas>
           </div>
-
           <div style="background:var(--lg-navy);border:1px solid var(--lg-navy-light);border-radius:8px;padding:14px;margin-bottom:16px">
             <div style="font-size:12px;font-weight:700;color:var(--lg-gold);margin-bottom:6px">ANALYST SUMMARY</div>
             <div style="font-size:13px;color:var(--lg-gray-200);line-height:1.55">${esc(v.valuation_reasoning || '')}</div>
           </div>
-
           <div style="font-size:12px;color:var(--lg-gold);font-weight:600;padding:8px 12px;background:rgba(217,119,6,0.07);border-radius:6px">
             ${ICON.chart} Optimal Sell Window: ${esc(v.optimal_sell_window || '')}
-          </div>` : '<div class="lg-empty"><p>No valuation computed yet. Click "Valuate Now" to run secondary market analysis.</p></div>'}
+          </div>` : '<div class="lg-empty"><p>No valuation computed yet.</p></div>'}
         </div>
         <div class="lg-modal-footer">
           <button class="lg-btn lg-btn-outline" id="lg-asset-modal-close2">Close</button>
@@ -491,14 +453,12 @@
       </div>`;
 
     document.body.appendChild(overlay);
-
     requestAnimationFrame(() => {
       if (v?.chart_data) {
         const c = document.getElementById('lg-detail-chart');
         if (c) drawProjectionChart(c, [{ label: `${asset.make} ${asset.model}`, data: v.chart_data }], []);
       }
     });
-
     const close = () => overlay.remove();
     overlay.querySelector('#lg-asset-modal-close')?.addEventListener('click', close);
     overlay.querySelector('#lg-asset-modal-close2')?.addEventListener('click', close);
@@ -508,7 +468,6 @@
     });
   }
 
-  // ─── ADD ASSET MODAL ─────────────────────────────────────────
   function openAddAssetModal() {
     const overlay = el('div', 'lg-modal-overlay');
     overlay.innerHTML = `
@@ -520,28 +479,15 @@
         <div class="lg-modal-body">
           <form class="lg-form" id="lg-add-form">
             <div class="lg-form-row">
-              <div class="lg-field">
-                <label class="lg-label">Make</label>
-                <input class="lg-input" name="make" required placeholder="Colt, Glock, Sig Sauer…">
-              </div>
-              <div class="lg-field">
-                <label class="lg-label">Model</label>
-                <input class="lg-input" name="model" required placeholder="Python, 19, P365 XL…">
-              </div>
+              <div class="lg-field"><label class="lg-label">Make</label><input class="lg-input" name="make" required placeholder="Colt, Glock, Sig Sauer…"></div>
+              <div class="lg-field"><label class="lg-label">Model</label><input class="lg-input" name="model" required placeholder="Python, 19, P365 XL…"></div>
             </div>
             <div class="lg-form-row">
-              <div class="lg-field">
-                <label class="lg-label">Caliber</label>
-                <input class="lg-input" name="caliber" placeholder=".357 Mag, 9mm…">
-              </div>
-              <div class="lg-field">
-                <label class="lg-label">Year Manufactured</label>
-                <input class="lg-input" name="year_manufactured" type="number" min="1800" max="2030" placeholder="1978">
-              </div>
+              <div class="lg-field"><label class="lg-label">Caliber</label><input class="lg-input" name="caliber" placeholder=".357 Mag, 9mm…"></div>
+              <div class="lg-field"><label class="lg-label">Year Manufactured</label><input class="lg-input" name="year_manufactured" type="number" min="1800" max="2030" placeholder="1978"></div>
             </div>
             <div class="lg-form-row">
-              <div class="lg-field">
-                <label class="lg-label">Condition</label>
+              <div class="lg-field"><label class="lg-label">Condition</label>
                 <select class="lg-select" name="condition">
                   <option value="new">New</option>
                   <option value="excellent">Excellent</option>
@@ -551,18 +497,11 @@
                   <option value="poor">Poor</option>
                 </select>
               </div>
-              <div class="lg-field">
-                <label class="lg-label">Purchase Price</label>
-                <input class="lg-input" name="purchase_price" type="number" min="0" step="0.01" placeholder="Your purchase price (stored separately)">
-              </div>
+              <div class="lg-field"><label class="lg-label">Purchase Price</label><input class="lg-input" name="purchase_price" type="number" min="0" step="0.01" placeholder="Your purchase price"></div>
             </div>
             <div class="lg-form-row">
-              <div class="lg-field">
-                <label class="lg-label">Purchase Date</label>
-                <input class="lg-input" name="purchase_date" type="date">
-              </div>
-              <div class="lg-field">
-                <label class="lg-label">Acquired From</label>
+              <div class="lg-field"><label class="lg-label">Purchase Date</label><input class="lg-input" name="purchase_date" type="date"></div>
+              <div class="lg-field"><label class="lg-label">Acquired From</label>
                 <select class="lg-select" name="acquired_from">
                   <option value="fpr">FPRMembers.com</option>
                   <option value="auction">Auction</option>
@@ -572,10 +511,7 @@
                 </select>
               </div>
             </div>
-            <div class="lg-field">
-              <label class="lg-label">Serial (Last 4 Only)</label>
-              <input class="lg-input" name="serial_masked" maxlength="4" placeholder="Last 4 digits only">
-            </div>
+            <div class="lg-field"><label class="lg-label">Serial (Last 4 Only)</label><input class="lg-input" name="serial_masked" maxlength="4" placeholder="Last 4 digits only"></div>
             <div style="font-size:11px;color:var(--lg-slate);background:var(--lg-navy);padding:10px 12px;border-radius:6px">
               All valuations use secondary market auction data only. Purchase price is stored separately and is never compared to MAP pricing.
             </div>
@@ -587,7 +523,6 @@
         </div>
       </div>`;
     document.body.appendChild(overlay);
-
     const close = () => overlay.remove();
     overlay.querySelector('#lg-add-close')?.addEventListener('click', close);
     overlay.querySelector('#lg-add-cancel')?.addEventListener('click', close);
@@ -598,7 +533,6 @@
     });
   }
 
-  // ─── LEDGER VIEW ─────────────────────────────────────────────
   function renderLedger(container, data) {
     container.innerHTML = '';
     const header = el('div', 'lg-section-header');
@@ -610,8 +544,6 @@
     container.appendChild(header);
 
     const grid = el('div', 'lg-vault-grid');
-
-    // Left: vault list
     const listCol = el('div', 'lg-vault-list');
     data.vault_assets.forEach((la, i) => {
       const item = el('div', 'lg-vault-item');
@@ -629,10 +561,8 @@
     });
     grid.appendChild(listCol);
 
-    // Right: detail
     const detailCol = el('div', 'lg-vault-detail');
     grid.appendChild(detailCol);
-
     container.appendChild(grid);
     if (data.vault_assets.length) renderVaultDetail(detailCol, data.vault_assets[0]);
   }
@@ -640,7 +570,6 @@
   function renderVaultDetail(container, la) {
     const trustWeights = { base: 10, receipt: 20, photos: 15, ballistics: 20, maintenance: 15, succession: 20 };
     const ts = la.trust_score;
-
     container.innerHTML = `
       <div class="lg-card" style="margin-bottom:16px">
         <div class="lg-card-header">
@@ -665,7 +594,6 @@
                 <span class="lg-trust-row-val" style="color:${has?'var(--lg-green)':'var(--lg-gray-400)'}">${has?'+'+w:'0'}</span>
               </div>`).join('')}
           </div>
-
           <div style="font-size:12px;font-weight:700;color:var(--lg-gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Documents (${la.documents?.length || 0})</div>
           <div class="lg-doc-grid">
             ${['receipt','photo','ballistics','maintenance_log','appraisal'].map(type => {
@@ -678,7 +606,6 @@
                 </div>`;
             }).join('')}
           </div>
-
           ${la.maintenance_logs?.length ? `
           <div style="font-size:12px;font-weight:700;color:var(--lg-gray-400);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px">Maintenance History</div>
           ${la.maintenance_logs.map(log => `
@@ -686,7 +613,6 @@
               <div style="font-weight:700;color:var(--lg-white);margin-bottom:2px">${esc(log.service_type?.replace(/_/g,' '))} · ${fmtDate(log.log_date)}</div>
               <div style="color:var(--lg-gray-400)">${log.shop_name ? esc(log.shop_name) + ' · ' : ''}${log.round_count_at_service ? log.round_count_at_service.toLocaleString() + ' rds at service' : ''}${log.cost ? ' · $' + log.cost : ''}</div>
             </div>`).join('')}` : ''}
-
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
             <button class="lg-btn lg-btn-outline lg-btn-sm" id="lg-upload-doc-btn">${ICON.upload} Upload Document</button>
             <button class="lg-btn lg-btn-outline lg-btn-sm" id="lg-add-log-btn">${ICON.plus} Maintenance Log</button>
@@ -694,7 +620,6 @@
           </div>
         </div>
       </div>
-
       ${la.succession_activated ? `
       <div class="lg-succession-panel">
         <div class="lg-succession-title">${ICON.shield} Succession Plan Active — ${esc(la.succession_state || '')}</div>
@@ -745,17 +670,10 @@
             This information is encrypted with AES-256-GCM before storage. Only you can decrypt it. FPR never has access to your beneficiary details in plaintext.
           </div>
           <form class="lg-form" id="lg-succ-form">
-            <div class="lg-field">
-              <label class="lg-label">Beneficiary Full Name</label>
-              <input class="lg-input" name="beneficiary_name" required placeholder="Full legal name">
-            </div>
-            <div class="lg-field">
-              <label class="lg-label">Beneficiary Email</label>
-              <input class="lg-input" name="beneficiary_email" type="email" required placeholder="heir@email.com">
-            </div>
+            <div class="lg-field"><label class="lg-label">Beneficiary Full Name</label><input class="lg-input" name="beneficiary_name" required placeholder="Full legal name"></div>
+            <div class="lg-field"><label class="lg-label">Beneficiary Email</label><input class="lg-input" name="beneficiary_email" type="email" required placeholder="heir@email.com"></div>
             <div class="lg-form-row">
-              <div class="lg-field">
-                <label class="lg-label">Transfer State</label>
+              <div class="lg-field"><label class="lg-label">Transfer State</label>
                 <select class="lg-select" name="succession_state">
                   <option value="TX">Texas</option>
                   <option value="FL">Florida</option>
@@ -763,10 +681,7 @@
                   <option value="OTHER">Other State</option>
                 </select>
               </div>
-              <div class="lg-field">
-                <label class="lg-label">Designated FFL (Optional)</label>
-                <input class="lg-input" name="ffl_name" placeholder="FFL dealer name">
-              </div>
+              <div class="lg-field"><label class="lg-label">Designated FFL (Optional)</label><input class="lg-input" name="ffl_name" placeholder="FFL dealer name"></div>
             </div>
           </form>
         </div>
@@ -786,7 +701,6 @@
     });
   }
 
-  // ─── COLLECTIVE BRAIN VIEW ────────────────────────────────────
   function renderBrain(container, data) {
     container.innerHTML = '';
     const header = el('div', 'lg-section-header');
@@ -811,7 +725,6 @@
       </button>`;
     container.appendChild(optBar);
 
-    // Privacy note
     const note = el('div', null);
     note.style.cssText = 'font-size:12px;color:var(--lg-slate);background:var(--lg-navy-mid);border:1px solid var(--lg-navy-light);border-radius:8px;padding:10px 14px;margin-bottom:20px;line-height:1.5';
     note.innerHTML = `Your member_id is never stored in the Collective Brain. All events are anonymized with a daily-rotating cryptographic hash before ingestion. Patterns only surface when at least 25 members share the same behavior — individual data cannot be inferred from any displayed insight.`;
@@ -848,7 +761,6 @@
     });
   }
 
-  // ─── INTEL VIEW ───────────────────────────────────────────────
   function renderIntel(container, data) {
     container.innerHTML = '';
     const header = el('div', 'lg-section-header');
@@ -860,8 +772,6 @@
     container.appendChild(header);
 
     const grid = el('div', 'lg-intel-grid');
-
-    // Messages
     const msgCol = el('div');
     const msgTitle = el('div', null);
     msgTitle.style.cssText = 'font-size:13px;font-weight:700;color:var(--lg-gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px';
@@ -870,7 +780,7 @@
 
     const msgList = el('div', 'lg-message-list');
     if (!data.intel_messages?.length) {
-      msgList.innerHTML = `<div class="lg-empty"><p>No proactive messages yet. Your Intelligence Engine is monitoring your platform behavior for relevant opportunities.</p></div>`;
+      msgList.innerHTML = `<div class="lg-empty"><p>No proactive messages yet.</p></div>`;
     } else {
       data.intel_messages.forEach(msg => {
         const card = el('div', `lg-message-card${msg.is_read === false ? ' lg-unread' : ''}`);
@@ -890,7 +800,6 @@
     msgCol.appendChild(msgList);
     grid.appendChild(msgCol);
 
-    // Signals sidebar
     const sigCol = el('div');
     const sigTitle = el('div', null);
     sigTitle.style.cssText = 'font-size:13px;font-weight:700;color:var(--lg-gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px';
@@ -911,10 +820,9 @@
         sigPanel.appendChild(card);
       });
     } else {
-      sigPanel.innerHTML = `<div class="lg-empty" style="padding:24px"><p>No active signals. Platform behavior is being monitored in the background.</p></div>`;
+      sigPanel.innerHTML = `<div class="lg-empty" style="padding:24px"><p>No active signals.</p></div>`;
     }
 
-    // MAP compliance info
     const mapNote = el('div', null);
     mapNote.style.cssText = 'margin-top:16px;background:var(--lg-navy-mid);border:1px solid var(--lg-navy-light);border-radius:8px;padding:14px';
     mapNote.innerHTML = `
@@ -929,11 +837,9 @@
     sigCol.appendChild(sigPanel);
     sigCol.appendChild(mapNote);
     grid.appendChild(sigCol);
-
     container.appendChild(grid);
   }
 
-  // ─── TOAST ───────────────────────────────────────────────────
   function showToast(msg, type = 'info') {
     const existing = document.querySelectorAll('.lg-toast');
     existing.forEach(t => t.remove());
@@ -942,13 +848,11 @@
     setTimeout(() => toast.remove(), 4000);
   }
 
-  // ─── MAIN INIT ────────────────────────────────────────────────
   function init(mountEl) {
     if (!mountEl) return;
     mountEl.classList.add('fpr-lg');
     mountEl.innerHTML = '';
 
-    // Header
     const header = el('div', 'lg-header');
     header.innerHTML = `
       <div class="lg-logo">FPR<span>Legacy</span></div>
@@ -963,7 +867,6 @@
       </nav>`;
     mountEl.appendChild(header);
 
-    // Views
     const views = {};
     ['forecaster', 'ledger', 'brain', 'intel'].forEach(name => {
       const view = el('div', `lg-view${name === 'forecaster' ? ' lg-visible' : ''}`, '');
@@ -972,7 +875,6 @@
       views[name] = view;
     });
 
-    // Tab switching
     header.querySelector('#lg-nav').addEventListener('click', e => {
       const btn = e.target.closest('.lg-nav-tab');
       if (!btn) return;
@@ -983,7 +885,6 @@
       renderView(target);
     });
 
-    // Render initial view
     renderView('forecaster');
 
     function renderView(name) {
@@ -998,7 +899,6 @@
     }
   }
 
-  // Auto-init
   function autoInit() {
     document.querySelectorAll('[data-fpr-legacy]').forEach(el => init(el));
   }
