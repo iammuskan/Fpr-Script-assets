@@ -510,7 +510,7 @@ Finding the right fit changes everything — comfort, confidence, and control   
           <ol>
             <li>Flatten your dominant hand against a neutral background, palm facing camera</li>
             <li>Spread fingers slightly — natural position, not strained</li>
-            <li>Place a credit card beside your hand for automatic scale reference</li>
+            <li>Place a quarter next to your hand for automatic scale reference</li>
             <li>Shoot in good lighting with no blur</li>
           </ol>
         </div>
