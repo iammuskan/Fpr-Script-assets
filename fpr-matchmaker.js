@@ -1,3 +1,5 @@
+
+
 /* FPRMembers.com — Build 11: AI Gun Matchmaker — Biometric Fitment Engine
    Mount: <div class="fpr-mm-mount" data-api-url="" data-member-id="" data-member-name="">
    Bootstrap: FPRMatchmaker.init(document.querySelector('.fpr-mm-mount'))
@@ -957,13 +959,9 @@ Finding the right fit changes everything — comfort, confidence, and control   
     }
   }
 
-  // ─── UPDATED: See Pricing & Availability ───────────────────────────────────
-  // Old behavior: showed an alert() explaining what it *would* do.
-  // New behavior: actually checks membership status and navigates —
-  //   - Logged-in member  -> member store (where they can search this item)
-  //   - Not a member      -> membership signup page
-  async function handleSeePricing(btn) {
+  function handleSeePricing(btn) {
     const gunName = btn.dataset.gunName || 'this firearm';
+    const pricingUrl = btn.dataset.pricingUrl || _pricingUrl;
 
     if (!_demoMode) {
       apiPost(`/api/matchmaker/member/${_memberId}/behavior`, {
@@ -972,22 +970,12 @@ Finding the right fit changes everything — comfort, confidence, and control   
       }).catch(() => {});
     }
 
-    try {
-      const memberResult = await window.$memberstackDom.getCurrentMember();
-      const isMember = memberResult && memberResult.data;
-
-      if (isMember) {
-        // Member is logged in -> take them to the member store
-        window.location.href = "https://www.fprmembers.com/member-store";
-      } else {
-        // Not a member -> take them to signup
-        window.location.href = "https://www.fprmembers.com/membership-signup";
-      }
-    } catch (err) {
-      console.error('[FPRMatchmaker] Member check failed:', err);
-      // Fail-safe: if we can't confirm membership, send to signup rather than dead-ending
-      window.location.href = "https://www.fprmembers.com/membership-signup";
+    if (pricingUrl) {
+      window.open(pricingUrl, '_blank');
+      return;
     }
+
+    alert(`Pricing for the ${gunName} is available through your FPR dealer.\n\nThis would navigate to the member pricing page where MAP-compliant pricing is displayed.`);
   }
 
   function handleFeedback(value) {
