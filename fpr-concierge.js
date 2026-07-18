@@ -44,6 +44,16 @@
   };
 
   function esc(s)  { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // Guards against unrendered Webflow CMS bindings (e.g. a data attribute
+  // that literally comes through as "{{wf_product_name}}" because the CMS
+  // field wasn't bound). Any value containing {{ ... }} is treated as
+  // "not provided" so the raw placeholder text never reaches a member.
+  function cleanVar(v) {
+    if (!v) return '';
+    if (/\{\{.*\}\}/.test(v)) return '';
+    return v;
+  }
   function fmtTime(iso) { return (iso ? new Date(iso) : new Date()).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}); }
   function fmtDate(iso) { return new Date(iso).toLocaleDateString([],{month:'short',day:'numeric'}); }
   function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; }
@@ -59,9 +69,11 @@
 
   // ─── WIDGET FACTORY ─────────────────────────────────────────────
   function createWidget(mountEl) {
-    const memberId    = mountEl.dataset.memberId    || DEMO.memberId;
-    const productSku  = mountEl.dataset.productSku  || '';
-    const productName = mountEl.dataset.productName || '';
+    const memberId    = cleanVar(mountEl.dataset.memberId)    || DEMO.memberId;
+    const memberName  = cleanVar(mountEl.dataset.memberName)  || '';
+    const productSku  = cleanVar(mountEl.dataset.productSku);
+    const productName = cleanVar(mountEl.dataset.productName);
+    const productBrand = cleanVar(mountEl.dataset.productBrand);
     const isMapCovered = mountEl.dataset.isMapCovered === 'true';
 
     let sessionId  = null;
@@ -138,7 +150,7 @@
     header.innerHTML = `
       <div class="cf-header-avatar">${ICON.star}</div>
       <div class="cf-header-info">
-        <div class="cf-header-title">FPR Concierge</div>
+        <div class="cf-header-title">FPR Concierge${memberName ? ` · ${esc(memberName)}` : ''}</div>
         <div class="cf-header-sub">Full context · ${DEMO.memberState} state laws · ${DEMO.purchaseHistory.length} purchases on file</div>
       </div>
       <div class="cf-header-actions">
@@ -373,8 +385,10 @@
       try {
         const data = await api('/api/concierge-full/session/start', 'POST', {
           member_id: memberId,
+          member_name: memberName || undefined,
           product_sku: productSku || undefined,
           product_name: productName || undefined,
+          product_brand: productBrand || undefined,
           is_map_covered: isMapCovered,
         });
         sessionId = data.session_id;
@@ -390,7 +404,8 @@
         const purchaseNote = DEMO.purchaseHistory.length
           ? ` I've got your purchase history pulled up — your P365 XL, Glock 19, and ${DEMO.purchaseHistory.length - 2} other items are on file.`
           : '';
-        addBubble('concierge', `Hey — good to see you. I'm your full FPR Concierge.${purchaseNote} I know your TX state laws, your Arsenal IQ gaps, and have the full catalog here. What can I help you with today?`);
+        const greetingName = memberName ? `Hey ${esc(memberName)}` : 'Hey';
+        addBubble('concierge', `${greetingName} — good to see you. I'm your full FPR Concierge.${purchaseNote} I know your TX state laws, your Arsenal IQ gaps, and have the full catalog here. What can I help you with today?`);
         renderQuickReplies(DEMO.quickReplies);
         sendBtn.disabled = false;
         inputEl.focus();
