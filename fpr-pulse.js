@@ -1,7 +1,7 @@
 /**
  * FPRMembers.com — Build 4: Dealer Pulse — Opportunity Signals Dashboard
  * File: fpr-pulse.js
- * Built: 2026-05-05
+ * Built: 2026-05-05 (Updated: member-detection + bell click fix)
  *
  * Paste into: Webflow Site Settings → Custom Code → before </body>
  *
@@ -24,6 +24,7 @@
     memberId:   null,
     apiUrl:     null,
     demoMode:   false,
+    isMember:   false,   // NEW — set by checkMembership() before render
     signals:    [],
     watchlist:  [],
     activeTab:  'all',
@@ -33,6 +34,8 @@
     watchedSkuIds: new Set(),
     pollInterval: null,
   };
+
+  var LOGIN_URL = 'https://www.fprmembers.com/login'; // NEW — single source of truth for the login link
 
   /* ---- Format helpers ----------------------------------------------------- */
   var _fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
@@ -51,6 +54,24 @@
 
   function escHtml(str) {
     return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  /* ---- NEW: Membership check ----------------------------------------------
+     Confirms real login status via Memberstack before we decide whether to
+     show "Log In" prompts. Previously this file never checked — it always
+     rendered "Log In" on MAP-restricted cards regardless of session state.
+  --------------------------------------------------------------------------- */
+  async function checkMembership() {
+    try {
+      if (window.$memberstackDom) {
+        var result = await window.$memberstackDom.getCurrentMember();
+        state.isMember = !!(result && result.data);
+      } else {
+        state.isMember = false;
+      }
+    } catch (err) {
+      state.isMember = false;
+    }
   }
 
   /* ---- Signal type helpers ------------------------------------------------ */
@@ -196,7 +217,18 @@
     card.dataset.deliveryId = signal.delivery_id;
     if (signal.dashboard_read_at) card.classList.add('is-read');
 
-    var loginUrl = (state.demoMode ? '#' : state.apiUrl.replace('/api','') + '/member/signals?signal=' + signal.signal_id);
+    // UPDATED: previously this always pointed to a login-style URL regardless
+    // of whether the visitor was already an authenticated member. Now it
+    // checks state.isMember (set by checkMembership()) and only sends
+    // non-members to the real login page; members go straight to the signal.
+    var ctaUrl, ctaLabel;
+    if (state.isMember) {
+      ctaUrl   = state.demoMode ? '#' : (state.apiUrl.replace('/api','') + '/member/signals?signal=' + signal.signal_id);
+      ctaLabel = 'View Details';
+    } else {
+      ctaUrl   = LOGIN_URL;
+      ctaLabel = 'Log In';
+    }
 
     card.innerHTML =
       '<div class="fpr-signal-card__inner">' +
@@ -210,10 +242,10 @@
           '</span>' +
           /* REQUIRED TEXT — verbatim per MAP rule */
           '<p class="fpr-signal-card__headline">An item on your watchlist has entered your Strategic Buy Zone.</p>' +
-          '<p class="fpr-signal-card__subtext">Log in to see availability.</p>' +
+          '<p class="fpr-signal-card__subtext">' + (state.isMember ? 'View this item for availability.' : 'Log in to see availability.') + '</p>' +
         '</div>' +
-        '<a href="' + escHtml(loginUrl) + '" class="fpr-signal-card__cta">' +
-          'Log In' +
+        '<a href="' + escHtml(ctaUrl) + '" class="fpr-signal-card__cta">' +
+          ctaLabel +
           '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
         '</a>' +
       '</div>' +
@@ -359,7 +391,7 @@
 
       /* MAP rule: never show price for MAP-restricted items */
       var priceHtml = item.is_under_map
-        ? '<span class="fpr-watchlist-item__price fpr-watchlist-item__price--hidden">Member pricing — log in</span>'
+        ? '<span class="fpr-watchlist-item__price fpr-watchlist-item__price--hidden">' + (state.isMember ? 'Member pricing available' : 'Member pricing — log in') + '</span>'
         : '<span class="fpr-watchlist-item__price">' + fmt(item.best_price) + '</span>';
 
       var signalHtml = item.unread_signals > 0
@@ -482,6 +514,26 @@
       });
     }
 
+    /* NEW: Bell click — previously had no handler at all, so clicking it did
+       nothing even though the badge showed a count. Now it scrolls the member
+       down to the signals list and surfaces unread items first so the bell
+       actually leads somewhere. */
+    var bellBtn = container.querySelector('.fpr-bell');
+    if (bellBtn) {
+      bellBtn.addEventListener('click', function () {
+        var list = container.querySelector('.fpr-signals-list');
+        if (list) {
+          list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        state.signals.sort(function (a, b) {
+          var aUnread = !a.dashboard_read_at ? 1 : 0;
+          var bUnread = !b.dashboard_read_at ? 1 : 0;
+          return bUnread - aUnread;
+        });
+        renderSignals(container);
+      });
+    }
+
     /* Delegated: dismiss + read signals */
     container.querySelector('.fpr-signals-list')?.addEventListener('click', async function (e) {
       var btn = e.target.closest('[data-action]');
@@ -588,9 +640,14 @@
     state.apiUrl   = container.dataset.apiUrl   || '';
     state.demoMode = container.dataset.demo === 'true' || !state.apiUrl;
 
-    bindEvents(container);
-    load(container);
-    startPolling(container);
+    // NEW: confirm real membership status before first render, so
+    // MAP-restricted cards and watchlist pricing correctly reflect whether
+    // the visitor is already logged in.
+    checkMembership().then(function () {
+      bindEvents(container);
+      load(container);
+      startPolling(container);
+    });
   }
 
   if (document.readyState === 'loading') {
