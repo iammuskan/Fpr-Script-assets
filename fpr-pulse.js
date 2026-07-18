@@ -632,23 +632,35 @@
     state.pollInterval = setInterval(function () { load(container); }, 90000);
   }
 
-  function init() {
-    var container = document.querySelector('.fpr-pulse');
-    if (!container) return;
+  async function init() {
+  var container = document.querySelector('.fpr-pulse');
+  if (!container) return;
 
-    state.memberId = container.dataset.memberId || 'demo-member';
-    state.apiUrl   = container.dataset.apiUrl   || '';
-    state.demoMode = container.dataset.demo === 'true' || !state.apiUrl;
+  state.apiUrl = container.dataset.apiUrl || '';
 
-    // NEW: confirm real membership status before first render, so
-    // MAP-restricted cards and watchlist pricing correctly reflect whether
-    // the visitor is already logged in.
-    checkMembership().then(function () {
-      bindEvents(container);
-      load(container);
-      startPolling(container);
-    });
+  // Fetch real member ID from Memberstack (no more "demo-member" placeholder)
+  var realMemberId = container.dataset.memberId || '';
+  if (!realMemberId || realMemberId === 'MEMBER_ID_VAR') {
+    try {
+      if (window.$memberstackDom) {
+        var result = await window.$memberstackDom.getCurrentMember();
+        if (result && result.data && result.data.id) {
+          realMemberId = result.data.id;
+        }
+      }
+    } catch (err) {
+      console.error('[FPR Pulse] Could not get member ID:', err);
+    }
   }
+
+  state.memberId = realMemberId || 'demo-member';
+  state.demoMode = !realMemberId || !state.apiUrl;
+
+  await checkMembership();
+  bindEvents(container);
+  load(container);
+  startPolling(container);
+}
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
