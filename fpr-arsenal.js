@@ -274,7 +274,7 @@ const FPRArsenalIQ = (() => {
   function renderWelcome() {
     const hasSavedScoreOnly = _iq && Array.isArray(_iq.gaps) && _iq.gaps.length === 0 && Array.isArray(_iq.priorities) && _iq.priorities.length === 0 && !_analysis;
     return `<div class="fpr-iq-welcome">
-      <div class="fpr-iq-welcome-icon">🔫</div>
+      <div class="fpr-iq-welcome-icon"><i class="ti ti-target" style="color:#1b2f4e;"></i></div>
       <h1 class="fpr-iq-welcome-title">Arsenal IQ™</h1>
       <p class="fpr-iq-welcome-sub">
         Your personalized armory readiness score. Arsenal IQ analyzes your life stage, family,
@@ -323,7 +323,7 @@ const FPRArsenalIQ = (() => {
 
       <div class="fpr-iq-section">
         <div class="fpr-iq-section-title">Current Firearm Count</div>
-        ${opts('quick_count', [['0','0️⃣','None',''],['1-2','🔫','1–2',''],['3-5','🔫🔫','3–5',''],['6+','💼','6+','']])}
+        ${opts('quick_count', [['0','0️⃣','None',''],['1-2','<i class="ti ti-pistol" style="color:#1b2f4e;"></i>','1–2',''],['3-5','<i class="ti ti-pistol" style="color:#1b2f4e;"></i><i class="ti ti-pistol" style="color:#1b2f4e;margin-left:2px;"></i>','3–5',''],['6+','💼','6+','']])}
       </div>
       <div class="fpr-iq-section">
         <div class="fpr-iq-section-title">Home Type</div>
@@ -705,7 +705,7 @@ const FPRArsenalIQ = (() => {
         <button class="fpr-iq-btn fpr-iq-btn-secondary" data-action="share-card">🔗 Generate Share Link</button>
         <button class="fpr-iq-btn fpr-iq-btn-secondary" data-action="show-dashboard">← Back to Dashboard</button>
       </div>
-      ${_shareCard?.share_url ? `<div class="fpr-iq-scorecard-share-url">${_shareCard.share_url}</div>` : ''}
+      ${_shareCard?.share_url ? `<div class="fpr-iq-scorecard-share-url"><a href="${_shareCard.share_url}" target="_blank" rel="noopener noreferrer">${_shareCard.share_url}</a></div>` : ''}
       <div style="margin-top:14px;font-size:11.5px;color:#9AA3AF">
         The Arsenal IQ Score represents armory preparedness completeness for your profile.
         It is not an endorsement or guarantee. For informational purposes only.
@@ -790,7 +790,17 @@ const FPRArsenalIQ = (() => {
       case 'welcome':       _view = 'welcome';   render(); break;
       case 'mode-quick':    _view = 'quick';     render(); break;
       case 'mode-full':     _view = 'intake'; _step = 1; render(); break;
-      case 'show-dashboard': _view = 'dashboard'; if (_demoMode && !_iq) { _iq = DEMO.iq; _analysis = DEMO.analysis; _inventory = DEMO.inventory; _profile = { ...DEMO.profile }; } window.fprAwardTicket('arsenal_analyzed', {}); render(); break;
+      case 'show-dashboard':
+        _view = 'dashboard';
+        if (_demoMode && !_iq) { _iq = DEMO.iq; _analysis = DEMO.analysis; _inventory = DEMO.inventory; _profile = { ...DEMO.profile }; }
+        // FIX (#6): fprAwardTicket may not be loaded on every page. If it throws or is
+        // missing, it was killing this click handler before render() ran, which is why
+        // "Back to Dashboard" appeared broken. Now it's guarded so the view always switches.
+        if (typeof window.fprAwardTicket === 'function') {
+          try { window.fprAwardTicket('arsenal_analyzed', {}); } catch (err) { /* non-blocking */ }
+        }
+        render();
+        break;
       case 'show-scorecard': _view = 'scorecard'; render(); break;
       case 'run-quick':     handleQuickScore(); break;
       case 'intake-1': case 'intake-2': case 'intake-3':
